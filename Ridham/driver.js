@@ -31,4 +31,5 @@ function generate_and_send_code(var email)
       console.log('Email sent: ' + info.response);
    }
    });
+   return code;
 }
