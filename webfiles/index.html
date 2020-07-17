@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title> MustangConnect </title>
 <link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 rel='stylesheet'>
 <style>
@@ -26,10 +27,46 @@ div.title {
 <body>
 
 <div class="title">
-<p> Welcome to mustangConnect</p>
+<p> MustangConnect</p>
 <p></p>
-<a href="home.html"> Click here to go to example signed in page. </a>
 </div>
+
+<div>
+<label>
+<span>Cal Poly username or email</span>
+<input id="username" aria-label="Cal Poly username or email" 
+ aria-required="true" name="username" type="text" value>
+ </label>
+</div>
+
+<div>
+ <label>
+ <span>Password</span>
+ <input id="password" aria-label="Password" aria-required="true"
+  name="password" type="text" value>
+  </label>
+</div>
+
+<div>
+<button id="login" onclick="location.href='home.html';">Log In</button>
+</div>
+
+<script>
+var user_input = document.getElementById("username");
+var pass_input = document.getElementById("password");
+user_input.addEventListener("keyup", function(event) {
+	if (event.keyCode == 13) {
+		event.preventDefault();
+		document.getElementById("login").click();
+	}
+});
+pass_input.addEventListener("keyup", function(event) {
+	if (event.keyCode == 13) {
+		event.preventDefault();
+		document.getElementById("login").click();
+	}
+});
+</script>
 
 </body>
 </html>
