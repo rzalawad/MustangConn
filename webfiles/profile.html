@@ -4,10 +4,23 @@
 	<title> Kelechi's Profile </title>
 <link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Open Sans'
+rel='stylesheet'>
 <style>
 
 html {
-	overflow-x: hidden;
+	overflow: hidden;
+}
+
+body {
+	background-color: white;
+	margin: -9999rem -9999rem -9999rem;
+	padding: 9999rem 9999rem 9999rem;
+	overflow: hidden;
 }
 
 ul.top_menu {
@@ -36,35 +49,45 @@ ul.top_menu li a:hover {
 	background-color: #081c15;
 }
 
-ul.friends_list {
+div.friends_list {
+	position: absolute;
+	bottom: 285px;
+	left: 1000px;
+}
+
+.fl_title_font {
+	margin: 0;
+	padding: 0;
+	width: 300px;
+	font-family: "Oleo Script Swash Caps";
+	font-size: 30px;
+	text-align: center;
+	color: black;
+}
+
+ul.fl_contents {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 200px;
-	background-color: blue;
+	width: 300px;
+	background-color: #e3e3e3;
+	border: 1px outset;
 }
 
-ul.friends_list li {
-	float: right;
-}
-
-ul.friends_list li a {
-	display: block;
-	color: black;
-	padding: 8px 16px;
+ul.fl_contents li a {
+	display: inline-block;
+	color: black;;
+	width: 100%;
+	border-bottom: 1px groove white;
 	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 22px;
+	font-weight: bold;
 }
 
-ul.friends_list li a:hover {
+ul.fl_contents li a:hover {
 	background-color: #bd8b13;
 	color: white;
-}
-
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow-x: hidden;
 }
 
 .profile_pic {
@@ -73,20 +96,34 @@ body {
 	height: 300px;
 	border-radius: 50%;
 	object-fit: cover;
-	position: relative;
-	top: 50px;
+	position: absolute;
+	top: 90px;
+	left: 25px;
+}
+
+.minimized_profile_pic {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+div.profile_info {
+	position:absolute;
+	top: 75px;
+	left: 400px;
 }
 
 div.profile_name {
-	position: relative;
-	bottom: 250px;
-	left: 400px;
 	font-family: "PT Serif Caption";
 	font-size: 18px;
 }
 
-div.profile_info {
-	background-color: white;
+div.profile_body {
+	font-family: "Open Sans";
+	font-size: 10px;
 }
 
 </style>
@@ -106,20 +143,50 @@ div.profile_info {
 	</a>
 </div>
 
-<div class="profile_name">
-	<h1> Kelechi Igwe </h1>
-</div>
-
 <div class="profile_info">
-	<h3> Age </h3>
+	<div class="profile_name">
+		<h1> Kelechi Igwe </h1>
+	</div>
+	<div class="profile_body">
+	<h2> Nickname: Name of Nick </h2>
+	<h2> Gender: Male </h2>
+	<h2> Pronouns: <span style="font-style: italic"> He, His, Him </span> </h2>
+	<h2> Age: 29 </h2>
+	<h2> Ethnicity: Nigerian (Black/African American) </h2>
+	<h2> Languages: English </h2>
+	<h2> Hometown: Land Down Under </h2>
+	<h2> Major: Cookie Theory </h2>
+	<h2> Dorm: Off Campus (Mustang Village) </h2>
+	<h2> Hobbies: Trying To Get This Project Done </h2>
+	</div>
 </div>
 
-<p> Friends List </p>
-<ul class="friends_list">
-	<li> <a href="#rzalawad"> Ridham Zalawadia </a> </li>
-	<li> <a href="#jzmorris"> Jarod Morris </a> </li>
-	<li> <a href="#jdevkar"> Jayant Devkar </a> </li>
+<div class=friends_list>
+<h2 class="fl_title_font"> Friends List (3) </h2>
+<ul class="fl_contents">
+	<li> <a href="#rzalawad">
+		<img src="http://placehold.it/400x200"
+		 class="minimized_profile_pic">
+		 <span style="text-align: center; position:absolute; top: 50px"> Ridham Zalawadia </span>
+		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 80px"> "R-Dawg" </span>
+		</a>
+	</li>
+	<li> <a href="#jzmorris">
+		<img src="http://placehold.it/400x200"
+		 class="minimized_profile_pic">
+		 <span style="text-align: center; position:absolute; top: 125px"> Jarod Morris </span>
+		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 155px"> "J-Rod" </span>
+		</a>
+	</li>
+	<li> <a href="#jdevkar">
+		<img src="http://placehold.it/400x200"
+		 class="minimized_profile_pic">
+		 <span style="text-align: center; position:absolute; top: 200px"> Jayant Devkar </span>
+		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 230px"> "Jay" </span>
+		</a>
+	</li>
 </ul>
+</div>
 
 </body>
 </html>
