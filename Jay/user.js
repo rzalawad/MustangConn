@@ -11,6 +11,10 @@ const uSchema = new Schema({
         type: String,
         required: true
     },
+    user: {
+        type: String,
+        required: true
+    },
     nick_name: {
         type: String,
         required: true
@@ -27,7 +31,7 @@ const uSchema = new Schema({
         type: Array,
         required: true
     },
-    'pref': {
+    pref: {
         type: String,
         required: true
     },

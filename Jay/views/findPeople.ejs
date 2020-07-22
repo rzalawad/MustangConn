@@ -1,8 +1,7 @@
-  
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Kelechi's Profile </title>
+	<title>Sugesstion for <%=u_name%></title>
 <link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 rel='stylesheet'>
 <style>
@@ -99,55 +98,63 @@ div.profile_info {
 	<li style="float:right"><a href="index"> Log Out </a> </li>
 	<li style="float:right"><a href="chat"> Chat </a> </li>
 	<li style="float:right"><a href="clubs"> Clubs </a> </li>
-	<li style="float:right"><a href="profile"> Profile </a> </li>
-	<li style="float:right"><a href="findPeople"> Meet People! </a> </li>
+  <li style="float:right"><a href="profile"> Profile </a> </li>
+  <li style="float:right"><a href="findPeople"> Meet People! </a> </li>
 </ul>
 
-<div>
-	<a href="http://placehold.it/400x200" target="_blank">
-		<img src="http://placehold.it/400x200" class="profile_pic">
-	</a>
-</div>
+<% q.forEach((target)=>{ %>
+  <div class="profile_info">
+    <h3>------------------------------------ </h3>
+  </div>
 
-<div class="profile_name">
-	<h1><%=name%> </h1>
-</div>
+  <div class="profile_info">
+    <h2><%=target.name%> </h2>
+  </div>
+  
+  <div class="profile_info">
+    <h3>Age: <%=target.age%> </h3>
+  </div>
+  <div class="gender">
+    <h3>Gender: <%=target.gender%> </h3>
+  </div>
+  
+  <div class="profile_info">
+    <h3>Dorm: <%=target.dorm%> </h3>
+  </div>
+  <div class="profile_info">
+    <h3>Hobbies</h3>
+  </div>
+  
+  <ul title="Hobbies"> 
+    <% (target.hobby_list).forEach((item)=>{%> 
+    <li><%=item%></li>  
+    <%});%> 
+  </ul> 
+  
+  <div class="profile_info">
+    <h3>Location: <%=target.location%> </h3>
+  </div>
 
-<div class="profile_info">
-	<h3>Age: <%=age%> </h3>
-</div>
-<div class="gender">
-	<h3>Gender: <%=gender%> </h3>
-</div>
+  <div class="profile_info">
+    <h3>Major: <%=target.major%> </h3>
+  </div>
+  
+  
+  <div class="profile_info">
+    <h3>Friends</h3>
+  </div>
+  
+  <ul> 
+    <% target.friend_list.forEach((item)=>{%> 
+    <li><%=item%></li>  
+    <%});%> 
+  </ul> 
 
-<div class="profile_info">
-	<h3>Dorm: <%=dorm%> </h3>
-</div>
+  <div class="profile_info">
+    <h3>------------------------------------ </h3>
+  </div>
+  
+  </body>
+  </html>
 
-<div class="profile_info">
-	<h3>Hobbies:</h3>
-</div>
-
-<ul title="Hobbies"> 
-	<% hobbies.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
-
-<div class="profile_info">
-	<h3>Location: <%=location%> </h3>
-</div>
-
-
-<div class="profile_info">
-	<h3>Friends</h3>
-</div>
-
-<ul> 
-	<% friends.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
-
-</body>
-</html>
+  <%});%> 

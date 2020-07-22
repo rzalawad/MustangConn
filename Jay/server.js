@@ -4,10 +4,15 @@ const tabsR = require('./routes/tabs')
 const pytalk = require('pytalk')
 const fs = require('fs')
 const dataB = require('./database')
+const driver = require("./driver")
 const User = require("./user");
 const { models } = require("mongoose");
 const { use } = require('./routes/tabs')
 
+const mongodb = require('mongodb')
+const binary = mongodb.Binary
+var code = null
+var u_email = null
 // Connection URL
 // const url = 'mongodb://jay:$jay123@MC-Profiles/Mustang_Connect?authSource=admin';
 
@@ -18,7 +23,7 @@ const { use } = require('./routes/tabs')
 // });
 
 
-var c_user
+var c_user = null
 
 
 // Set view engine as EJS
@@ -52,6 +57,7 @@ app.get('/chat',function(req,res) {
 })
 
 app.get('/home',function(req,res) {
+    code = null
     let path = './views/'
     path += 'home.html'
     fs.readFile(path,(err,data)=>{
@@ -82,6 +88,49 @@ app.get('/index',function(req,res) {
     })
 })
  
+app.get("/post", (req, res) => {
+    if(c_user){
+        console.log(c_user.user)
+        if(c_user.user == "admin"){
+            console.log("ninini")
+            let file = {file: binary(req.file.img.data) }
+            insertFile(file, res, req)
+        }
+        console.log("noooooo")
+    }
+    else{
+        res.render("error")
+    }
+    
+
+})
+
+function insertFile(file, res, req) {
+    console.log("poop")
+    mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err, client) => {
+        if (err) {
+            return err
+        }
+        else {
+            let db = client.db('Mustang_Connect')
+            let collection = db.collection('clubs')
+            try {
+                var post = {
+                    "file":file,
+                    "des" :req.query.des
+                }
+                collection.insertOne(post)
+                console.log('File Inserted')
+            }
+            catch (err) {
+                console.log('Error while inserting:', err)
+            }
+            client.close()
+            res.redirect('/home')
+        }
+
+    })
+}
                             
 app.get("/login",async function(req,res){
     (dataB.validation(req.query.email, req.query.psswd)).then((user)=>{
@@ -97,14 +146,82 @@ app.get("/login",async function(req,res){
     })
 })
 
-// app.get("/register", function(req,res=>{
+app.get("/codeVerify", function(req,res){
+    if(code == null){
+        u_email = null
+        res.render("error")
+    }
+    else{
+        if (req.query.code == code){
+            code = null
+            res.render("register")
+        }
+        else{
+            u_email = null
+            res.render("error")
+        }
+    }
+})
 
-// }))
+app.get("/verification", function(req,res){
+    res.render("verification")
+})
+
+
+
+app.get("/Test", function(req,res){
+    res.render("post")
+})
+
+
+app.get("/eVerification",function(req,res){
+    (driver.codeGenerator(req.query.email)).then((cod)=>{
+        if (cod){
+            code = cod
+            u_email = req.query.email
+            res.render("codeEntry")
+        }
+        else{
+            
+            res.render("error")
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+})
+
+
+
+
+
+
+app.get("/findPeople", function(req,res){
+    if(c_user != null){
+        (dataB.findPeople(c_user).then((doc)=>{
+            var query = []
+            // console.log((Object.keys(doc).length))
+            for(var index= 0; index<(Object.keys(doc).length);index++){
+              var target = doc[index]
+              query[index] = target
+            }
+            
+            res.render('findPeople',{u_name: c_user.name, q: query})
+        }))
+    }
+    else{
+        res.redirect("/index")
+    }
+})
+
+
+app.get("/test",function(req,res){
+    res.render('findPeople')
+})
 
 
 
     
-
 
 
 app.listen(5000)

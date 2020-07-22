@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>MustangConnect</title>
+	
+		<script type="text/javascript" src="/eel.js"></script>
+	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	  </head>
+	  <body>
+		<h1>Register Form </h1>
+	
+	
+		<form>
+			<label for="fname">Full name:</label>
+			<input type="text" id="fname" name="fname"><br><br>
+			<label for="nname">Prefered name:</label>
+			<input type="text" id="nname" name="nname"><br><br>
+			<label for="major">The short form of your major:</label>
+			<input type="text" id="major" name="major"><br><br>
+			<label for="dorm">dorm name/off campus:</label>
+			<input type="text" id="dorm" name="dorm"><br><br>
+			<label for="ethnicity">Ethnicity:</label>
+			<input type="text" id="ethnicity" name="ethnicity"><br><br>
+			<label for="browser">Choose the languages you speak:</label>
+			<input list="lang" name="lang" id="lang">
+			<datalist id="fpref">
+			  <option value="Age">
+			  <option value="Location">
+			  <option value="Dorm">
+			  <option value="Ethnicity">
+			  <option value="Major">
+			</datalist>
+			<h3>Please enter your preference below in the order of importance:</h3>
+			<ul>
+				<li>major</li>
+				<li>language</li>
+				<li>ethnicity</li>
+				<li>gender</li>
+				<li>location</li>
+				<li>hobby</li>
+				<li>age</li>
+			</ul>
+			<label for="p1">Preference 1:</label>
+			<input type="text" id="p1" name="p1"><br><br>
+			<label for="p2">Preference 2:</label>
+			<input type="text" id="p2" name="p2"><br><br>
+			<label for="p3">Preference 3:</label>
+			<input type="text" id="p3" name="p3"><br><br>
+			<label for="p4">Preference 4:</label>
+			<input type="text" id="p4" name="p4"><br><br>
+			<label for="p5">Preference 5:</label>
+			<input type="text" id="p5" name="p5"><br><br>
+
+			
+
+			<input type="submit">
+
+		  </form>
+	
+	
+	  </body>
+
+	  <form action="/verification.ejs">
+		<input type="submit" value="Sign Up">
+	  </form>
+
+</html>
