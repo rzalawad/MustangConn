@@ -1,0 +1,23 @@
+{
+  "name": "mustangconn",
+  "version": "1.0.0",
+  "description": "Website: https://mustangconnect.z5.web.core.windows.net/",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ridham177/MustangConn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ridham177/MustangConn/issues"
+  },
+  "homepage": "https://github.com/Ridham177/MustangConn#readme",
+  "dependencies": {
+    "pytalk": "^1.0.5"
+  }
+}
