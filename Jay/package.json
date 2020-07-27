@@ -2,7 +2,7 @@
   "name": "Mustang_Connect",
   "version": "1.0.0",
   "description": "CSC 307 Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "MustangConnect": "nodemon server.js"
   },
@@ -16,6 +16,7 @@
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.25",
     "nodemailer": "^6.4.10",
+    "package.json": "^2.0.1",
     "pug": "^3.0.0",
     "pytalk": "^1.0.5",
     "pytalk-2": "^2.0.0",

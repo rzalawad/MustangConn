@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
-const tabsR = require('./routes/tabs')
+//const tabsR = require('./routes/tabs')
 const pytalk = require('pytalk')
 const fs = require('fs')
 const dataB = require('./database')
 const driver = require("./driver")
 const User = require("./user");
 const { models } = require("mongoose");
-const { use } = require('./routes/tabs')
+//const { use } = require('./routes/tabs')
 
 const mongodb = require('mongodb')
 const binary = mongodb.Binary
@@ -30,7 +30,7 @@ var c_user = null
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/assets'));
 
-app.use('/tabs', tabsR)
+//app.use('/tabs', tabsR)
 
 app.get('/',function(req,res) {
     let path = './views/'
@@ -224,4 +224,4 @@ app.get("/test",function(req,res){
     
 
 
-app.listen(5000)
+app.listen(3000)

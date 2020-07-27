@@ -15,12 +15,23 @@
 		<h3>Please enter the calpoly email below </h3>
 	
 	
-		<form action="/eVerification">
+		<form action="/eVerification" onsubmit="return emailComplete()">
 			<label for="email">Email ID:</label>
 			<input type="text" id="email" name="email"><br><br>
 			<input type="submit" value="Submit">
-		  </form>
-	
+		</form>
+		<script>
+			function emailComplete()
+			{
+				var email = document.getElementById('email');
+				var n = email.value.search("@calpoly.edu");
+				if (n == -1)
+				{
+					email.value = email.value + "@calpoly.edu";
+				}
+				return true;
+			}
+		</script>
 	
       </body>
 </html>
