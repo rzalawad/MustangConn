@@ -22,20 +22,10 @@ function lsa(target,user){
 
 var get_collc = function(query,pref){
     return new Promise(function(resolve, reject){
-        if(pref == "language" || pref == "hobby_list"){
-            User.find({}, (err,result)=>{
-                // console.log("helo",Object.keys(result).length)
-                resolve(result)
-
-            })
-        }
-        else{
             User.find(query, (err,result)=>{
                 // console.log("noo",Object.keys(result).length)
                 resolve(result)
             })
-        }
-        
     })
 }
 
@@ -61,7 +51,6 @@ var find_people = function(user){
                         if(lsa(target.pref_list,user.pref_list)){
                             if(p in target.pref_list)
                                 scr+=scores[index]
-                                
                             else
                                 scr+= scores[index] - dp[index]
                             // console.log("scores",scr)
@@ -84,7 +73,8 @@ var find_people = function(user){
                         }
                     }
                     }
-                    if(scr>0.6){
+                    // console.log(scr)
+                    if(scr>=0.55){
                         fp_list[Object.keys(fp_list).length] = target
                     }
                 }

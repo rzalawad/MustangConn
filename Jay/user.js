@@ -17,7 +17,7 @@ const uSchema = new Schema({
     },
     nick_name: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
@@ -70,6 +70,10 @@ const uSchema = new Schema({
     ethnicity: {
         type: String,
         required: true
+    },
+    ppic: {
+        type: String,
+        required: false
     },
 
 //    "name":"James Walsh","user":"user","nick_name":"not_set","email":"James Walsh@calpoly.edu","pref_list":["ethnicity","gender","location","major","hobby_list"],"pref":"ethnicity","hobby_list":["dancing","road trips","baking"],"friend_list":[],"gender":"male","age":{"$numberInt":"20"},"location":"Oklahoma","language":["Marathi","Spanish","Tamil","Urdu"],"major":"ME","dorm":"red bricks","ethnicity":"American"} 
