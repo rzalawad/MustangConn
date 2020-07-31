@@ -282,7 +282,7 @@ app.get("/eVerification",function(req,res){
 //@Des: creats new user in dataB
 //#########################################################
 
-app.get("/singUp",(req,res)=>{
+app.get("/signUp",(req,res)=>{
     c_user = new User()
     c_user.name = req.query.name
     c_user.major = req.query.major
