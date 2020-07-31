@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const http = require('http')
-const tabsR = require('./routes/tabs')
 const fs = require('fs')
 const dataB = require('./database')
 const driver = require("./driver")
@@ -67,7 +66,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/assets'));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
-app.use('/tabs', tabsR)
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
 
@@ -179,6 +177,10 @@ app.get('/index',function(req,res) {
     res.render("index")
 })
  
+app.get("/post/upload", (req,res)=>{
+    res.render("upload")
+})
+
 
 
 function insertFile(file, res, req) {
@@ -413,4 +415,4 @@ app.post("/post", upload.single('file'), (req, res) => {
 })
     
 
-server.listen(5000,()=> console.log("Online at 5000"))
+server.listen(process.env.PORT || 3000,()=> console.log("Online at 3000"))
