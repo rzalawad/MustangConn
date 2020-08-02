@@ -27,9 +27,6 @@ var code = null
 var u_email = null
 var c_user = null
 
-
-
-
 //Initialize gridfs
 Grid.mongo = mongoose.mongo;
 let gfs 
@@ -74,12 +71,6 @@ app.use(express.json());
 
 
 //intialize
-
-
-
-
-
-
 
 //routes
 app.get('/',function(req,res) {
@@ -177,10 +168,6 @@ app.get('/index',function(req,res) {
     res.render("index")
 })
  
-app.get("/post/upload", (req,res)=>{
-    res.render("upload")
-})
-
 
 
 function insertFile(file, res, req) {
@@ -279,7 +266,7 @@ app.get("/eVerification",function(req,res){
 
 
 //Route: to sign up
-//@Des: creats new user in dataB
+//@Des: creates new user in dataB
 //#########################################################
 
 app.get("/signUp",(req,res)=>{
@@ -320,29 +307,22 @@ app.get("/test",(req,res)=>{
 
 
 
-
-
-
-
 ///////////////////////////////////////////////////////
 
 
 
 
-
-
+var query = []
 
 //#########################################################
 app.get("/findPeople", function(req,res){
     if(c_user != null){
         (dataB.findPeople(c_user).then((doc)=>{
-            var query = []
             // console.log((Object.keys(doc).length))
             for(var index= 0; index<(Object.keys(doc).length);index++){
               var target = doc[index]
               query[index] = target
             }
-            
             res.render('findPeople',{u_name: c_user.name, q: query})
         }))
     }
@@ -352,6 +332,14 @@ app.get("/findPeople", function(req,res){
 })
 
 
+
+app.post('/addFriend', (req,res) => {
+
+    c_user.friend_list.push(query[req.body.name].name);
+
+    c_user.save();
+
+})
 
 // //@route to grab post from DB
 // app.get('/file/:filename', (req,res)=>{
@@ -415,4 +403,4 @@ app.post("/post", upload.single('file'), (req, res) => {
 })
     
 
-server.listen(process.env.PORT || 3000,()=> console.log("Online at 3000"))
+server.listen(5000,()=> console.log("Online at 5000"))

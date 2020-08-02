@@ -28,7 +28,7 @@
 </ul>
 
 <hr>
-<% q.forEach((target)=>{ %>
+<% q.forEach((target, i) =>{ %>
 	<div class="container">
 		<div class="card card-body mb-3">
 			<div >
@@ -40,7 +40,8 @@
 						<% } %>
 				</a>
 			</div>
-			<h2><%=target.name%> </h2>
+            
+			<h2 id="names"><%=target.name%> </h2>
 			<h3>Age: <%=target.age%> </h3>
 			<h3>Gender: <%=target.gender%> </h3>
 			<h3>Dorm: <%=target.dorm%> </h3>
@@ -58,10 +59,20 @@
 				<li><%=item%></li>  
 				<%});%> 
 			</ul> 
+			
+			<h1>Add Friend Button</h1>
+			
+			<form action="/addFriend" method="POST">
+				<input type="text" placeholder="name" name="name" value= <%=i%> >
+				<button type="Add">Add Friend</button>
+			</form>
+			
+
+
 		</div>
 	</div>
-<%});%> 
 
+<%});%> 
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
