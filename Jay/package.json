@@ -4,7 +4,9 @@
   "description": "CSC 307 Project",
   "main": "index.js",
   "scripts": {
-    "MustangConnect": "nodemon server.js"
+    "MustangConnect": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

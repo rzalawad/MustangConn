@@ -1,4 +1,5 @@
 const User = require("./user");
+const UserSchema = require("./uSchema")
 const { models } = require("mongoose");
 const { resolveInclude } = require("ejs");
 
@@ -38,25 +39,32 @@ var find_people = function(user){
         // console.log(m_pref)
         get_collc(query, m_pref).then((collection)=>{
             // console.log("nicee",Object.keys(collection).length)
-            for(var t=0; t<(Object.keys(collection).length); t++){
+            for(var t=0; t<(Object.keys(collection).length); t++)
+            {
                 var target = collection[t]
-                if (user.email == target.email){
+                if (user.email == target.email)
+                {
                     continue
                 }
                 var scr =0
                 var lenght = Object.keys(user.pref_list).length
-                for(var index = 0; index<lenght; index++){
+                for(var index = 0; index<lenght; index++)
+                {
                     var p = (user.pref_list)[index]
-                    if(p=='language' || p=='hobby_list'){
-                        if(lsa(target.pref_list,user.pref_list)){
+                    if(p=='language' || p=='hobby_list')
+                    {
+                        if(lsa(target.pref_list,user.pref_list))
+                        {
                             if(p in target.pref_list)
                                 scr+=scores[index]
                             else
                                 scr+= scores[index] - dp[index]
                             // console.log("scores",scr)
                         }
-                        else{
-                            if(target[p] == user[p]){
+                        else
+                        {
+                            if(target[p] == user[p])
+                            {
                                 if(p in target.pref_list)
                                     scr+=scores[index]
                                 else
@@ -64,8 +72,10 @@ var find_people = function(user){
                             }
                         }       
                     }
-                    else{
-                        if(target[p] == user[p]){
+                    else
+                    {
+                        if(target[p] == user[p])
+                        {
                             if(p in target.pref_list)
                                 scr+=scores[index]
                             else
@@ -74,7 +84,8 @@ var find_people = function(user){
                     }
                     }
                     // console.log(scr)
-                    if(scr>=0.55){
+                    if(scr>=0.55)
+                    {
                         fp_list[Object.keys(fp_list).length] = target
                     }
                 }
@@ -105,7 +116,14 @@ var validation = function(username, password) {
     })}
 
 
-
+function get_profile_for_username(username)
+{
+    UserSchema.find({name : username}).then(proflies =>{
+        return proflies;
+    }).catch(err => {
+        console.log("search error")
+    })
+}
 
 //test
 
@@ -138,3 +156,4 @@ var validation = function(username, password) {
 
 exports.validation = validation
 exports.findPeople = find_people
+exports.get_profile_for_username = get_profile_for_username

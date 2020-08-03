@@ -1,0 +1,177 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Profile </title>
+<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+rel='stylesheet'>
+<style>
+
+html {
+	overflow-x: hidden;
+}
+
+ul.top_menu {
+	list-style-type: none;
+	margin: -9999rem -9999rem 0;
+	padding: 9999rem 9999rem 0;
+	overflow: hidden;
+	background-color: #154734;
+}
+
+ul.top_menu li {
+	float: left;
+}
+
+ul.top_menu li a {
+	display: block;
+	color: white;
+	font-family: "PT Serif Caption";
+	font-size: 18px;
+	text-align: center;
+	padding: 14px 30px;
+	text-decoration: none;
+}
+
+ul.top_menu li a:hover {
+	background-color: #081c15;
+}
+
+ul.friends_list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: blue;
+}
+
+ul.friends_list li {
+	float: right;
+}
+
+ul.friends_list li a {
+	display: block;
+	color: black;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+ul.friends_list li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+body {
+	background-color: white;
+	margin: -9999rem -9999rem -9999rem;
+	padding: 9999rem 9999rem 9999rem;
+	overflow-x: hidden;
+}
+
+
+.profile_pic {
+	display: inline-block;
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	object-fit: cover;
+	position: relative;
+	top: 20px;
+}
+
+div.profile_name {
+	position: relative;
+	bottom: 250px;
+	left: 400px;
+	font-family: "PT Serif Caption";
+	font-size: 18px;
+}
+
+div.profile_info {
+	background-color: white;
+}
+
+.bttn{
+	padding-top: 40px;
+}
+
+
+</style>
+</head>
+<body>
+<ul class="top_menu">
+	<li> <a href="home"> MustangConnect </a> </li>
+	<li style="float:right"><a href="index"> Log Out </a> </li>
+	<li style="float:right"><a href="chat"> Chat </a> </li>
+	<li style="float:right"><a href="clubs"> Clubs </a> </li>
+	<li style="float:right"><a href="profile"> Profile </a> </li>
+	<li style="float:right"><a href="findPeople"> Meet People! </a> </li>
+</ul>
+
+<div>
+	<a href="http://placehold.it/400x200" target="_blank">
+		<% if(ppic){ %>
+			<img src="image/<%= ppic %>"class="profile_pic">
+		<% } else { %>
+			<img src="http://placehold.it/400x200" class="profile_pic">
+			<% } %>
+	</a>
+</div>
+	
+<h2></h2>
+<div class="bttn">
+	<form action="/profile/upload/redirect">
+		<button class="btn btn-lg btn-primary btn-block"  type="submit">Change Profile Pic</button>
+	</form>
+</div>
+
+<div class="profile_name">
+
+	<h1><%=name%> </h1>
+</div>
+
+<div class="profile_info">
+
+	<h3>Age: <%=age%> </h3>
+</div>
+<div class="gender">
+	<h3>Gender: <%=gender%> </h3>
+</div>
+
+<div class="profile_info">
+	<h3>Dorm: <%=dorm%> </h3>
+</div>
+
+<div class="profile_info">
+	<h3>Hobbies:</h3>
+</div>
+
+<ul title="Hobbies"> 
+	<% hobbies.forEach((item)=>{%> 
+	<li><%=item%></li>  
+	<%});%> 
+</ul> 
+
+<div class="profile_info">
+	<h3>Location: <%=location%> </h3>
+</div>
+
+
+<div class="profile_info">
+	<h3>Friends</h3>
+</div>
+
+<ul> 
+	<% friends.forEach((item)=>{%> 
+	<li><%=item%></li>  
+	<%});%> 
+</ul> 
+<p id="demo"></p>
+<script>
+	var test = document.getElementById('mydiv').dataset.test
+	document.getElementById("demo").innerHTML = test;
+</script>
+
+
+</body>
+</html>

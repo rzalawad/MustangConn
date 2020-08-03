@@ -19,9 +19,10 @@ function generate_and_send_code(var email)
       subject: 'MustangConnect Authentication Code',
       text: `Here is your authentication code: ${code}
 
-      We hope you enjoy our site
-      Sincerely,
-      MustangConnect Team`
+We hope you enjoy our site
+Stay Safe,
+Sincerely,
+MustangConnect Team`
    };
 
    transporter.sendMail(mailOptions, function(error, info){

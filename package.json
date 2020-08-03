@@ -1,23 +1,35 @@
 {
-  "name": "mustangconn",
+  "name": "Mustang_Connect",
   "version": "1.0.0",
-  "description": "Website: https://mustangconnect.z5.web.core.windows.net/",
-  "main": "server.js",
+  "description": "CSC 307 Project",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "MustangConnect": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ridham177/MustangConn.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Ridham177/MustangConn/issues"
-  },
-  "homepage": "https://github.com/Ridham177/MustangConn#readme",
   "dependencies": {
-    "pytalk": "^1.0.5"
+    "body-parser": "^1.19.0",
+    "eel": "^0.1.1",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "gridfs-stream": "^1.1.1",
+    "http": "0.0.1-security",
+    "method-override": "^3.0.0",
+    "moment": "^2.27.0",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.25",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.2.0",
+    "nodemailer": "^6.4.10",
+    "pug": "^3.0.0",
+    "pytalk": "^1.0.5",
+    "pytalk-2": "^2.0.0",
+    "python-shell": "^2.0.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

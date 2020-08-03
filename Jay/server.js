@@ -11,9 +11,18 @@ const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
+const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
+const socketio = require("socket.io")
 const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Connect?retryWrites=true&w=majority"
+
+//const local_url = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
+
+//intialize
+const serv = http.createServer(app);
+const io = socketio(serv)
+
+
 //mongo connection
 mongoose.connect(url)
 var conn = mongoose.connection;
@@ -73,8 +82,6 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 
-//intialize
-
 
 
 
@@ -86,15 +93,57 @@ app.get('/',function(req,res) {
     res.render("index")
 })
 
+app.get("/chat-choose", (req, res) => {
+    console.log(c_user)
+    
+    // testing
+    if (c_user.friend_list.length == 0)
+    {
+        c_user.friend_list.push("Jay");
+    }
+    res.render("chat-choose", {friends: c_user.friend_list})
+
+
+    //code that is secure below. Implement this
+
+    /*if (c_user != null)
+    {
+        res.render('chat-choose', {friends: c_user.friend_list})
+    }
+    else
+    {
+        res.render("home");
+    }*/
+})
+
 app.get('/chat',function(req,res) {
-    fs.readFile('./views/chat.html',(err,data)=>{
-        if(err){
-            console.log(err)
-        }
-        else{
-            res.end(data)
-        }
-    })
+
+    if (c_user == null)
+    {
+        res.send('signUp');
+    }
+    else
+    {
+        var friend_name = req.query.friend;
+        var friend_profile = dataB.get_profile_for_username(friend_name);
+
+
+        
+        /* Dont know what this is for
+        fs.readFile('./views/chat.html',(err,data)=> {
+            if(err){
+                console.log(err)
+            }
+            else{
+                if (c_user.friend_list == null)
+                {
+                    c_user.friend_list.push("Ridham")
+                }
+                res.end(data, {friends: c_user.friend_list});
+            }
+        })
+        */
+    }
 })
 
 
@@ -215,6 +264,7 @@ app.get("/login",async function(req,res){
         if(user){
             console.log(req.query.email)
             c_user = user
+            console.log(c_user)
             res.redirect("/home")
         }
     }).catch((flag)=>{
@@ -285,6 +335,7 @@ app.get("/eVerification",function(req,res){
 app.get("/signUp",(req,res)=>{
     c_user = new User()
     c_user.name = req.query.name
+    console.log(req.query.major)
     c_user.major = req.query.major
     c_user.age = req.query.age
     c_user.gender = req.query.gender

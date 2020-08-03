@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>MustangConnect</title>
+	
+		<script type="text/javascript" src="/eel.js"></script>
+	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</head>
+	  <body>
+		<h1>Register Form </h1>
+	
+		<form action="/signUp" enctype="multipart/form-data">
+			  <div class="form-group col-md-6">
+				<label for="name">Full Name</label>
+				<input type="text" class="form-control" id="name" name= "name" placeholder="Full Name">
+			  </div>
+
+			<div class="form-group col-md-6">
+				<label for="major">Major:</label>
+				<input type="text" class="form-control" id="major" name="major" placeholder="Abbreviation for your major">
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="age">Age</label>
+				<input type="text" class="form-control" id="age" name = "age" placeholder="Ethnicity">
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="gender">Gender</label>
+				<input type="text" class="form-control" id="gender" name = "gender" placeholder="Ethnicity">
+			</div>
+
+			<div class="form-group col-md-6">
+			  <label for="dorm">Dorm</label>
+			  <input type="text" class="form-control" id="dorm" name="dorm" placeholder="Poly Canyon Village/ Off Campus">
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="location">Location</label>
+				<input type="text" class="form-control" id="location" name="location" placeholder="City or State or Country">
+				<small id="locHelp" class="form-text text-muted">City: If In-state or State: If out-of-state or Country: If International.</small>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="ethnicity">Ethnicity</label>
+				<input type="text" class="form-control" id="ethnicity" name = "ethnicity" placeholder="Ethnicity">
+			  </div>
+
+			  <div class="form-group col-md-6">
+				<label for="language">Language</label>
+				<input type="text" class="form-control" id="language" name = "language" placeholder="Languages that you can speak">
+				<small id="locHelp" class="form-text text-muted">List all the laguages you can speak separated by comma.</small>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="hobbies">Hobby</label>
+				<input type="text" class="form-control" id="hobbies" name = "hobbies" placeholder="Hobies">
+				<small id="locHelp" class="form-text text-muted">List all the things you love to do separated by comma.</small>
+			</div>
+	
+
+
+			<div class="form-group col-md-4">
+				<label for="preference">Preference</label>
+				<small id="prefHelp" class="form-text text-muted">Choose your top 5 preference to meet people accordingly</small>
+
+				<select id="p1" name="1" class="form-control">
+				  <option selected>First Preference</option>
+				  <option> location</option>
+				  <option> hobby</option>
+				  <option> language</option>
+				  <option> major</option>
+				  <option> dorm</option>
+				  <option> gender</option>
+				  <option> ethnicity</option>
+				</select>
+
+				<select id="p2" name="2" class="form-control">
+					<option selected>Second Preference</option>
+					<option> location</option>
+					<option> hobby</option>
+					<option> language</option>
+					<option> major</option>
+					<option> dorm</option>
+					<option> gender</option>
+					<option> ethnicity</option>
+				</select>
+
+				<select id="p3" name="3" class="form-control">
+				<option selected>Third Preference</option>
+				<option> location</option>
+				<option> hobby</option>
+				<option> language</option>
+				<option> major</option>
+				<option> dorm</option>
+				<option> gender</option>
+				<option> ethnicity</option>
+				</select>
+
+				<select id="p4" name="4" class="form-control">
+				<option selected>Fourth Preference</option>
+				<option> location</option>
+				<option> hobby</option>
+				<option> language</option>
+				<option> major</option>
+				<option> dorm</option>
+				<option> gender</option>
+				<option> ethnicity</option>
+				</select>
+
+				<select id="p5" name="5" class="form-control">
+				<option selected>Fifth Preference</option>
+				<option> location</option>
+				<option> hobby</option>
+				<option> language</option>
+				<option> major</option>
+				<option> dorm</option>
+				<option> gender</option>
+				<option> ethnicity</option>
+				</select>
+			</div>
+
+
+
+
+			<button type="submit" class="btn btn-primary">Sign up</button>
+		  </form>
+	  </body>
+
+</html>

@@ -12,23 +12,103 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	</head>
-	  <body>
+	<body>
 		<h1>Register Form </h1>
-	
-		<form action="/signUp" enctype="multipart/form-data">
-			  <div class="form-group col-md-6">
+		<div id="error" style="color: red">
+		</div>
+		<form id="form" action="/signUp" enctype="multipart/form-data">
+			
+			<div class="form-group col-md-6">
 				<label for="name">Full Name</label>
 				<input type="text" class="form-control" id="name" name= "name" placeholder="Full Name">
-			  </div>
-
+			</div>
 			<div class="form-group col-md-6">
+				<label for="password">Enter Password</label>
+				<input type="password" class="form-control" id="password1" name = "password" placeholder="password">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="password">Verify Password</label>
+				<input type="password" class="form-control" id="password2" name = "password" placeholder="password">
+			</div>
+
+			<div class="form-group col-md-6 dropdown">
 				<label for="major">Major:</label>
-				<input type="text" class="form-control" id="major" name="major" placeholder="Abbreviation for your major">
+				<select name="Major" id="Major">
+					<option>Agricultural Business</option>
+					<option>Agricultural Communication</option>
+					<option>Agricultural Science</option>
+					<option>Animal Science</option>
+					<option>Dairy Science</option>
+					<option>Agricultural Systems Management</option>
+					<option>BioResource and Agricultural Engineeing</option>
+					<option>Recreation, Parks, & Tourism Administration</option>
+					<option>Food Science</option>
+					<option>Nutrition</option>
+					<option>Agricultural and Environmental Plant Sciences</option>
+					<option>ROTC</option>
+					<option>Environmental Earth and Soil Sciences</option>
+					<option>Environmental Management and Protection</option>
+					<option>Forestry and Natural Resources</option>
+					<option>Wine and Viticulture</option>
+					<option>Architectural Engineering</option>
+					<option>Architecture</option>
+					<option>City and Regional Planning</option>
+					<option>Construction Management</option>
+					<option>Landscape Architecture</option>
+					<option>Business Administration</option>
+					<option>Economics</option>
+					<option>Industrial Technology and Packaging</option>
+					<option>Aerospace Engineering</option>
+					<option>Biomedical Engineering</option>
+					<option>Civil Engineering</option>
+					<option>Environmental Engineering</option>
+					<option>Computer Engineering</option>
+					<option>Computer Science</option>
+					<option>Software Engineering</option>
+					<option>Electrical Engineering</option>
+					<option>General Engineering</option>
+					<option>Industrial Engineering</option>
+					<option>Manufacturing Engineering</option>
+					<option>Materials Engineering</option>
+					<option>Mechanical Engineering</option>
+					<option>Art and Design</option>
+					<option>Communication Studies</option>
+					<option>English</option>
+					<option>Comparative Ethnic Studies</option>
+					<option>Graphic Communication</option>
+					<option>History</option>
+					<option>Interdisciplinary Studies</option>
+					<option>Journalism</option>
+					<option>Music</option>
+					<option>Philosophy</option>
+					<option>Political Science</option>
+				
+					<option>Child Development</option>
+					<option>Psychology</option>
+					<option>Anthropology and Geography</option>
+					<option>Sociology</option>
+					<option>Theatre Arts</option>
+					<option>Spanish</option>
+					<option>Biological Sciences</option>
+					<option>Microbiology</option>
+
+					<option>Marine Sciences</option>
+					<option>Biochemistry</option>
+					<option>Chemistry</option>
+					<option>Kinesiology</option>
+					<option>Public Health</option>
+					<option>Liberal Studies</option>
+					<option>Mathematics</option>
+					<option>Physics</option>
+
+					<option>Statistics</option>
+					<option>Liberal Arts & Engineering Studies</option>
+				</select>
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="age">Age</label>
-				<input type="text" class="form-control" id="age" name = "age" placeholder="Ethnicity">
+				<input type="text" class="form-control" id="age" name = "age" placeholder="Age">
 			</div>
 
 			<div class="form-group col-md-6">
@@ -53,7 +133,7 @@
 			  </div>
 
 			  <div class="form-group col-md-6">
-				<label for="language">Language</label>
+				<label for="language">Languages Spoken</label>
 				<input type="text" class="form-control" id="language" name = "language" placeholder="Languages that you can speak">
 				<small id="locHelp" class="form-text text-muted">List all the laguages you can speak separated by comma.</small>
 			</div>
@@ -131,6 +211,80 @@
 
 			<button type="submit" class="btn btn-primary">Sign up</button>
 		  </form>
-	  </body>
+	</body>
 
+	<script>
+		const errorElem = document.getElementById("error");
+		var pass1 = document.getElementById("password1");
+		var pass2 = document.getElementById("password2");
+		var Name = document.getElementById("name");
+		var Age = document.getElementById("age");
+		var Gender = document.getElementById("gender");
+		var Dorm = document.getElementById("dorm");
+		var user_location = document.getElementById("location");
+		var Ethnicity = document.getElementById("ethnicity");
+		var Langauges = document.getElementById("language");
+		var Hobbies = document.getElementById("hobbies");
+
+
+
+		var majors = document.querySelector("#Major");
+		Array.from(majors.options).forEach(function(option_element) {
+			var att = document.createAttribute("value");       
+			// Create a "class" attribute
+			att.value = option_element.innerText;
+			option_element.setAttributeNode(att);   
+		});
+
+		form.addEventListener("submit", (e) => {
+			let messages=[]
+			
+			if (pass1.value != pass2.value)
+			{
+				messages.push('Passwords not the same');
+			}
+
+			if (Name.value == "")
+			{
+				messages.push("Please enter a Name");
+			}
+
+			if (Age.value == "")
+			{
+				messages.push("Please enter a Name");
+			}
+
+			if (Gender.value == "")
+			{
+				messages.push("Please enter a Gender");
+			}
+
+			if (Dorm.value == "")
+			{
+				messages.push("Please enter a dorm");
+			}
+			if (user_location.value == "")
+			{
+				messages.push("Please enter a location");
+			}
+			if (Ethnicity.value == "")
+			{
+				messages.push("Please enter a ethnicity");
+			}
+			if (Languages.value == "")
+			{
+				messages.push("Please enter a languages");
+			}
+			if (Hobbies.value == "")
+			{
+				messages.push("Please enter a hobbies");
+			}
+
+			if (messages.length > 0)
+			{
+				e.preventDefault();
+				errorElem.innerText = messages.join(", ")
+				window.scrollTo({ top: 0, behavior: 'smooth' });			}
+		})
+	</script>
 </html>
