@@ -73,8 +73,12 @@ const uSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    username: {
+        type: String,
+        required: false
+    }
 
 //    "name":"James Walsh","user":"user","nick_name":"not_set","email":"James Walsh@calpoly.edu","pref_list":["ethnicity","gender","location","major","hobby_list"],"pref":"ethnicity","hobby_list":["dancing","road trips","baking"],"friend_list":[],"gender":"male","age":{"$numberInt":"20"},"location":"Oklahoma","language":["Marathi","Spanish","Tamil","Urdu"],"major":"ME","dorm":"red bricks","ethnicity":"American"} 
 })
 
-module.exports = mongoose.model('uSchema', uSchema);
+module.exports = uSchema

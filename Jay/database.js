@@ -1,5 +1,5 @@
 const User = require("./user");
-const UserSchema = require("./uSchema")
+const chatRoom = require("./chatRoom")
 const { models } = require("mongoose");
 const { resolveInclude } = require("ejs");
 
@@ -118,12 +118,44 @@ var validation = function(username, password) {
 
 function get_profile_for_username(username)
 {
-    UserSchema.find({name : username}).then(proflies =>{
-        return proflies;
+    User.find({username: username}).then(profiles =>{
+        return profiles;
     }).catch(err => {
         console.log("search error")
     })
 }
+
+function get_profile_for_name(name)
+{
+    User.find({name: name}).then(profiles =>{
+        return profiles;
+    }).catch(err => {
+        console.log("search error")
+    })
+}
+
+
+function get_profile_with_id(id)
+{
+    User.findById(id).then(profile => {
+        return profile;
+    }).catch(err => {
+        console.log("Search by ID error occurred. ID: ", id)
+    })
+}
+
+
+function chat_room_query(username1, username2)
+{
+    if (username1.localCompare(username2) > 0)
+    {
+        [username1, username2] = [username2, username1]
+    }
+    var room1 = chatRoom.chatRoom.find({username1: username1, username2: username2})
+    return room1
+}
+
+
 
 //test
 
@@ -157,3 +189,5 @@ function get_profile_for_username(username)
 exports.validation = validation
 exports.findPeople = find_people
 exports.get_profile_for_username = get_profile_for_username
+exports.get_profile_with_id = get_profile_with_id
+exports.chat_room_query = chat_room_query

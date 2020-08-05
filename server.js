@@ -1,10 +1,7 @@
+//library imports
 const express = require('express')
-const app = express()
 const http = require('http')
 const fs = require('fs')
-const dataB = require('.backendJS/database')
-const driver = require(".backendJS/driver")
-const server = http.createServer(app)
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,23 +10,31 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const mongoose = require('mongoose')
-//const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Connect?retryWrites=true&w=majority"
+const mongodb = require('mongodb')
 
-const local_url = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
+//file imports
+const dataB = require('.backendJS/database')
+const driver = require(".backendJS/driver")
+const Post = require('.backendJS/post_info')
+const User = require('.backendJS/user')
+const masterRoom = require('')
+
+//instantiation
+const app = express()
+const server = http.createServer(app)
 
 //mongo connection
+const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Connect?retryWrites=true&w=majority"
 mongoose.connect(url)
 var conn = mongoose.connection;
 var db = mongoose.connection.db
 
-const mongodb = require('mongodb')
-const Post = require('.backendJS/post_info')
-const User = require('.backendJS/user')
 const binary = mongodb.Binary
 var code = null
 var u_email = null
 var c_user = null
 
+const master_room = 
 
 
 
@@ -298,7 +303,7 @@ app.get("/signUp",(req,res)=>{
     c_user.hobby_list = (req.query.hobbies).split(',')
     c_user.user = "admin"
     c_user.email = u_email
-    c_user.password = "1234"
+    c_user.password = req.query.password
     c_user.friend_list = []
     for(var i= 1; i<=5;i++){
         var x = i.toString()

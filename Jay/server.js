@@ -1,10 +1,6 @@
 const express = require('express')
-const app = express()
 const http = require('http')
 const fs = require('fs')
-const dataB = require('./database')
-const driver = require("./driver")
-const server = http.createServer(app)
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,14 +9,28 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
+const mongodb = require('mongodb')
 const socketio = require("socket.io")
+
+//file imports
+const dataB = require('./database')
+const driver = require("./driver")
+
+//instantiation
+const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
+
+//mongo connection
 const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Connect?retryWrites=true&w=majority"
+mongoose.connect(url)
+var conn = mongoose.connection;
+var db = mongoose.connection.db
 
-//const local_url = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
-
-//intialize
-const serv = http.createServer(app);
-const io = socketio(serv)
+const binary = mongodb.Binary
+var code = null
+var u_email = null
+var c_user = null
 
 
 //mongo connection
@@ -28,16 +38,9 @@ mongoose.connect(url)
 var conn = mongoose.connection;
 var db = mongoose.connection.db
 
-const mongodb = require('mongodb')
 const Post = require('./post_info')
+const chatRoom = require("./chatRoom")
 const User = require('./user')
-const binary = mongodb.Binary
-var code = null
-var u_email = null
-var c_user = null
-
-
-
 
 //Initialize gridfs
 Grid.mongo = mongoose.mongo;
@@ -96,12 +99,22 @@ app.get('/',function(req,res) {
 app.get("/chat-choose", (req, res) => {
     console.log(c_user)
     
+    //in the list to send, I am sending both name and usernames because names could be duplicates but usernames are unique (as they are calpoly usernames)
+
     // testing
     if (c_user.friend_list.length == 0)
     {
-        c_user.friend_list.push("Jay");
+        var profile = dataB.get_profile_for_username("jdevkar")
+        c_user.friend_list.push(
+            [profile._id, profile.username]
+        );
     }
-    res.render("chat-choose", {friends: c_user.friend_list})
+    var list_to_send = []
+    c_user.friend_list.forEach(id => {
+        var profile = dataB.get_profile_with_id(id)
+        list_to_send.push([profile.name, profile.username])
+    });
+    res.render("chat-choose", {friends: list_to_send})
 
 
     //code that is secure below. Implement this
@@ -124,11 +137,21 @@ app.get('/chat',function(req,res) {
     }
     else
     {
-        var friend_name = req.query.friend;
+        var friend_name = req.query.friend_name;
         var friend_profile = dataB.get_profile_for_username(friend_name);
-
-
+        console.log(friend_profile)
         
+        var room = dataB.chat_room_query(c_user, friend_name)
+        if (room == null)
+        {
+
+        }
+        else
+        {
+            
+        }
+
+
         /* Dont know what this is for
         fs.readFile('./views/chat.html',(err,data)=> {
             if(err){
@@ -348,6 +371,7 @@ app.get("/signUp",(req,res)=>{
     c_user.email = u_email
     c_user.password = "1234"
     c_user.friend_list = []
+    c.username = c_user.email.substring(0, c_user.email.indexOf("@"))
     for(var i= 1; i<=5;i++){
         var x = i.toString()
         c_user.pref_list[i-1] = req.query[x]

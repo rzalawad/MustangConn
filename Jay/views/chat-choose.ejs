@@ -20,14 +20,19 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div>
-        <ul> 
-            <% friends.forEach((item)=>{%> 
-            <li><%=item%></li>  
+        <ul id="friendsList"> 
+            <label>Chat with: </label>
+            <% friends.forEach((item)=>{ %> 
+            <form action="/chat" method="GET">
+                <input type = "hidden" name = "friend_name" value = <%item[1]%> />
+                <label><%=item[0]%></label>
+                <input type="submit" value="Submit"></li>  
+            </form>
             <%});%>
         </ul>
     </div>
     <script src="" async defer>
-        
+
     </script>
 </body>
 
