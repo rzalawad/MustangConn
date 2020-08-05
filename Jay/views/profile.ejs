@@ -2,9 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Profile </title>
-<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
-rel='stylesheet'>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title> <%=name%>'s Profile </title>
+
+	<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+	rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+	rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+	rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Open Sans'
+	rel='stylesheet'>
 <style>
 
 html {
@@ -29,34 +40,52 @@ ul.top_menu li a {
 	font-family: "PT Serif Caption";
 	font-size: 18px;
 	text-align: center;
-	padding: 14px 30px;
 	text-decoration: none;
 }
 
 ul.top_menu li a:hover {
-	background-color: #081c15;
+	color: #bd8b13;
 }
 
-ul.friends_list {
+div.friends_list {
+	position: absolute;
+	bottom: 250px;
+	left: 1000px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.fl_title_font {
+	margin: 0;
+	padding: 0;
+	width: 300px;
+	font-family: "Oleo Script Swash Caps";
+	font-size: 30px;
+	text-align: center;
+	color: black;
+}
+
+ul.fl_contents {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 200px;
-	background-color: blue;
+	width: 300px;
+	background-color: #e3e3e3;
+	border: 1px outset;
 }
 
-ul.friends_list li {
-	float: right;
-}
-
-ul.friends_list li a {
-	display: block;
-	color: black;
-	padding: 8px 16px;
+ul.fl_contents li a {
+	display: inline-block;
+	color: black;;
+	width: 100%;
+	border-bottom: 1px groove white;
 	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 22px;
+	font-weight: bold;
 }
 
-ul.friends_list li a:hover {
+ul.fl_contents li a:hover {
 	background-color: #bd8b13;
 	color: white;
 }
@@ -77,22 +106,38 @@ body {
 	object-fit: cover;
 	position: relative;
 	top: 20px;
+	left: 10px;
+}
+
+.minimized_profile_pic {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+div.profile_info {
+	position:absolute;
+	top: 75px;
+	left: 400px;
 }
 
 div.profile_name {
-	position: relative;
-	bottom: 250px;
-	left: 400px;
 	font-family: "PT Serif Caption";
 	font-size: 18px;
 }
 
-div.profile_info {
-	background-color: white;
+div.profile_body {
+	font-family: "Open Sans";
+	font-size: 10px;
 }
 
 .bttn{
 	padding-top: 40px;
+	position:relative;
+	left: 70px;
 }
 
 
@@ -100,12 +145,15 @@ div.profile_info {
 </head>
 <body>
 <ul class="top_menu">
-	<li> <a href="home"> MustangConnect </a> </li>
-	<li style="float:right"><a href="index"> Log Out </a> </li>
-	<li style="float:right"><a href="chat"> Chat </a> </li>
-	<li style="float:right"><a href="clubs"> Clubs </a> </li>
-	<li style="float:right"><a href="profile"> Profile </a> </li>
-	<li style="float:right"><a href="findPeople"> Meet People! </a> </li>
+	<li style="float:left; padding: 7px 30px"> 
+		<a href="home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+	</li>
+	<li style="float:left; padding: 14px 30px"> <a href="post/upload"> Post </a> </li>
+	<li style="float:right; padding: 14px 30px"> <a href="index"> Log Out </a> </li>
+	<li style="float:right; padding: 14px 30px"> <a href="chat"> Chat </a> </li>
+	<li style="float:right; padding: 14px 30px"> <a href="clubs"> Clubs </a> </li>
+	<li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
+	<li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
 </ul>
 
 <div>
@@ -117,55 +165,46 @@ div.profile_info {
 			<% } %>
 	</a>
 </div>
-	
-<h2></h2>
+
+<span></span>
 <div class="bttn">
 	<form action="/profile/upload/redirect">
 		<button class="btn btn-lg btn-primary btn-block"  type="submit">Change Profile Pic</button>
 	</form>
 </div>
 
-<div class="profile_name">
-
-	<h1><%=name%> </h1>
-</div>
-
 <div class="profile_info">
-
-	<h3>Age: <%=age%> </h3>
-</div>
-<div class="gender">
-	<h3>Gender: <%=gender%> </h3>
-</div>
-
-<div class="profile_info">
-	<h3>Dorm: <%=dorm%> </h3>
-</div>
-
-<div class="profile_info">
-	<h3>Hobbies:</h3>
-</div>
-
-<ul title="Hobbies"> 
-	<% hobbies.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
-
-<div class="profile_info">
-	<h3>Location: <%=location%> </h3>
+	<div class="profile_name">
+		<h1> <%=name%> </h1>
+	</div>
+	<div class="profile_body">
+	<h2> Gender: <%=gender%> </h2>
+	<h2> Age: <%=age%> </h2>
+	<h2> Hometown: <%=location%> </h2>
+	<h2> Dorm: <%=dorm%> </h2>
+	<h2> Hobbies:  </h2>
+	<ul title="Hobbies"> 
+		<% hobbies.forEach((item)=>{%> 
+		<li><%=item%></li>  
+		<%});%> 
+	</ul> 
+	</div>
 </div>
 
-
-<div class="profile_info">
-	<h3>Friends</h3>
+<div class=friends_list>
+	<h2 class="fl_title_font"> Friends List (<%=friends.length%>) </h2>
+	<ul class="fl_contents">
+		<% friends.forEach((item)=>{%> 
+		<li> <a href="profile">
+			<img src="http://placehold.it/400x200"
+			 class="minimized_profile_pic">
+			 <span style="text-align: center;"> <%=item%> </span>
+			</a>
+		</li>
+		<%});%> 
+	</ul>
 </div>
-
-<ul> 
-	<% friends.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
+	
 <p id="demo"></p>
 <script>
 	var test = document.getElementById('mydiv').dataset.test

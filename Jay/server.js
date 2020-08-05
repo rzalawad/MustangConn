@@ -168,6 +168,10 @@ app.get('/index',function(req,res) {
     res.render("index")
 })
  
+app.get('/clubs',function(req, res) {
+    res.render("clubs")
+})
+
 
 
 function insertFile(file, res, req) {
