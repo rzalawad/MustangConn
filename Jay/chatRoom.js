@@ -3,7 +3,7 @@ const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Conn
 
 mongoose.connect(url,{ useNewUrlParser: true,  useUnifiedTopology: true })
 
-const messageHistory = monsoose.Schema({
+const messageHistory = mongoose.Schema({
     messageUser1: [{
             type: String
         }],
