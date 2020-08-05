@@ -6,6 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 			crossorigin="anonymous">
+
 <style>
 	.profile_pic {
 	display: inline-block;
@@ -15,17 +16,46 @@
 	object-fit: cover;
 	position: relative;
 }
+
+ul.top_menu {
+	list-style-type: none;
+	margin: -9999rem -9999rem 0;
+	padding: 9999rem 9999rem 0;
+	overflow: hidden;
+	background-color: #154734;
+}
+
+ul.top_menu li {
+	float: left;
+}
+
+ul.top_menu li a {
+	display: block;
+	color: white;
+	font-family: "PT Serif Caption";
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+}
+
+ul.top_menu li a:hover {
+	color: #bd8b13;
+}
+
 </style>
 </head>
 <body>
-<ul class="top_menu">
-	<li> <a href="home"> MustangConnect </a> </li>
-	<li style="float:right"><a href="index"> Log Out </a> </li>
-	<li style="float:right"><a href="chat"> Chat </a> </li>
-	<li style="float:right"><a href="clubs"> Clubs </a> </li>
-  <li style="float:right"><a href="profile"> Profile </a> </li>
-  <li style="float:right"><a href="findPeople"> Meet People! </a> </li>
-</ul>
+	<ul class="top_menu">
+		<li style="float:left; padding: 7px 30px"> 
+			<a href="home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+		</li>
+		<li style="float:left; padding: 14px 30px"> <a href="post/upload"> Post </a> </li>
+		<li style="float:right; padding: 14px 30px"> <a href="index"> Log Out </a> </li>
+		<li style="float:right; padding: 14px 30px"> <a href="chat"> Chat </a> </li>
+		<li style="float:right; padding: 14px 30px"> <a href="clubs"> Clubs </a> </li>
+		<li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
+		<li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
+	</ul>
 
 <hr>
 <% q.forEach((target, i) =>{ %>
