@@ -334,10 +334,17 @@ app.get("/findPeople", function(req,res){
 
 
 app.post('/addFriend', (req,res) => {
+    for (var = i = 0, len = c_user.friend_list.length; i < len; i++){
+        if (c_user.friend_list[i] === (query[req.body.name].name){
+            var flag = true;
+        }
+    }
+    if (flag != true){
+        c_user.friend_list.push(query[req.body.name].name);
+        c_user.save();
 
-    c_user.friend_list.push(query[req.body.name].name);
+    }
 
-    c_user.save();
 
 })
 

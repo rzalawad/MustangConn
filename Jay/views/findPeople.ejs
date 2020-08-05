@@ -59,11 +59,9 @@
 				<li><%=item%></li>  
 				<%});%> 
 			</ul> 
-			
-			<h1>Add Friend Button</h1>
-			
+					
 			<form action="/addFriend" method="POST">
-				<input type="text" placeholder="name" name="name" value= <%=i%> >
+				<input type="hidden" placeholder="name" name="name" value= <%=i%> >
 				<button type="Add">Add Friend</button>
 			</form>
 			
