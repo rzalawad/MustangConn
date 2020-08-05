@@ -334,8 +334,8 @@ app.get("/findPeople", function(req,res){
 
 
 app.post('/addFriend', (req,res) => {
-    for (var = i = 0, len = c_user.friend_list.length; i < len; i++){
-        if (c_user.friend_list[i] === (query[req.body.name].name){
+    for (var i = 0, len = c_user.friend_list.length; i < len; i++){
+        if (c_user.friend_list[i] === (query[req.body.name].name)){
             var flag = true;
         }
     }
