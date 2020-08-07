@@ -338,11 +338,13 @@ app.get("/findPeople", function(req,res){
 
 
 app.post('/addFriend', (req,res) => {
+    //check for duplicates 
     for (var i = 0, len = c_user.friend_list.length; i < len; i++){
         if (c_user.friend_list[i] === (query[req.body.name].name)){
             var flag = true;
         }
     }
+    
     if (flag != true){
         c_user.friend_list.push(query[req.body.name].name);
         c_user.save();
@@ -386,7 +388,7 @@ app.post('/addFriend', (req,res) => {
 var des = null
 var type = null
 //@route to upload post image and description
-app.post("/post", upload.single('file'), (req, res) => {
+app.post("/post/upload", upload.single('file'), (req, res) => {
     if(c_user){
         console.log(c_user.user)
         if(c_user.user == "admin"){
@@ -409,9 +411,11 @@ app.post("/post", upload.single('file'), (req, res) => {
     else{
         res.render("error")
     }
-    
 
 })
     
+app.get("/post/upload", (req,res)=>{
+    res.render("upload")
+})
 
 server.listen(5000,()=> console.log("Online at 5000"))
