@@ -6,7 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href='https://fonts.googleapis.com/css?family=PT Serif Caption' rel='stylesheet'>
-    
+	<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+	rel='stylesheet'>
 <style>
 html {
 	overflow-x: hidden;
@@ -44,6 +45,88 @@ ul.top_menu li a:hover {
 	color: #bd8b13;
 }
 
+.list_titles {
+	font-family: "PT Serif Caption";
+	font-size: 24px;
+	color: black;
+	margin: 0;
+	padding: 0;
+}
+
+div.cf_list {
+	position: absolute;
+	top: 90px;
+	left: 50px;
+}
+
+div.sc_list {
+	position: absolute;
+	top: 90px;
+	left: 1000px;
+}
+
+ul.clubs_followed {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 700px;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+	height: 400px;
+}
+
+ul.clubs_followed li a {
+	display: inline-block;
+	color: black;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 22px;
+	font-weight: bold;
+}
+
+ul.clubs_followed li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+ul.suggested_clubs {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 300px;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+	height: 550px;
+}
+
+ul.suggested_clubs li a {
+	display: inline-block;
+	color: black;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 22px;
+	font-weight: bold;
+}
+
+ul.suggested_clubs li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+.minimized_profile_pic {
+	display: inline-block;
+	padding: 5px 5px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+
 </style>
 </head>
 <body>
@@ -58,3 +141,34 @@ ul.top_menu li a:hover {
 	<li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
 	<li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
 </ul>
+
+<div class=cf_list>
+	<h2 class="list_titles" style="width: 700px; text-align: center"> Clubs You Follow (#) </h2>
+	<ul class="clubs_followed"> 
+		<li> <a href="clubs">
+			<img src="http://placehold.it/400x200"
+			 class="minimized_profile_pic" style="width: 100px; height: 100px">
+			 <span style="position:absolute; font-size: 32px; width: 550px; top: 40px"> CP Meme Club </span>
+			 <span style="font-weight:normal; width: 550px; font-size: 18px; position: absolute; top: 80px">
+				This is not actually linked to the meme club. This is just a placeholder. </span>
+			</a>
+		</li> 
+	</ul>
+</div>
+
+<div class=sc_list>
+	<h2 class="list_titles" style="width: 300px; text-align: center"> Suggested Clubs </h2>
+	<ul class="suggested_clubs"> 
+		<li> <a href="clubs">
+			<img src="http://placehold.it/400x200"
+			 class="minimized_profile_pic" style="width: 60px; height: 60px">
+			 <span style="position:absolute; width: 200px;top: 40px"> Computer Science Society </span>
+			 <span style="font-weight:normal; width: 200px; font-size: 12px; position: absolute; top: 70px">
+				 Again, just another placeholder (is this even an actual club? idk). </span>
+			</a>
+		</li> 
+	</ul>
+</div>
+
+</body>
+</html>
