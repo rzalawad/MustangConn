@@ -43,6 +43,12 @@ const uSchema = new Schema({
         type: Array,
         required: true
     },
+    
+    friend_list_emails: {
+        type: Array,
+        required: true
+    },
+
     gender: {
         type: String,
         required: true
