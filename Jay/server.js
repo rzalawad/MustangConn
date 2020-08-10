@@ -109,9 +109,6 @@ app.post("/profile/Image",upload.single('file'),(req,res)=>{
     res.redirect("/profile")
 })
 
-
-
-
 // @route DELETE /files/:id
 // @desc  Delete file
 app.delete('/files/:id', (req, res) => {
@@ -148,8 +145,6 @@ app.get('/image/:filename', (req,res)=>{
       });
 })
 
-
-
 app.get('/home',function(req,res) {
     Post.find({}).sort({ _id: -1 }).exec(function(err, docs) { if(err){
         console.log("error in post loading :/home")
@@ -161,7 +156,24 @@ app.get('/home',function(req,res) {
 
 
 app.get('/profile',function(req,res) {
-    res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic})
+    res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, email: c_user.email, friends_email: c_user.friend_list_emails})
+})
+
+app.get('/profile/:c_username', function(req, res){
+    var c_username = req.params.c_username;
+    //console.log(c_username);
+
+    User.findOne({email: c_username}, function(err,obj) { 
+        //console.log(obj);
+        res.render('profile', {name: obj.name, age: obj.age, location: obj.location, gender: obj.gender, dorm: obj.dorm, hobbies: obj.hobby_list, friends: obj.friend_list, ppic:obj.ppic, email: obj.email})
+
+    });
+
+    //console.log(obj.email);
+
+
+
+    //res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, email: c_user.email})
 })
 
 app.get('/index',function(req,res) {
@@ -216,18 +228,12 @@ app.get("/login",async function(req,res){
     })
 })
 
-
-
-
-
 //Route to verify User
 
 //##################################################################################
-
 app.get("/verification",(req,res)=>{
     res.render("verification")
 })
-
 
 //@Des: Verifies code 
 app.get("/codeVerify", function(req,res){
@@ -246,6 +252,7 @@ app.get("/codeVerify", function(req,res){
         }
     }
 })
+
 //@Des: asks fro email and generates code
 app.get("/eVerification",function(req,res){
     (driver.codeGenerator(req.query.email)).then((cod)=>{
@@ -266,9 +273,6 @@ app.get("/eVerification",function(req,res){
 })
 
 ///////////////////////////////////////////////////////////////////////////
-
-
-
 //Route: to sign up
 //@Des: creates new user in dataB
 //#########################################################
@@ -314,8 +318,6 @@ app.get("/test",(req,res)=>{
 ///////////////////////////////////////////////////////
 
 
-
-
 var query = []
 
 //#########################################################
@@ -339,6 +341,7 @@ app.get("/findPeople", function(req,res){
 
 app.post('/addFriend', (req,res) => {
     //check for duplicates 
+
     for (var i = 0, len = c_user.friend_list.length; i < len; i++){
         if (c_user.friend_list[i] === (query[req.body.name].name)){
             var flag = true;
@@ -346,12 +349,13 @@ app.post('/addFriend', (req,res) => {
     }
     
     if (flag != true){
+        //c_user.friend_list.pop();
+        //c_user.friend_list_emails.pop();
+
         c_user.friend_list.push(query[req.body.name].name);
+        c_user.friend_list_emails.push(query[req.body.name].email);
         c_user.save();
-
     }
-
-
 })
 
 // //@route to grab post from DB
