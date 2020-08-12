@@ -111,7 +111,6 @@ var validation = function(username, password) {
                     reject(false)
                 } 
             }
- 
         })
     })}
 
@@ -130,8 +129,14 @@ var get_profile_for_username = (username) => {
 var get_profile_for_email = (email) => {
     return new Promise( (resolve, reject) => {
         User.findOne({email: email}, (profiles) => {
-            console.log(profiles)
-            resolve(profiles)
+            if (profiles == null) {
+                reject(false)
+            }
+            else
+            {
+                console.log(profiles)
+                resolve(profiles)
+            }
         }, (err) => {
             reject(err)
         });

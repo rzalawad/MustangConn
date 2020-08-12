@@ -96,28 +96,21 @@ app.get("/chat-choose", (req, res) => {
     console.log(c_user)
     
     //in the list to send, I am sending both name and usernames because names could be duplicates but usernames are unique (as they are calpoly usernames)
-
+    var profile;
     // testing
     if (c_user.friend_list.length == 0)
     {
-        try
-        {
-            var profile = dataB.get_profile_for_email("Earle Young@calpoly.edu")
-        }
-        catch (error) 
-        {
-            console.log("Friend add search error");
-        }
+        dataB.get_profile_for_email("Earle Young@calpoly.edu").then((friend_profile) => profile = friend_profile)
         
-            console.log("searched profile = ", profile)
+        console.log("searched profile = ", profile)
         c_user.friend_list.push(
             [profile._id, profile.username]
         );
     }
     var list_to_send = []
     c_user.friend_list.forEach(id => {
-        dataB.get_profile_with_id(id).then(profile => {
-            var profile = profile
+        dataB.get_profile_with_id(id).then(profiles => {
+            profile = profiles
         }).catch(err => console.log("Email search error occured"))
         list_to_send.push([profile.name, profile.username])
     });
