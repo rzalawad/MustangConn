@@ -43,12 +43,10 @@ const uSchema = new Schema({
         type: Array,
         required: true
     },
-    
     friend_list_emails: {
         type: Array,
         required: true
     },
-
     gender: {
         type: String,
         required: true
@@ -80,6 +78,10 @@ const uSchema = new Schema({
     ppic: {
         type: String,
         required: false
+    },
+    following_list: {
+        type: Array,
+        required: true
     },
 
 //    "name":"James Walsh","user":"user","nick_name":"not_set","email":"James Walsh@calpoly.edu","pref_list":["ethnicity","gender","location","major","hobby_list"],"pref":"ethnicity","hobby_list":["dancing","road trips","baking"],"friend_list":[],"gender":"male","age":{"$numberInt":"20"},"location":"Oklahoma","language":["Marathi","Spanish","Tamil","Urdu"],"major":"ME","dorm":"red bricks","ethnicity":"American"} 

@@ -64,11 +64,13 @@ app.use(express.static(__dirname + '/assets'));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 // Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: false }));
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
+// Allow Access to 'public' directory
+app.use(express.static(path.join(__dirname, 'public')))
 
 //intialize
 
@@ -76,6 +78,8 @@ app.use(express.json());
 app.get('/',function(req,res) {
     res.render("index")
 })
+
+
 
 app.get('/chat',function(req,res) {
     fs.readFile('./views/chat.html',(err,data)=>{
@@ -150,7 +154,19 @@ app.get('/home',function(req,res) {
         console.log("error in post loading :/home")
     }
     else{
-        res.render("home",{files:docs})
+        if(c_user != null){
+            (dataB.findPeople(c_user).then((doc)=>{
+                // console.log((Object.keys(doc).length))
+                for(var index= 0; index<(Object.keys(doc).length);index++){
+                  var target = doc[index]
+                  query[index] = target
+                }
+                res.render("home",{files:docs, q: query, friends: c_user.friend_list, email: c_user.email, friends_email: c_user.friend_list_emails})
+            }))
+        }
+        else{
+            res.render("index")
+        }
     } });
 })
 
@@ -181,7 +197,7 @@ app.get('/index',function(req,res) {
 })
  
 app.get('/clubs',function(req, res) {
-    res.render("clubs")
+    res.render("clubs", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, following: c_user.following_list})
 })
 
 
