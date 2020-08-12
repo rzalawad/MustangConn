@@ -74,9 +74,10 @@ ul.top_menu li a:hover {
 				</a>
 			</div>
             
-			<h2 id="names"><%=target.name%> </h2>
+			<h2 ><%=target.name%> </h2>
 			<h3>Age: <%=target.age%> </h3>
 			<h3>Gender: <%=target.gender%> </h3>
+			<h3>Email: <%=target.email%> </h3>
 			<h3>Dorm: <%=target.dorm%> </h3>
 			<h3>Hobbies</h3>
 			<ul title="Hobbies"> 
@@ -95,6 +96,7 @@ ul.top_menu li a:hover {
 					
 			<form action="/addFriend" method="POST">
 				<input type="hidden" placeholder="name" name="name" value= <%=i%> >
+				<input type="hidden" placeholder="name" name="email" value= <%=target.email%> >
 				<button type="Add">Add Friend</button>
 			</form>
 			

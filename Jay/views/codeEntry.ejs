@@ -1,25 +1,138 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>MustangConnect</title>
-	
-		<script type="text/javascript" src="/eel.js"></script>
-	
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	  </head>
-	  <body>
+<html lang="en">
+  <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This will maybe someday contain info about this website :)">
+		<meta name="author" content="Cal Poly Summer 2020 CSC 307 Group 3">
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 
+		<title>MustangConnect</title>
+		<link href='https://fonts.googleapis.com/css?family=Lora'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+		rel='stylesheet'>
+		
+		<script type="text/javascript" src="/eel.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+		 crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+		 crossorigin="anonymous"></script>
+  </head>
+
+  <style>
+    html {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background-image: url(/images/loginbackground.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+
+    .intro_header {
+        text-align: center;
+        margin-top: 70px; 
+        color: white;
+        font-family: "Lora";
+        font-weight: 600;
+        font-size: 36px;
+    }
+
+    .intro_body {
+        text-align: center;
+        margin-top: -30px;
+        color: white;
+        font-family: "Open Sans";
+        font-weight: 500;
+        font-style: italic;
+        font-size: 20px;
+    }
+
+    div.field_cont {
+        width: 400px;
+        height: 230px;
+        padding: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -140px 0 0 -220px;
+        background-color: white;
+        border: 2px solid gainsboro;
+        border-radius: 8px;
+    }
+
+    .form-control {
+        width: 90%;
+        margin: 0px 20px;
+        height: 40px;
+        box-sizing: border-box;
+        font-family: "Open Sans";
+        font-size: 16px;
+        border: 2px inset gainsboro;
+	}
+
+  .form-control:focus {
+        outline: none;
+  }
+
+	.form-control:focus {
+		border: 2px inset gainsboro;
+	}
 	
+	.verified {
+        margin: 0px 140px;
+        width: 30%;
+        background-color: #98b096;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Open Sans";
+        border: 2px outset #98b096;
+        cursor: pointer;
+    }
+
+    .verified:hover {
+      background-color: #6dab68;
+    }
+  </style>
+
+  <body>
+    <p class="intro_header"> Welcome to MustangConnect! </p>
+    <p class="intro_body">
+    A platform where Cal Poly students can meet new people and
+    discover new clubs to truly make Cal Poly their "home away
+    from home".
+    </p>
+
+    <div class="field_cont">
+		<p style="font-family: Lora; font-weight: bold; font-size: 20px; text-align: center;">
+		Please Enter The Code Sent To Your Email.</p>
 		<form action="/codeVerify">
-			<label for="code">Please enter the code emailed to you: </label>
-			<input type="text" id="code" name="code"><br><br>
-			<input type="submit" value="Submit">
+			<input type="text" class="form-control" id="code" name="code"
+			 placeholder="Example: 123456" required autofocus>
+			<br><br>
+			<input type="submit" class="verified" value="Submit">
 		  </form>
-	
-	
-      </body>
+    </div>
+
+    <span style="position: absolute; bottom: 5px; right: 5px;
+                 background-color: black">
+    <a style="color: white; font-size: 16px; text-decoration: none"
+     href="https://gopoly.com/images/2020/7/8/CPCampusByBrittanyAnzelApp.jpg?width=1416&height=797
+           &mode=crop&scale=both&format=jpg&quality=80" target="_blank">
+      Photo Credits: Brittany App (click here for photo link)
+    </a>
+    </span>
+
+  </body>
+
 </html>

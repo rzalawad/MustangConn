@@ -194,8 +194,8 @@ div.profile_body {
 <div class=friends_list>
 	<h2 class="fl_title_font"> Friends List (<%=friends.length%>) </h2>
 	<ul class="fl_contents">
-		<% friends.forEach((item)=>{%> 
-		<li> <a href="profile">
+		<% friends.forEach((item, i)=>{%> 
+		<li> <a href="profile/<%=friends_email[i]%>">
 			<img src="http://placehold.it/400x200"
 			 class="minimized_profile_pic">
 			 <span style="text-align: center;"> <%=item%> </span>

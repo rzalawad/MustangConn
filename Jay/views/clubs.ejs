@@ -143,16 +143,18 @@ ul.suggested_clubs li a:hover {
 </ul>
 
 <div class=cf_list>
-	<h2 class="list_titles" style="width: 700px; text-align: center"> Clubs You Follow (#) </h2>
-	<ul class="clubs_followed"> 
+	<h2 class="list_titles" style="width: 700px; text-align: center"> Clubs You Follow (<%=following.length%>) </h2>
+	<ul class="clubs_followed">
+		<% following.forEach((item)=>{%>
 		<li> <a href="clubs">
 			<img src="http://placehold.it/400x200"
 			 class="minimized_profile_pic" style="width: 100px; height: 100px">
-			 <span style="position:absolute; font-size: 32px; width: 550px; top: 40px"> CP Meme Club </span>
+			 <span style="position:absolute; font-size: 32px; width: 550px; top: 40px"> <%=item%> </span>
 			 <span style="font-weight:normal; width: 550px; font-size: 18px; position: absolute; top: 80px">
-				This is not actually linked to the meme club. This is just a placeholder. </span>
+				This (sometime in the future) should be the club description </span>
 			</a>
-		</li> 
+		</li>
+		<%});%> 
 	</ul>
 </div>
 

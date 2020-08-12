@@ -49,7 +49,8 @@ def user_generator():
             "language": list_selector(language),
             "major": major[random.randint(0,len(major)-1)],
             "dorm": dorms[random.randint(0,len(dorms)-1)],
-            "ethnicity": "American"
+            "ethnicity": "American",
+            "following_list": []
             }
 
     return post

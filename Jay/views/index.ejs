@@ -1,43 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This will maybe someday contain info about this website :)">
+    <meta name="author" content="Cal Poly Summer 2020 CSC 307 Group 3">
+    <link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 
-    <title>Signin Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="./signin.css" rel="stylesheet">
+    <title>MustangConnect</title>
+    <link href='https://fonts.googleapis.com/css?family=Lora'
+      rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans'
+      rel='stylesheet'>
   </head>
 
-  <body class="text-center">
-    <form class="form-signin" action="/login">
-      <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="email" class="sr-only">Email address</label>
-      <input type="email" name= 'email' id="email" class="form-control" placeholder="Email address" required autofocus>
-      <label for="psswd" class="sr-only">Password</label>
-      <input type="password" name= 'psswd' id="psswd" class="form-control" placeholder="Password" required><br>
+  <style>
+    html {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background-image: url(/images/loginbackground.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+
+    .intro_header {
+        text-align: center;
+        margin-top: 70px; 
+        color: white;
+        font-family: "Lora";
+        font-weight: 600;
+        font-size: 36px;
+    }
+
+    .intro_body {
+        text-align: center;
+        margin-top: -30px;
+        color: white;
+        font-family: "Open Sans";
+        font-weight: 500;
+        font-style: italic;
+        font-size: 20px;
+    }
+
+    div.field_cont {
+        width: 400px;
+        height: 230px;
+        padding: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -140px 0 0 -220px;
+        background-color: white;
+        border: 2px solid gainsboro;
+        border-radius: 8px;
+    }
+
+    .login_box {
+        padding-bottom: 20px;
+        border-bottom: 2px solid gainsboro;
+    }
+
+    .form-control {
+        width: 90%;
+        margin: 0px 20px;
+        height: 40px;
+        box-sizing: border-box;
+        font-family: "Open Sans";
+        font-size: 16px;
+        border: 2px inset gainsboro;
+    }
+
+    .form-control:focus {
+        outline: none;
+    }
+    
+    button.login {
+        margin: 0px 140px;
+        width: 30%;
+        background-color: #98b096;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Open Sans";
+        border: 2px outset #98b096;
+        cursor: pointer;
+    }
+
+    button.login:hover {
+      background-color: #6dab68;
+    }
+
+    button.signup {
+        margin: 0px 140px;
+        width: 30%;
+        background-color: #9996b0;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Open Sans";
+        border: 2px outset #9996b0;
+        cursor: pointer;
+    }
+
+    button.signup:hover {
+      background-color: #7972ad;
+    }
+
+  </style>
+
+  <body>
+    <p class="intro_header"> Welcome to MustangConnect! </p>
+    <p class="intro_body">
+    A platform where Cal Poly students can meet new people and
+    discover new clubs to truly make Cal Poly their "home away
+    from home".
+    </p>
+
+    <div class="field_cont">
+    <form class="login_box" action="/login">
+      <input type="email" name= 'email' id="email" class="form-control" placeholder="Email Address" required autofocus>
+      <br>
+      <input type="password" name= 'psswd' id="psswd" class="form-control" placeholder="Password" required>
+      <br>
+      <br>
       <a>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="login" type="submit">Login</button>
       </a>
 
     </form>
+
+    <p style="color: black; font-family: Open Sans; text-align: center;
+              font-size: 14px; font-weight: bold">
+    Don't have an account yet? Let's make you one!
+    </p>
 
     <form action="/verification">
       <a>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      <button class="signup" type="submit">Sign Up</button>
       </a>
     </form>
+    </div>
 
-      
-
+    <span style="position: absolute; bottom: 5px; right: 5px;
+                 background-color: black">
+    <a style="color: white; font-size: 16px; text-decoration: none"
+     href="https://gopoly.com/images/2020/7/8/CPCampusByBrittanyAnzelApp.jpg?width=1416&height=797
+           &mode=crop&scale=both&format=jpg&quality=80" target="_blank">
+      Photo Credits: Brittany App (click here for photo link)
+    </a>
+    </span>
 
   </body>
+
 </html>
