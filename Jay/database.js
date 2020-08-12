@@ -116,32 +116,46 @@ var validation = function(username, password) {
     })}
 
 
-function get_profile_for_username(username)
-{
-    User.find({username: username}).then(profiles =>{
-        return profiles;
-    }).catch(err => {
-        console.log("search error")
-    })
-}
-
-function get_profile_for_name(name)
-{
-    User.find({name: name}).then(profiles =>{
-        return profiles;
-    }).catch(err => {
-        console.log("search error")
-    })
+var get_profile_for_username = (username) => {
+    return new Promise( (resolve, reject) => {
+        User.findOne({username: username}, (profiles) => {
+            resolve(profiles)
+        }, (err) => {
+            reject(err)
+        });
+    });
 }
 
 
-function get_profile_with_id(id)
-{
-    User.findById(id).then(profile => {
-        return profile;
-    }).catch(err => {
-        console.log("Search by ID error occurred. ID: ", id)
-    })
+var get_profile_for_email = (email) => {
+    return new Promise( (resolve, reject) => {
+        User.findOne({email: email}, (profiles) => {
+            console.log(profiles)
+            resolve(profiles)
+        }, (err) => {
+            reject(err)
+        });
+    });
+}
+
+var get_profile_for_name = (name) => {
+    return new Promise( (resolve, reject) => {
+        User.findOne({name: name}, (profiles) => {
+            resolve(profiles)
+        }, (err) => {
+            reject(err)
+        });
+    });
+}
+
+var get_profile_with_id = (id) => {
+    return new Promise( (resolve, reject) => {
+        User.findById(id, (profiles) => {
+            resolve(profiles)
+        }, (err) => {
+            reject(err)
+        });
+    });
 }
 
 
@@ -151,7 +165,7 @@ function chat_room_query(username1, username2)
     {
         [username1, username2] = [username2, username1]
     }
-    var room1 = chatRoom.chatRoom.find({username1: username1, username2: username2})
+    var room1 = chatRoom.chatRoom.find({user1: username1, user2: username2})
     return room1
 }
 
@@ -190,4 +204,6 @@ exports.validation = validation
 exports.findPeople = find_people
 exports.get_profile_for_username = get_profile_for_username
 exports.get_profile_with_id = get_profile_with_id
+exports.get_profile_for_name = get_profile_for_name
+exports.get_profile_for_email = get_profile_for_email
 exports.chat_room_query = chat_room_query

@@ -15,6 +15,7 @@ const socketio = require("socket.io")
 //file imports
 const dataB = require('./database')
 const driver = require("./driver")
+const chatFormat = require('./chatFormat')
 
 //instantiation
 const app = express()
@@ -32,15 +33,10 @@ var code = null
 var u_email = null
 var c_user = null
 
-
-//mongo connection
-mongoose.connect(url)
-var conn = mongoose.connection;
-var db = mongoose.connection.db
-
 const Post = require('./post_info')
 const chatRoom = require("./chatRoom")
-const User = require('./user')
+const User = require('./user');
+const formatMessage = require('./chatFormat');
 
 //Initialize gridfs
 Grid.mongo = mongoose.mongo;
@@ -104,14 +100,25 @@ app.get("/chat-choose", (req, res) => {
     // testing
     if (c_user.friend_list.length == 0)
     {
-        var profile = dataB.get_profile_for_username("jdevkar")
+        try
+        {
+            var profile = dataB.get_profile_for_email("Earle Young@calpoly.edu")
+        }
+        catch (error) 
+        {
+            console.log("Friend add search error");
+        }
+        
+            console.log("searched profile = ", profile)
         c_user.friend_list.push(
             [profile._id, profile.username]
         );
     }
     var list_to_send = []
     c_user.friend_list.forEach(id => {
-        var profile = dataB.get_profile_with_id(id)
+        dataB.get_profile_with_id(id).then(profile => {
+            var profile = profile
+        }).catch(err => console.log("Email search error occured"))
         list_to_send.push([profile.name, profile.username])
     });
     res.render("chat-choose", {friends: list_to_send})
@@ -144,10 +151,120 @@ app.get('/chat',function(req,res) {
         var room = dataB.chat_room_query(c_user, friend_name)
         if (room == null)
         {
+            username1 = friend_profile.username
+            username2 = c_user.username
+            if (username1.localCompare(username2) > 0)
+            {
+                [username1, username2] = [username2, username1]
+            }
+            var newMsgHistory = chatRoom.messageHistoryInit().save().then(() => console.log("message history created"))
+            const newRoom = new chatRoom.chatRoomInit({
+                user1: username1,
+                user2: username2,
+                roomNum: Math.random()*10000,
+                messageHistory: newMsgHistory
+            })
 
+            newRoom.save().then(() => console.log("Chat room " + newRoom._id.toString() + " created"));
+
+            var roomID = newRoom_id.toString()
+
+            io.on('connection', socket => {
+
+                socket.emit("roomID", roomID)
+
+                socket.join(roomID);
+                socket.broadcast.to(roomID).emit('message', chatFormat(c_user.name, `${c_user.name} has joined the chat`))
+
+                
+                socket.on('chatMessage', msg => {
+                    var msgObj = formatMessage(c_user.name, msg)
+                    if (c_user.username == newRoom.user1)
+                    {
+                        newRoom.messageHistory.sequence.push(1)
+                        newRoom.messageHistory.messageUser1.push([msgObj.text, msgObj.time])
+                    }
+                    else
+                    {
+                        newRoom.messageHistory.sequence.push(2)
+                        newRoom.messageHistory.messageUser2.push([msgObj.text, msgObj.time])
+                    }
+                    io.to(roomID).emit('message', msgObj)
+                })
+
+                socket.on('disconnect', () => {
+                    io.to(roomID).emit('message', formatMessage(c_user.name, `${c_user.name} has left the chat`));
+                })
+
+            });
+
+
+            
         }
         else
         {
+
+            username1 = friend_profile.username
+            username2 = c_user.username
+            
+            if (username1.localCompare(username2) > 0)
+            {
+                [username1, username2] = [username2, username1]
+            }
+
+            if (username1 == friend_profile.username)
+            {
+                var name1 = friend_name.name
+                var name2 = c_user.name
+            }
+            else
+            {
+                var name1 = c_user.name
+                var name2 = friend_profile.name
+            }
+
+            io.on('connection', socket => {
+                
+                roomID = room._id.toString();
+
+                socket.join(roomID)
+                var pointer1 = 0, pointer2 = 0
+                room.messageHistory.sequence.forEach(turn => {
+                    if (turn == 1)
+                    {
+                        io.to(roomID).emit('message', formatMessage(name1, room.messageHistory.messageUser1[pointer1][0], room.messageHistory.messageUser1[pointer1][1]));
+                        pointer1 += 1
+                    }
+                    else
+                    {
+                        io.to(roomID).emit('message', formatMessage(name2, room.messageHistory.messageUser2[pointer2][0], room.messageHistory.messageUser2[pointer2][1]));
+                        pointer2 += 1
+                    }
+                     
+                });
+
+
+                socket.on('chatMessage', msg => {
+                    var msgObj = formatMessage(c_user.name, msg)
+                    if (c_user.username == newRoom.user1)
+                    {
+                        newRoom.messageHistory.sequence.push(1)
+                        newRoom.messageHistory.messageUser1.push([msgObj.text, msgObj.time])
+                    }
+                    else
+                    {
+                        newRoom.messageHistory.sequence.push(2)
+                        newRoom.messageHistory.messageUser2.push([msgObj.text, msgObj.time])
+                    }
+                    io.to(roomID).emit('message', msgObj)
+                })
+
+                socket.on('disconnect', () => {
+                    io.to(roomID).emit('message', formatMessage(c_user.name, `${c_user.name} has left the chat`));
+                })
+
+                
+            })
             
         }
 
