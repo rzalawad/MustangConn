@@ -170,6 +170,16 @@ app.get('/home',function(req,res) {
     } });
 })
 
+app.get('/clubs/:current_Club', function(req, res){
+    var current_Club = req.params.current_Club;
+
+    
+    res.render("viewClub", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, club_list: c_user.club_list, ppic:c_user.ppic, club_email: c_user.friend_list_emails})
+
+
+    
+})
+
 
 app.get('/profile',function(req,res) {
     res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, email: c_user.email, friends_email: c_user.friend_list_emails})
@@ -197,7 +207,7 @@ app.get('/index',function(req,res) {
 })
  
 app.get('/clubs',function(req, res) {
-    res.render("clubs", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, following: c_user.following_list})
+    res.render("clubs", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, club_list: c_user.club_list, club_email: c_user.club_email})
 })
 
 

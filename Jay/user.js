@@ -47,6 +47,16 @@ const uSchema = new Schema({
         type: Array,
         required: true
     },
+    club_list: {
+        type: Array,
+        required: true
+    },
+    club_list_emails: {
+        type: Array,
+        required: true
+    },
+
+
     gender: {
         type: String,
         required: true
