@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session');
 const http = require('http')
 const fs = require('fs')
 const methodOverride = require('method-override');
@@ -11,6 +12,11 @@ const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 const mongodb = require('mongodb')
 const socketio = require("socket.io")
+const MongoStore = require('connect-mongo')(session);
+const uuid = require('uuid/v4')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 
 //file imports
 const dataB = require('./database')
@@ -28,10 +34,66 @@ mongoose.connect(url)
 var conn = mongoose.connection;
 var db = mongoose.connection.db
 
+//app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+
+//session
+app.use(session({
+    secret: "deep dark secret: I like C++ more than python",
+    store: new MongoStore({ mongooseConnection: conn, collection: "sessions" }),
+    resave: false,
+    genid: (req) => {
+        return uuid()
+    },
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}))
+
+
+
+const customField = {
+    usernameField: 'email',
+    passwordField: 'psswd'
+}
+
+const verifyCallback = (username, password, done) => {
+    User.findOne({ email: username, password: password }, function(err, user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        return done(null, user);
+    });
+}
+
+const strategy = new LocalStrategy(customField, verifyCallback)
+
+passport.use(strategy)
+
+passport.serializeUser((user, done) => {
+    done(null, user.id)
+})
+
+passport.deserializeUser((userID, done) => {
+    User.findById(userID).then((user) => {
+        done(null, user)
+    }).catch(err => done(err))
+})
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use( (req, res, next) => {
+    console.log(req.session)
+    console.log(req.user)
+    next()
+})
+
+
+
 const binary = mongodb.Binary
 var code = null
-var u_email = null
-var c_user = null
 
 const Post = require('./post_info')
 const chatRoom = require("./chatRoom")
@@ -72,13 +134,12 @@ const upload = multer({ storage });
 // Set view engine as EJS
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/assets'));
-app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 // Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded());
-
+//app.use(express.urlencoded());
+//app.use(bodyParser.json());
 // Parse JSON bodies (as sent by API clients)
-app.use(express.json());
+//app.use(express.json());
 
 
 
@@ -392,8 +453,8 @@ function insertFile(file, res, req) {
     })
 }
                             
-app.get("/login",async function(req,res){
-    (dataB.validation(req.query.email, req.query.psswd)).then((user)=>{
+app.post("/login", passport.authenticate('local', {failureRedirect: '/err', successRedirect: "/home"}))/*, async function(req,res){
+    (dataB.validation(req.body.email, req.body.psswd)).then((user)=>{
         if(user){
             console.log(req.query.email)
             c_user = user
@@ -406,9 +467,7 @@ app.get("/login",async function(req,res){
             res.render('index')
         }
     })
-})
-
-
+})*/
 
 
 
