@@ -19,13 +19,20 @@ mongoose.connect(url)
 var conn = mongoose.connection;
 var db = mongoose.connection.db
 
+
+const session = require('express-session')
+
+
+
+
 const mongodb = require('mongodb')
 const Post = require('./post_info')
 const User = require('./user')
+const Club = require('./club')
+const cuser = require('./current_user')
 const binary = mongodb.Binary
-var code = null
-var u_email = null
-var c_user = null
+
+
 
 //Initialize gridfs
 Grid.mongo = mongoose.mongo;
@@ -64,56 +71,299 @@ app.use(express.static(__dirname + '/assets'));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 // Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({extended: false }));
+app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+app.use(session({
+    secret: 'f53638%;3#hHJA34',
+    resave: false,
+    saveUninitialized: true,
+  }))
 
-// Allow Access to 'public' directory
-app.use(express.static(path.join(__dirname, 'public')))
 
-//intialize
 
-//routes
+
+
+
+
+
+
+
+
+
+// ONE
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//INDEX and Login routes
+
+
+//@1 : index
+// wtbd: better css
 app.get('/',function(req,res) {
     res.render("index")
+    req.session.code = null
+    req.session.u_email = null
 })
 
 
 
-app.get('/chat',function(req,res) {
-    fs.readFile('./views/chat.html',(err,data)=>{
-        if(err){
-            console.log(err)
+
+
+//@2 : r/login
+// wtbd: 1)better css
+//       2) better security?
+app.get("/login",async function(req,res){
+    (dataB.validation(req.query.email, req.query.psswd)).then((user)=>{
+        if(user){
+            req.session.user = user
+            // console.log(req.session.user.name)
+            res.redirect("/home")
         }
-        else{
-            res.end(data)
+    }).catch((flag)=>{
+        if(flag == false)
+        {
+            res.render('index')
         }
     })
 })
 
 
-//Route to upload profile pic
-//@in profile.ejs
+
+
+
+
+
+// @11: r/logout 
+app.post("/logout",function(req,res){
+    console.log("no way dog")
+    req.session.destroy()
+    res.redirect("/")
+})
+
+
+
+
+// @3 : r/Singup 
+// wtbd: 1)better css
+//       2)implement calpoly only students.
+app.get("/signUp",(req,res)=>{
+    req.session.user = new User()
+    req.session.user.name = req.query.name
+    req.session.user.major = req.query.major
+    req.session.user.age = req.query.age
+    req.session.user.gender = req.query.gender
+    req.session.user.dorm = req.query.dorm
+    req.session.user.location = req.query.location
+    req.session.user.ethnicity = req.query.ethnicity
+    req.session.user.language = (req.query.language).split(',')
+    req.session.user.hobby_list = (req.query.hobbies).split(',')
+    req.session.user.user = "admin"
+    req.session.user.email = req.session.u_email
+    req.session.user.password = "1234"
+    req.session.user.friend_list = []
+    for(req.session.lopV = 1; req.session.lopV<=5; req.session.lopV++){
+        req.session.tempV = req.session.lopV.toString()
+        req.session.user.pref_list[i-1] = req.query[x]
+    }
+    req.session.user.pref = req.session.user.pref_list[0]
+    req.session.user.save((err,data)=>{
+        if(err){
+            console.log("Post gone worng")
+            console.log(err)
+        }
+        else{
+            res.redirect("/home")
+        }
+    })
+    // clearing temps JIC
+    req.session.lopV = 0
+    req.session.tempV =0
+
+})
+
+//@Des: Verifies code 
+app.get("/codeVerify", function(req,res){
+    if(req.session.code == null){
+        req.session.u_email = null
+        res.render("error")
+    }
+    else{
+        if (req.query.code == req.session.code){
+            req.session.code = null
+            if(!req.session.user.email)
+                res.render("register")
+            else{
+                res.render('') //TBC
+            }
+        }
+        else{
+            req.session.u_email = null
+            res.render("error")
+        }
+    }
+})
+//@Des: asks fro email and generates code
+app.get("/eVerification",function(req,res){
+    req.session.flag = true
+    User.findOne({email:req.query.email}).then((obj)=>{
+        if(!obj){
+            (driver.codeGenerator(req.query.email)).then((cod)=>{
+                if (cod){
+                    req.session.code = cod
+                    req.session.u_email = req.query.email
+                    res.render("codeEntry")
+                }
+                else{   
+                    res.render("error")
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+        else{
+            res.redirect('/')
+        }
+    })  
+})
+// des: verified page
+app.get("/verification",(req,res)=>{
+    res.render('verification',{club:false})
+})
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+//TWO 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//Main Body routes
+
+
+//@4 : r/home 
+//wtbd: 1)better css
+//      2)better post algo 
+app.get('/home',function(req,res) {
+    Post.find({}).sort({ _id: -1 }).exec(function(err, docs) { if(err){
+        console.log("error in post loading :/home")
+    }
+    else{
+        res.render("home",{files:docs})
+    } });
+})
+
+
+//@5 : r/profile
+//wtbd: 1)better css
+//      2)nav bar bug
+app.get('/profile',function(req,res) {
+    res.render('profile', {target:req.session.user})
+})
+
+
+
+// @6 : r/findpoeple
+// wtbd: 1)filter? 
+app.get("/findPeople", function(req,res){   
+        (dataB.findPeople(req.session.user).then((doc)=>{
+            req.session.query = []
+            for(req.session.lopV= 0; req.session.lopV<(Object.keys(doc).length); req.session.lopV++){
+                req.session.tempV= doc[req.session.lopV]
+                req.session.query[req.session.lopV] = req.session.tempV
+            }
+            res.render('findPeople',{u_name: req.session.name, q: req.session.query})
+        }))
+            // clearing temps JIC
+        req.session.lopV = 0
+        req.session.tempV =0
+})
+
+
+
+// @7 : r/post
+//wtbd : 1) better css
+//       2) previewing post
+app.post("/post", upload.single('file'), (req, res) => {
+    if(req.session.user){
+        if(req.session.user.user == "admin"){
+            req.session.post2 = new Post()
+            req.session.post2.des = (req.body.des)
+            req.session.post2.type = (req.body.type)
+            req.session.post2.cname = (req.body.cname)
+            req.session.post2.fname = req.file.filename
+            req.session.post2.uploader = req.session.user.email
+            req.session.post2.save((err,data)=>{
+                if(err){
+                    console.log("Post gone worng")
+                    console.log(err)
+                }
+                else{
+                    console.log("ok post")
+                }
+            })
+        }
+        res.redirect("/home")
+
+    }
+    else{
+        res.render("error")
+    }
+    req.session.post2 = null
+})
+
+app.get("/upload", (req,res)=>{
+    res.render("upload")
+})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+// THREE
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+// Change Profile Image
+
+
+
+// @8 : r/ProfilePic
+// wtbd : 1)better css
+        // 2)preview pic
 app.get("/profile/upload/redirect",(req,res)=>{
     res.render("profilePic")
 })
 app.post("/profile/Image",upload.single('file'),(req,res)=>{
-    if(c_user.ppic){
-        gfs.remove({ filename: c_user.ppic, root: 'posts' }, (err, gridStore) => {
+    console.log(req.session.name)
+    if(req.session.user.ppic){
+        gfs.remove({ filename: req.session.user.ppic, root: 'posts' }, (err, gridStore) => {
         });
+        console.log("1")
     }
-    c_user.ppic = req.file.filename
-    c_user.save((err,data)=>{
-        if(err){
-            console.log("profile pic save wrong")
-            console.log(err)
-        }
-    })
-    res.redirect("/profile")
+    // console.log(req.file);
+    
+    User.findOne({email: req.session.user.email}, function(err,obj) { 
+                    req.session.tempV = obj  
+                    // console.log(obj.name);  
+                    req.session.tempV.ppic = req.file.filename;
+                    req.session.user.ppic = req.session.tempV.ppic;
+                    req.session.tempV.save();s
+                    res.redirect("/profile")
+            }); 
+           
 })
 
-// @route DELETE /files/:id
+// @9 : r/Delete_Profile_Pic
 // @desc  Delete file
 app.delete('/files/:id', (req, res) => {
     Post.find({fname:req.params.id}).remove((err)=>{console.log("error removing post info")})
@@ -121,12 +371,14 @@ app.delete('/files/:id', (req, res) => {
       if (err) {
         return res.status(404).json({ err: err });
       }
-  
       res.redirect('/home');
     });
   });
 
-  //route to get image
+
+
+// @10 : r/Load_Profile_Pic
+// gets profile pic from the dbw
 app.get('/image/:filename', (req,res)=>{
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
         // Check if file
@@ -135,7 +387,7 @@ app.get('/image/:filename', (req,res)=>{
             err: 'No file exists'
           });
         }
-    
+
         // Check if image
         if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
           // Read output to browser
@@ -148,72 +400,119 @@ app.get('/image/:filename', (req,res)=>{
         }
       });
 })
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.get('/home',function(req,res) {
-    Post.find({}).sort({ _id: -1 }).exec(function(err, docs) { if(err){
-        console.log("error in post loading :/home")
-    }
-    else{
-        if(c_user != null){
-            (dataB.findPeople(c_user).then((doc)=>{
-                // console.log((Object.keys(doc).length))
-                for(var index= 0; index<(Object.keys(doc).length);index++){
-                  var target = doc[index]
-                  query[index] = target
+
+
+// ##################################################################################################################
+// Creat Club Profile
+
+app.get('/club/profile', function(req,res) {
+    Club.findOne({email:req.query.email}).then((obj)=>{
+        if(!obj){
+            (driver.codeGenerator(req.query.email)).then((cod)=>{
+                if (cod){
+                    req.session.code = cod
+                    req.session.u_email = req.query.email
+                    res.render("verification")
                 }
-                res.render("home",{files:docs, q: query, friends: c_user.friend_list, email: c_user.email, friends_email: c_user.friend_list_emails})
-            }))
+                else{
+                    res.render("error")
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
         }
         else{
-            res.render("index")
+            res.render("error")
         }
-    } });
+    })
+})
+//@Des: asks fro email and generates code
+app.get("/club/verification",function(req,res){
+    req.session.flag = false
+    Club.findOne({email:req.query.email}).then((obj)=>{
+        if(!obj){
+            (driver.codeGenerator(req.query.email)).then((cod)=>{
+                if (cod){
+                    req.session.code = cod
+                    req.session.u_email = req.session.email
+                    res.render("codeEntry")
+                }
+                else{   
+                    res.render("error")
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+        else{
+            res.redirect('/')
+        }
+    })  
+})
+app.get("/club",function(req,res){
+    res.render('verification',{club:true})
 })
 
-app.get('/clubs/:current_Club', function(req, res){
-    var current_Club = req.params.current_Club;
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/chat',function(req,res) {
+    fs.readFile('./views/chat.html',(err,data)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.end(data)
+        }
+    })
+})
+
+
+
+app.post('/addFriend', (req,res) => {
+    //check for duplicates 
+
+    for (req.session.lopV = 0; req.session.lopV < req.session.user.friend_list.length; req.session.lopV++){
+        if (req.session.user.friend_list[i] === (query[req.body.name].name)){
+            req.session.flag = true;
+        }
+    }
     
-    res.render("viewClub", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, club_list: c_user.club_list, ppic:c_user.ppic, club_email: c_user.friend_list_emails})
+    if (req.session.flag != true){
+        //req.session.userfriend_list.pop();
+        //req.session.userfriend_list_emails.pop();
 
-
-    
+        req.session.user.friend_list.push(query[req.body.name].name);
+        req.session.user.friend_list_emails.push(query[req.body.name].email);
+        req.session.user.save();
+    }
+    req.session.lopV =0 
 })
 
 
-app.get('/profile',function(req,res) {
-    res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, email: c_user.email, friends_email: c_user.friend_list_emails})
-})
-
-app.get('/profile/:c_username', function(req, res){
-    var c_username = req.params.c_username;
-    //console.log(c_username);
-
-    User.findOne({email: c_username}, function(err,obj) { 
-        //console.log(obj);
-        res.render('profile', {name: obj.name, age: obj.age, location: obj.location, gender: obj.gender, dorm: obj.dorm, hobbies: obj.hobby_list, friends: obj.friend_list, ppic:obj.ppic, email: obj.email})
-
-    });
-
-    //console.log(obj.email);
 
 
 
-    //res.render('profile', {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, email: c_user.email})
-})
-
-app.get('/index',function(req,res) {
-    res.render("index")
-})
- 
-app.get('/clubs',function(req, res) {
-    res.render("clubs", {name: c_user.name, age: c_user.age, location: c_user.location, gender: c_user.gender, dorm: c_user.dorm, hobbies: c_user.hobby_list, friends: c_user.friend_list, ppic:c_user.ppic, club_list: c_user.club_list, club_email: c_user.club_email})
-})
 
 
+
+
+
+
+
+
+
+
+
+// FUNCTIONS USED IN MAH CODE   
+// ############################################################################################################
 
 function insertFile(file, res, req) {
-    console.log("poop")
+    // console.log("poop")
     mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, (err, client) => {
         if (err) {
             return err
@@ -222,11 +521,11 @@ function insertFile(file, res, req) {
             let db = client.db('Mustang_Connect')
             let collection = db.collection('clubs')
             try {
-                var post = {
+                req.session.post = {
                     "file":file,
                     "des" :req.query.des
                 }
-                collection.insertOne(post)
+                collection.insertOne(req.session.post)
                 console.log('File Inserted')
             }
             catch (err) {
@@ -235,155 +534,18 @@ function insertFile(file, res, req) {
             client.close()
             res.render("home")
         }
-
+        req.session.post = null
     })
-}
-                            
-app.get("/login",async function(req,res){
-    (dataB.validation(req.query.email, req.query.psswd)).then((user)=>{
-        if(user){
-            console.log(req.query.email)
-            c_user = user
-            res.redirect("/home")
-        }
-    }).catch((flag)=>{
-        if(flag == false)
-        {
-            res.render('index')
-        }
-    })
-})
+} 
 
-//Route to verify User
-
-//##################################################################################
-app.get("/verification",(req,res)=>{
-    res.render("verification")
-})
-
-//@Des: Verifies code 
-app.get("/codeVerify", function(req,res){
-    if(code == null){
-        u_email = null
-        res.render("error")
-    }
-    else{
-        if (req.query.code == code){
-            code = null
-            res.render("register")
-        }
-        else{
-            u_email = null
-            res.render("error")
-        }
-    }
-})
-
-//@Des: asks fro email and generates code
-app.get("/eVerification",function(req,res){
-    (driver.codeGenerator(req.query.email)).then((cod)=>{
-        if (cod){
-            code = cod
-            u_email = req.query.email
-            console.log(u_email)
-            res.render("codeEntry")
-        }
-        else{
-            
-            res.render("error")
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
-
-})
-
-///////////////////////////////////////////////////////////////////////////
-//Route: to sign up
-//@Des: creates new user in dataB
-//#########################################################
-
-app.get("/signUp",(req,res)=>{
-    c_user = new User()
-    c_user.name = req.query.name
-    c_user.major = req.query.major
-    c_user.age = req.query.age
-    c_user.gender = req.query.gender
-    c_user.dorm = req.query.dorm
-    c_user.location = req.query.location
-    c_user.ethnicity = req.query.ethnicity
-    c_user.language = (req.query.language).split(',')
-    c_user.hobby_list = (req.query.hobbies).split(',')
-    c_user.user = "admin"
-    c_user.email = u_email
-    c_user.password = "1234"
-    c_user.friend_list = []
-    for(var i= 1; i<=5;i++){
-        var x = i.toString()
-        c_user.pref_list[i-1] = req.query[x]
-    }
-    c_user.pref = c_user.pref_list[0]
-    c_user.save((err,data)=>{
-        if(err){
-            console.log("Post gone worng")
-            console.log(err)
-        }
-        else{
-            res.redirect("/home")
-        }
-    })
-
-})
-
-app.get("/test",(req,res)=>{
-    res.render("register")
-})
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      
 
 
 
-///////////////////////////////////////////////////////
 
 
-var query = []
-
-//#########################################################
-app.get("/findPeople", function(req,res){
-    if(c_user != null){
-        (dataB.findPeople(c_user).then((doc)=>{
-            // console.log((Object.keys(doc).length))
-            for(var index= 0; index<(Object.keys(doc).length);index++){
-              var target = doc[index]
-              query[index] = target
-            }
-            res.render('findPeople',{u_name: c_user.name, q: query})
-        }))
-    }
-    else{
-        res.render("index")
-    }
-})
-
-
-
-app.post('/addFriend', (req,res) => {
-    //check for duplicates 
-
-    for (var i = 0, len = c_user.friend_list.length; i < len; i++){
-        if (c_user.friend_list[i] === (query[req.body.name].name)){
-            var flag = true;
-        }
-    }
-    
-    if (flag != true){
-        //c_user.friend_list.pop();
-        //c_user.friend_list_emails.pop();
-
-        c_user.friend_list.push(query[req.body.name].name);
-        c_user.friend_list_emails.push(query[req.body.name].email);
-        c_user.save();
-    }
-})
-
+// IMPORT REFERENCE CODE CAUSE ME DUMB
 // //@route to grab post from DB
 // app.get('/file/:filename', (req,res)=>{
 //     gfs.files.findOne({filename: req.params.filename}).toArray((err,file)=>{
@@ -415,37 +577,7 @@ app.post('/addFriend', (req,res) => {
 //     })
 // })
 
-var des = null
-var type = null
-//@route to upload post image and description
-app.post("/post/upload", upload.single('file'), (req, res) => {
-    if(c_user){
-        console.log(c_user.user)
-        if(c_user.user == "admin"){
-            var post = new Post()
-            post.des = (req.body.des)
-            post.type = (req.body.type)
-            post.cname = (req.body.cname)
-            post.fname = req.file.filename
-            post.uploader = c_user.email
-            post.save((err,data)=>{
-                if(err){
-                    console.log("Post gone worng")
-                    console.log(err)
-                }
-            })
-        }
-        res.redirect("/home")
-        console.log("noooooo")
-    }
-    else{
-        res.render("error")
-    }
 
-})
-    
-app.get("/post/upload", (req,res)=>{
-    res.render("upload")
-})
+
 
 server.listen(5000,()=> console.log("Online at 5000"))
