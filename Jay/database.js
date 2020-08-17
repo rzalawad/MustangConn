@@ -116,18 +116,19 @@ var validation = function(username, password) {
 
 
 var get_profile_for_username = (username) => {
-    return new Promise( (resolve, reject) => {
-        User.findOne({username: username}, (profiles) => {
-            resolve(profiles)
-        }, (err) => {
-            reject(err)
-        });
-    });
+    return User.findOne({username: username}).exec()
+}
+
+var test = () => {
+    return User.find().exec()
 }
 
 
 var get_profile_for_email = (email) => {
-    return new Promise( (resolve, reject) => {
+    
+    return User.findOne({email: email}).exec()
+    
+    /*return new Promise( (resolve, reject) => {
         User.findOne({email: email}, (profiles) => {
             if (profiles == null) {
                 reject(false)
@@ -140,7 +141,7 @@ var get_profile_for_email = (email) => {
         }, (err) => {
             reject(err)
         });
-    });
+    });*/
 }
 
 var get_profile_for_name = (name) => {
@@ -154,24 +155,24 @@ var get_profile_for_name = (name) => {
 }
 
 var get_profile_with_id = (id) => {
-    return new Promise( (resolve, reject) => {
+    return User.findById(id).exec()
+    /*return new Promise( (resolve, reject) => {
         User.findById(id, (profiles) => {
             resolve(profiles)
         }, (err) => {
             reject(err)
         });
-    });
+    });*/
 }
 
 
-function chat_room_query(username1, username2)
+function chat_room_query(email1, email2)
 {
-    if (username1.localCompare(username2) > 0)
+    if (email1.localeCompare(email2) > 0)
     {
-        [username1, username2] = [username2, username1]
+        [email1, email2] = [email2, email1]
     }
-    var room1 = chatRoom.chatRoom.find({user1: username1, user2: username2})
-    return room1
+    return chatRoom.chatRoomModel.findOne({email1: email1, email2: email2}).exec()
 }
 
 
@@ -206,6 +207,7 @@ function chat_room_query(username1, username2)
 
 
 exports.validation = validation
+exports.test = test
 exports.findPeople = find_people
 exports.get_profile_for_username = get_profile_for_username
 exports.get_profile_with_id = get_profile_with_id

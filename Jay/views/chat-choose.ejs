@@ -23,8 +23,8 @@
         <ul id="friendsList"> 
             <label>Chat with: </label>
             <% friends.forEach((item)=>{ %> 
-            <form action="/chat" method="GET">
-                <input type = "hidden" name = "friend_name" value = <%item[1]%> />
+            <form action="/chat" method="POST">
+                <input type = "hidden" name = "friend_email" value = <%=item[1]%> />
                 <label><%=item[0]%></label>
                 <input type="submit" value="Submit"></li>  
             </form>

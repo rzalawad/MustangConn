@@ -38,7 +38,7 @@ var db = mongoose.connection.db
 app.use(bodyParser.urlencoded({extended: true}))
 
 //session
-app.use(session({
+var session_middleware = session({
     secret: "deep dark secret: I like C++ more than python",
     store: new MongoStore({ mongooseConnection: conn, collection: "sessions" }),
     resave: false,
@@ -48,8 +48,11 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
-}))
+})
+app.use(session_middleware)
 
+// socketio middleware
+//io.use((socket, next) => session_middleware(socket.request, {}, next))
 
 
 const customField = {
@@ -85,8 +88,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use( (req, res, next) => {
-    console.log(req.session)
-    console.log(req.user)
     next()
 })
 
@@ -99,6 +100,7 @@ const Post = require('./post_info')
 const chatRoom = require("./chatRoom")
 const User = require('./user');
 const formatMessage = require('./chatFormat');
+const { ENGINE_METHOD_PKEY_METHS } = require('constants');
 
 //Initialize gridfs
 Grid.mongo = mongoose.mongo;
@@ -154,29 +156,48 @@ app.get('/',function(req,res) {
 })
 
 app.get("/chat-choose", (req, res) => {
-    console.log(c_user)
     
     //in the list to send, I am sending both name and usernames because names could be duplicates but usernames are unique (as they are calpoly usernames)
     var profile;
-    // testing
-    if (c_user.friend_list.length == 0)
+    
+    
+    if (req.user.friend_list.length == 0)
     {
-        dataB.get_profile_for_email("Earle Young@calpoly.edu").then((friend_profile) => profile = friend_profile)
-        
-        console.log("searched profile = ", profile)
-        c_user.friend_list.push(
-            [profile._id, profile.username]
-        );
+        dataB.get_profile_for_email("jdevkar@calpoly.edu").then((friend_profile) => {
+            profile = friend_profile
+            console.log("searched profile = ", profile)
+            req.user.friend_list.push(profile._id);
+        }).then( () => {
+            var list_to_send = []
+            cnt = 0
+            req.user.friend_list.forEach(id => {
+                dataB.get_profile_with_id(id).then(ret_profile => {
+                    list_to_send.push([ret_profile.name, ret_profile.email])
+                    console.log(cnt, req.user.friend_list.length)
+                    if (cnt == req.user.friend_list.length-1)
+                    {
+                        console.log(list_to_send)
+                        res.render("chat-choose", {friends: list_to_send})        
+                    }
+                    cnt++
+                }).catch(err => console.log("Email search error occured"))
+            })
+        }).catch(() => console.log("user not found"))
     }
     var list_to_send = []
-    c_user.friend_list.forEach(id => {
-        dataB.get_profile_with_id(id).then(profiles => {
-            profile = profiles
+    cnt = 0
+    req.user.friend_list.forEach(id => {
+        dataB.get_profile_with_id(id).then(ret_profile => {
+            list_to_send.push([ret_profile.name, ret_profile.email])
+            console.log(cnt, req.user.friend_list.length-1  )
+            if (cnt == req.user.friend_list.length)
+            {
+                console.log(list_to_send)
+                res.render("chat-choose", {friends: list_to_send})        
+            }
+            cnt++
         }).catch(err => console.log("Email search error occured"))
-        list_to_send.push([profile.name, profile.username])
-    });
-    res.render("chat-choose", {friends: list_to_send})
-
+    })
 
     //code that is secure below. Implement this
 
@@ -190,137 +211,58 @@ app.get("/chat-choose", (req, res) => {
     }*/
 })
 
-app.get('/chat',function(req,res) {
+app.post('/chat',function(req,res) {
 
-    if (c_user == null)
+    if (!req.isAuthenticated())
     {
         res.send('signUp');
     }
     else
     {
-        var friend_name = req.query.friend_name;
-        var friend_profile = dataB.get_profile_for_username(friend_name);
-        console.log(friend_profile)
+        console.log(req.user.profile)
+        var friend_email = req.body.friend_email;
+        var my_email = req.user.email;
+        var friend_profile = null
+        var room = null
+        dataB.get_profile_for_email(friend_email).then( (profile) => {
+            friend_profile = profile
+            console.log(friend_profile)
+            console.log(friend_email)
+            email1 = friend_profile.email
+            email2 = req.user.email
+            console.log(email1, typeof(email1), email2, typeof(email2))
+            if (email1.localeCompare(email2) > 0)
+                [email1, email2] = [email2, email1]
+            
+            dataB.chat_room_query(email1, email2).then( (entireRoom) => {
+                
+                    res.render("chat", {room: JSON.stringify(entireRoom), my_email: my_email})
+                
+            }).catch((err) => {
+                var newMsgHistory = new chatRoom.historyModel()
+                newMsgHistory.save().then(() => {
+                    console.log("message history created")
+                    const newRoom = new chatRoom.chatRoomModel({
+                        email1: email1,
+                        email2: email2,
+                        roomNum: Math.random()*10000,
+                        messageHistory: newMsgHistory
+                    })
+    
+                    newRoom.save().then( () => {
+                        console.log("Chat room " + newRoom._id.toString() + " created")
+                        res.render("chat", {room: JSON.stringify(newRoom), my_email: my_email})
+    
+                    }).catch(() => console.log("newroom save failed"))
+                
+                
+                }).catch(() => console.log("messagehistory save failed"))
+                
+            })
+        });
+    }
+
         
-        var room = dataB.chat_room_query(c_user, friend_name)
-        if (room == null)
-        {
-            username1 = friend_profile.username
-            username2 = c_user.username
-            if (username1.localCompare(username2) > 0)
-            {
-                [username1, username2] = [username2, username1]
-            }
-            var newMsgHistory = chatRoom.messageHistoryInit().save().then(() => console.log("message history created"))
-            const newRoom = new chatRoom.chatRoomInit({
-                user1: username1,
-                user2: username2,
-                roomNum: Math.random()*10000,
-                messageHistory: newMsgHistory
-            })
-
-            newRoom.save().then(() => console.log("Chat room " + newRoom._id.toString() + " created"));
-
-            var roomID = newRoom_id.toString()
-
-            io.on('connection', socket => {
-
-                socket.emit("roomID", roomID)
-
-                socket.join(roomID);
-                socket.broadcast.to(roomID).emit('message', chatFormat(c_user.name, `${c_user.name} has joined the chat`))
-
-                
-                socket.on('chatMessage', msg => {
-                    var msgObj = formatMessage(c_user.name, msg)
-                    if (c_user.username == newRoom.user1)
-                    {
-                        newRoom.messageHistory.sequence.push(1)
-                        newRoom.messageHistory.messageUser1.push([msgObj.text, msgObj.time])
-                    }
-                    else
-                    {
-                        newRoom.messageHistory.sequence.push(2)
-                        newRoom.messageHistory.messageUser2.push([msgObj.text, msgObj.time])
-                    }
-                    io.to(roomID).emit('message', msgObj)
-                })
-
-                socket.on('disconnect', () => {
-                    io.to(roomID).emit('message', formatMessage(c_user.name, `${c_user.name} has left the chat`));
-                })
-
-            });
-
-
-            
-        }
-        else
-        {
-
-            username1 = friend_profile.username
-            username2 = c_user.username
-            
-            if (username1.localCompare(username2) > 0)
-            {
-                [username1, username2] = [username2, username1]
-            }
-
-            if (username1 == friend_profile.username)
-            {
-                var name1 = friend_name.name
-                var name2 = c_user.name
-            }
-            else
-            {
-                var name1 = c_user.name
-                var name2 = friend_profile.name
-            }
-
-            io.on('connection', socket => {
-                
-                roomID = room._id.toString();
-
-                socket.join(roomID)
-                var pointer1 = 0, pointer2 = 0
-                room.messageHistory.sequence.forEach(turn => {
-                    if (turn == 1)
-                    {
-                        io.to(roomID).emit('message', formatMessage(name1, room.messageHistory.messageUser1[pointer1][0], room.messageHistory.messageUser1[pointer1][1]));
-                        pointer1 += 1
-                    }
-                    else
-                    {
-                        io.to(roomID).emit('message', formatMessage(name2, room.messageHistory.messageUser2[pointer2][0], room.messageHistory.messageUser2[pointer2][1]));
-                        pointer2 += 1
-                    }
-                     
-                });
-
-
-                socket.on('chatMessage', msg => {
-                    var msgObj = formatMessage(c_user.name, msg)
-                    if (c_user.username == newRoom.user1)
-                    {
-                        newRoom.messageHistory.sequence.push(1)
-                        newRoom.messageHistory.messageUser1.push([msgObj.text, msgObj.time])
-                    }
-                    else
-                    {
-                        newRoom.messageHistory.sequence.push(2)
-                        newRoom.messageHistory.messageUser2.push([msgObj.text, msgObj.time])
-                    }
-                    io.to(roomID).emit('message', msgObj)
-                })
-
-                socket.on('disconnect', () => {
-                    io.to(roomID).emit('message', formatMessage(c_user.name, `${c_user.name} has left the chat`));
-                })
-
-                
-            })
-            
-        }
 
 
         /* Dont know what this is for
@@ -337,8 +279,44 @@ app.get('/chat',function(req,res) {
             }
         })
         */
-    }
 })
+
+
+io.on('connection', socket => {
+
+    socket.on('join.room', room_id => {
+        socket.join(room_id)
+        console.log("room joined")
+    })
+
+    socket.on('chatMessage', (roomID, user_email, msg) => {
+        console.log(msg)
+        io.to(roomID).emit('message', formatMessage(user_email, msg))
+    })
+
+
+    /*socket.on('chatMessage', msg => {
+        var msgObj = formatMessage(c_user.name, msg)
+        if (c_user.username == newRoom.user1)
+        {
+            newRoom.messageHistory.sequence.push(1)
+            newRoom.messageHistory.messageUser1.push([msgObj.text, msgObj.time])
+        }
+        else
+        {
+            newRoom.messageHistory.sequence.push(2)
+            newRoom.messageHistory.messageUser2.push([msgObj.text, msgObj.time])
+        }
+        io.to(roomID).emit('message', msgObj)
+    })*/
+
+    socket.on('disconnect', () => {
+        socket.leave()    
+    })
+
+});
+
+
 
 
 //Route to upload profile pic
@@ -354,6 +332,7 @@ app.post("/profile/Image",upload.single('file'),(req,res)=>{
     c_user.ppic = req.file.filename
     c_user.save((err,data)=>{
         if(err){
+            console.log(email);
             console.log("profile pic save wrong")
             console.log(err)
         }

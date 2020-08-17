@@ -19,16 +19,14 @@ const messageHistory = mongoose.Schema({
 })  
 
 
-const model_of_chat_history = mongoose.model("chatHistory", messageHistory)
-
-
 const chatRoom = mongoose.Schema({
-    user1: {type: Number, default: -1},
-    user2: {type: Number, default: -1},
+    email1: {type: String, default: -1},
+    email2: {type: String, default: -1},
     roomNum: {type: Number, default: -1},
     messageHistory: {type:messageHistory}
 })
 
-module.exports.chatRoom = chatRoom
-module.exports.chatRoomInit = mongoose.model('chatRoom', chatRoom)
-module.exports.messageHistoryInit = mongoose.model('messageHistory', messageHistory)
+let chatRoomModel = mongoose.model('chatRoom', chatRoom)
+let historyModel = mongoose.model('messageHistory', messageHistory)
+module.exports.chatRoomModel = chatRoomModel
+module.exports.historyModel = historyModel
