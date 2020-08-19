@@ -143,10 +143,10 @@ ul.suggested_clubs li a:hover {
 </ul>
 
 <div class=cf_list>
-	<h2 class="list_titles" style="width: 700px; text-align: center"> Clubs You Follow (<%=club_list.length%>) </h2>
+	<h2 class="list_titles" style="width: 700px; text-align: center"> Clubs You Follow (<%=target.club_list.length%>) </h2>
 	<ul class="clubs_followed">
-		<% club_list.forEach((item, i)=>{%>
-		<li> <a href="clubs/<%=club_email[i]%>">
+		<% target.club_list.forEach((item, i)=>{%>
+		<li> <a href="clubs/<%=target.club_list_emails[i]%>">
 			<img src="http://placehold.it/400x200"
 			 class="minimized_profile_pic" style="width: 100px; height: 100px">
 			 <span style="position:absolute; font-size: 32px; width: 550px; top: 40px"> <%=item%> </span>

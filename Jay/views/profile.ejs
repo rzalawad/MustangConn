@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title> <%=name%>'s Profile </title>
+	<title> <%=target.name%>'s Profile </title>
 
 	<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 	rel='stylesheet'>
@@ -158,8 +158,8 @@ div.profile_body {
 
 <div>
 	<a href="http://placehold.it/400x200" target="_blank">
-		<% if(ppic){ %>
-			<img src="image/<%= ppic %>"class="profile_pic">
+		<% if(target.ppic){ %>
+			<img src="image/<%= target.ppic %>"class="profile_pic">
 		<% } else { %>
 			<img src="http://placehold.it/400x200" class="profile_pic">
 			<% } %>
@@ -175,16 +175,16 @@ div.profile_body {
 
 <div class="profile_info">
 	<div class="profile_name">
-		<h1> <%=name%> </h1>
+		<h1> <%=target.name%> </h1>
 	</div>
 	<div class="profile_body">
-	<h2> Gender: <%=gender%> </h2>
-	<h2> Age: <%=age%> </h2>
-	<h2> Hometown: <%=location%> </h2>
-	<h2> Dorm: <%=dorm%> </h2>
+	<h2> Gender: <%=target.gender%> </h2>
+	<h2> Age: <%=target.age%> </h2>
+	<h2> Hometown: <%=target.location%> </h2>
+	<h2> Dorm: <%=target.dorm%> </h2>
 	<h2> Hobbies:  </h2>
 	<ul title="Hobbies"> 
-		<% hobbies.forEach((item)=>{%> 
+		<% target.hobby_list.forEach((item)=>{%> 
 		<li><%=item%></li>  
 		<%});%> 
 	</ul> 
@@ -192,10 +192,10 @@ div.profile_body {
 </div>
 
 <div class=friends_list>
-	<h2 class="fl_title_font"> Friends List (<%=friends.length%>) </h2>
+	<h2 class="fl_title_font"> Friends List (<%=target.friend_list.length%>) </h2>
 	<ul class="fl_contents">
-		<% friends.forEach((item, i)=>{%> 
-		<li> <a href="profile/<%=friends_email[i]%>">
+		<% target.friend_list.forEach((item, i)=>{%> 
+		<li> <a href="profile/<%=target.friend_list_emails[i]%>">
 			<img src="http://placehold.it/400x200"
 			 class="minimized_profile_pic">
 			 <span style="text-align: center;"> <%=item%> </span>

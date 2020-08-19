@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-        <title> <%=name%>'s Profile </title>
-    
+
+        <title> <%=target.name%>'s Profile </title>
+
         <link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
         rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
@@ -154,17 +154,17 @@
         <li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
         <li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
     </ul>
-    
+
     <div>
         <a href="http://placehold.it/400x200" target="_blank">
-            <% if(ppic){ %>
+            <% if(target.ppic){ %>
                 <img src="image/<%= ppic %>"class="profile_pic">
             <% } else { %>
                 <img src="http://placehold.it/400x200" class="profile_pic">
                 <% } %>
         </a>
     </div>
-    
+
     <span></span>
     <div class="bttn">
         <form action="/profile/upload/redirect">
@@ -174,13 +174,14 @@
 
     <div class="club_info">
         <div class="club_name">
-            <h1> <%=name%> </h1>
+            <h1> <%=target.name%> </h1>
         </div>
         <div class="profile_body">
-        <h2> Dorm: <%=dorm%> </h2>
+        <h2> Description: <%=target.des%> </h2>
+        <h2> Club Admin(s): <%=target.admin%> </h2>
         <h2> Hobbies:??  </h2>
-        <ul title="Hobbies"> 
-            <% hobbies.forEach((item)=>{%> 
+        <ul title="Members"> 
+            <% target.members.forEach((item)=>{%> 
             <li><%=item%></li>  
             <%});%> 
         </ul> 

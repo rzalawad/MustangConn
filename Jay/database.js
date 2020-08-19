@@ -43,6 +43,10 @@ var find_people = function(user){
                 if (user.email == target.email){
                     continue
                 }
+                /* This code should work for taking out duplicates */
+                else if (user.friend_list_emails.includes(target.email)){
+                    continue
+                }
                 var scr =0
                 var lenght = Object.keys(user.pref_list).length
                 for(var index = 0; index<lenght; index++){
@@ -103,9 +107,6 @@ var validation = function(username, password) {
  
         })
     })}
-
-
-
 
 //test
 

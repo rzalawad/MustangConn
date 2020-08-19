@@ -93,6 +93,16 @@ ul.home_sf_contents li a:hover {
 	color: white;
 }
 
+.add_sf {
+	position: relative;
+	top: -30px;
+	margin-left: 33%;
+	background-color: #bd8b13;
+	color: black;
+	border: 2px outset #bd8b13;
+	cursor: pointer;
+}
+
 .minimized_profile_pic {
 	display: inline-block;
 	width: 75px;
@@ -185,6 +195,7 @@ ul.home_sf_contents li a:hover {
 	font-size: 20px;
 	font-weight: bold;
 	background-color: #e3e3e3;
+	border: 1px solid #e3e3e3;
 }
 
 .home_fl {
@@ -239,22 +250,27 @@ ul.home_fl_contents li a:hover {
 	margin-top: 0; margin-bottom: 5%;"> Suggested Users</p>
 	<ul class="home_sf_contents">
 		<% q.forEach((target, i) =>{ %>
-			<%if (i < 6) { %>
+			<%if (i < 5) { %>
 			<li style="border-top: 2px inset #e3e3e3"> 
-				<a href="findPeople">
+				<a href="profile/<%=target.email%>">
 				<% if(target.ppic){ %>
-					<img src="image/<%= ppic %>" class="minimized_profile_pic">
+					<img src="image/<%= target.ppic %>" class="minimized_profile_pic">
 				<% } else { %>
 					<img src="http://placehold.it/400x200" class="minimized_profile_pic" >
 				<% } %>
 				<span style="position: relative; top: -35px"><%=target.name%></span>
-			</a>
+				</a>
+				<form action="/addFriend" method="POST">
+					<input type="hidden" placeholder="name" name="name" value= <%=i%> >
+					<input type="hidden" placeholder="name" name="email" value= <%=target.email%> >
+					<button type="Add" class="add_sf"> Add Friend</button>
+				</form>
 			</li>
 			<% } %>
 		<%});%> 
 	</ul>	
 				
-	<a class="more_link" style="left: 25px; bottom: 15px"
+	<a class="more_link" style="left: 25px; bottom: 20px"
 	 href="findPeople">
 		View More Suggested Users
 	</a>

@@ -64,10 +64,10 @@ ul.top_menu li a:hover {
 <% q.forEach((target, i) =>{ %>
 	<div class="container">
 		<div class="card card-body mb-3">
-			<div >
+			<div>
 				<a href="http://placehold.it/400x200" target="_blank">
 					<% if(target.ppic){ %>
-						<img src="image/<%= ppic %>" class="profile_pic">
+						<img src="image/<%= target.ppic %>" class="profile_pic">
 					<% } else { %>
 						<img src="http://placehold.it/400x200" class="profile_pic" >
 						<% } %>

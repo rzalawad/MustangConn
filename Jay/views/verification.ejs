@@ -22,7 +22,22 @@
 		 crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
-		 crossorigin="anonymous"></script>
+     crossorigin="anonymous"></script>
+
+    <script>
+    function check_email(form) {
+        var verif_email = form.email.value.split('@');
+        if (verif_email.length == 2) {
+            if (verif_email[1] == "calpoly.edu") {
+                form.action = "/student-verification"
+                return
+            }
+        }
+
+        alert("Email must be in format <username@calpoly.edu>")
+    }
+    </script>
+
   </head>
 
   <style>
@@ -58,15 +73,31 @@
     }
 
     div.field_cont {
-        width: 400px;
-        height: 230px;
-        padding: 20px;
+        width: 430px;
+        height: 470px;
+        padding: 5px;
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         margin: -140px 0 0 -220px;
         background-color: white;
         border: 2px solid gainsboro;
+        border-radius: 8px;
+    }
+
+    div.student_user {
+        margin: auto;
+        width: 80%;
+        height: 37%;
+        border: 2px solid #e3e3e3;
+        border-radius: 8px;
+    }
+
+    div.club_user {
+        margin: auto;
+        width: 80%;
+        height: 41%;
+        border: 2px solid #e3e3e3;
         border-radius: 8px;
     }
 
@@ -84,21 +115,59 @@
         outline: none;
     }
 	
-	.sendEmail {
-        margin: 0px 140px;
-        width: 30%;
-        background-color: #9996b0;
-        color: black;
-        font-size: 20px;
-        font-weight: bold;
-        font-family: "Open Sans";
-        border: 2px outset #9996b0;
-        cursor: pointer;
+	  .sendEmail {
+      margin: 0px 120px;
+      width: 30%;
+      background-color: #9996b0;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: "Open Sans";
+      border: 2px outset #9996b0;
+      cursor: pointer;
     }
 
     .sendEmail:hover {
       background-color: #7972ad;
     }
+
+    .verif_text {
+      font-family: "Lora";
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center
+    }
+
+    .club_directory {
+        width: 90%;
+        margin: 0px 20px;
+        height: 40px;
+        box-sizing: border-box;
+        font-family: "Open Sans";
+        font-size: 16px;
+        border: 2px inset gainsboro;
+    }
+
+    .club_directory:focus {
+        outline: none;
+    }
+
+    .sendClubEmail {
+      margin: 0px 120px;
+      width: 30%;
+      background-color: #98b096;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: "Open Sans";
+      border: 2px outset #98b096;
+      cursor: pointer;
+    }
+
+    .sendClubEmail:hover {
+      background-color: #6dab68;
+    }
+
   </style>
 
   <body>
@@ -110,14 +179,36 @@
     </p>
 
     <div class="field_cont">
-		<p style="font-family: Lora; font-weight: bold; font-size: 20px; text-align: center;">
-		Please Enter Your Cal Poly Email.</p>
-		<form action="/eVerification">
+		<p class="verif_text">
+    What Type Of Account Are You Making?</p>
+    
+    <div class="student_user">
+    <p class="verif_text"> Student</p>
+		<form onsubmit="check_email(this);">
 			<input type="text" class="form-control" id="email" name="email" 
-			 placeholder="Example: username@calpoly.edu" required autofocus>
+			 placeholder="Please Enter Cal Poly Email Address" required autofocus>
 			<br><br>
 			<input type="submit" class="sendEmail" value="Submit">
-		</form>
+    </form>
+    </div>
+
+    <br>
+
+    <div class="club_user">
+      <p class="verif_text"> Club </p>
+      <label for="clubs" class="verif_text" style="font-size: 16px; margin-left: 20px"> Choose Cal Poly Club </label>
+      <form action="/club-verification">
+        <select name="club_name" id="club_name" class="club_directory">
+          <% clubs.forEach((item)=>{%>
+              <option value="<%=item%>"> <%=item%> </option>
+          <%});%> 
+        </select>
+        <br><br>
+        <input type="submit" class="sendClubEmail" value="Submit">
+      </form>
+    </div>
+    </div>
+    </div>
     </div>
 
     <span style="position: absolute; bottom: 5px; right: 5px;
