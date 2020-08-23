@@ -1,6 +1,8 @@
 const express = require('express')
+const app = express()
 const session = require('express-session');
 const http = require('http')
+const server = http.createServer(app)
 const fs = require('fs')
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
@@ -11,7 +13,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream')
 const mongoose = require('mongoose')
 const mongodb = require('mongodb')
-const socketio = require("socket.io")
+const io = require("socket.io").listen(server)
 const MongoStore = require('connect-mongo')(session);
 const uuid = require('uuid/v4')
 const passport = require('passport');
@@ -23,10 +25,6 @@ const dataB = require('./database')
 const driver = require("./driver")
 const chatFormat = require('./chatFormat')
 
-//instantiation
-const app = express()
-const server = http.createServer(app)
-const io = socketio(server)
 
 //mongo connection
 const url = "mongodb+srv://jay:jay123@MC-Profiles.syvtn.mongodb.net/Mustang_Connect?retryWrites=true&w=majority"
@@ -39,9 +37,10 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 //session
 var session_middleware = session({
-    secret: "deep dark secret: I like C++ more than python",
     store: new MongoStore({ mongooseConnection: conn, collection: "sessions" }),
-    resave: false,
+    secret: "deep dark secret: I like C++ more than python",
+    resave: true,
+    saveUninitialized: true,
     genid: (req) => {
         return uuid()
     },
@@ -49,10 +48,16 @@ var session_middleware = session({
         maxAge: 1000 * 60 * 60 * 24
     }
 })
+var sharedsession = require("express-socket.io-session")
 app.use(session_middleware)
 
-// socketio middleware
-//io.use((socket, next) => session_middleware(socket.request, {}, next))
+
+//socketio middleware
+//io.use(sharedsession(session, {
+//    autoSave:true
+//}));
+io.use(sharedsession(session_middleware, {autoSave: true}))
+
 
 
 const customField = {
@@ -135,7 +140,7 @@ const upload = multer({ storage });
 
 // Set view engine as EJS
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 // Parse URL-encoded bodies (as sent by HTML forms)
 //app.use(express.urlencoded());
@@ -155,13 +160,18 @@ app.get('/',function(req,res) {
     res.render("index")
 })
 
+app.get("/test", (req, res) => {
+    dataB.get_profile_for_email("jdevkar@calpoly.edu").then((profile) => {});
+})
+
+
 app.get("/chat-choose", (req, res) => {
     
     //in the list to send, I am sending both name and usernames because names could be duplicates but usernames are unique (as they are calpoly usernames)
     var profile;
     
-    
-    if (req.user.friend_list.length == 0)
+    console.log(req.user)
+    if (req.user.friend_list_emails == 0)
     {
         dataB.get_profile_for_email("jdevkar@calpoly.edu").then((friend_profile) => {
             profile = friend_profile
@@ -170,11 +180,12 @@ app.get("/chat-choose", (req, res) => {
         }).then( () => {
             var list_to_send = []
             cnt = 0
-            req.user.friend_list.forEach(id => {
-                dataB.get_profile_with_id(id).then(ret_profile => {
+            console.log(req.user.friend_list_emails)
+            req.user.friend_list_email.forEach(email => {
+                dataB.get_profile_for_email(email).then(ret_profile => {
                     list_to_send.push([ret_profile.name, ret_profile.email])
                     console.log(cnt, req.user.friend_list.length)
-                    if (cnt == req.user.friend_list.length-1)
+                    if (cnt == req.user.friend_list_email.length-1)
                     {
                         console.log(list_to_send)
                         res.render("chat-choose", {friends: list_to_send})        
@@ -186,29 +197,22 @@ app.get("/chat-choose", (req, res) => {
     }
     var list_to_send = []
     cnt = 0
-    req.user.friend_list.forEach(id => {
-        dataB.get_profile_with_id(id).then(ret_profile => {
-            list_to_send.push([ret_profile.name, ret_profile.email])
-            console.log(cnt, req.user.friend_list.length-1  )
-            if (cnt == req.user.friend_list.length)
+    req.user.friend_list_emails.forEach(email => {
+        //console.log(email);
+        dataB.get_profile_for_email(email).then(ret_profile => {
+            if (ret_profile != null)
             {
-                console.log(list_to_send)
-                res.render("chat-choose", {friends: list_to_send})        
+                list_to_send.push([ret_profile.email, ret_profile.email])
+                //console.log(cnt, req.user.friend_list_emails.length-1  )
+                if (cnt == req.user.friend_list_emails.length-1)
+                {
+                    console.log(list_to_send)
+                    res.render("chat-choose", {friends: list_to_send})        
+                }
             }
             cnt++
-        }).catch(err => console.log("Email search error occured"))
+        }).catch(err => console.log("Email ", err, " search error occured"))
     })
-
-    //code that is secure below. Implement this
-
-    /*if (c_user != null)
-    {
-        res.render('chat-choose', {friends: c_user.friend_list})
-    }
-    else
-    {
-        res.render("home");
-    }*/
 })
 
 app.post('/chat',function(req,res) {
@@ -219,7 +223,7 @@ app.post('/chat',function(req,res) {
     }
     else
     {
-        console.log(req.user.profile)
+        console.log('user prof = ', req.user)
         var friend_email = req.body.friend_email;
         var my_email = req.user.email;
         var friend_profile = null
@@ -232,66 +236,70 @@ app.post('/chat',function(req,res) {
             email2 = req.user.email
             console.log(email1, typeof(email1), email2, typeof(email2))
             if (email1.localeCompare(email2) > 0)
+            {
                 [email1, email2] = [email2, email1]
+            }    
             
             dataB.chat_room_query(email1, email2).then( (entireRoom) => {
+                if (entireRoom != null)
+                {
+                    console.log("Already have room")
+                    console.log(entireRoom)
+                    res.render("chat", {room: JSON.stringify(entireRoom), my_email: my_email, my_name: req.user.name, friend_name: friend_profile.name})
+                }
+                else
+                {
+                    console.log("Creating new room")
                 
-                    res.render("chat", {room: JSON.stringify(entireRoom), my_email: my_email})
-                
-            }).catch((err) => {
-                var newMsgHistory = new chatRoom.historyModel()
-                newMsgHistory.save().then(() => {
-                    console.log("message history created")
                     const newRoom = new chatRoom.chatRoomModel({
                         email1: email1,
                         email2: email2,
-                        roomNum: Math.random()*10000,
-                        messageHistory: newMsgHistory
+                        messageHistory: []
                     })
-    
+
                     newRoom.save().then( () => {
                         console.log("Chat room " + newRoom._id.toString() + " created")
-                        res.render("chat", {room: JSON.stringify(newRoom), my_email: my_email})
-    
+                        res.render("chat", {room: JSON.stringify(newRoom), my_email: my_email, my_name: req.user.name, friend_name: friend_profile.name})
                     }).catch(() => console.log("newroom save failed"))
-                
-                
-                }).catch(() => console.log("messagehistory save failed"))
-                
+                }
+            }).catch((err) => {
+                console.log("couldn't find room. Err: ", err);
             })
-        });
+        }).catch(()=> console.log("couldn't find friend profile"));
     }
 
-        
-
-
-        /* Dont know what this is for
-        fs.readFile('./views/chat.html',(err,data)=> {
-            if(err){
-                console.log(err)
-            }
-            else{
-                if (c_user.friend_list == null)
-                {
-                    c_user.friend_list.push("Ridham")
-                }
-                res.end(data, {friends: c_user.friend_list});
-            }
-        })
-        */
 })
 
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
+
+    console.log('user connected');
+    socket.on('data', (userdata) => {
+        console.log('data = ', socket.handshake.session)
+    })
+    
+    socket.on("login", function(userdata) {
+        socket.handshake.session.userdata = userdata;
+        socket.handshake.session.save();
+    });
+
+    socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+            delete socket.handshake.session.userdata;
+            socket.handshake.session.save();
+        }
+    });
+
 
     socket.on('join.room', room_id => {
         socket.join(room_id)
         console.log("room joined")
     })
 
-    socket.on('chatMessage', (roomID, user_email, msg) => {
+    socket.on('chatMessage', (roomID, name, msg) => {
         console.log(msg)
-        io.to(roomID).emit('message', formatMessage(user_email, msg))
+        var formatted_message = formatMessage(name, msg)
+        chatRoom.chatRoomModel.findOneAndUpdate({_id: roomID}, {$push: {messageSequence: formatted_message}}, () => io.to(roomID).emit('message', formatted_message))
     })
 
 

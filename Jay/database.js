@@ -175,7 +175,10 @@ function chat_room_query(email1, email2)
     return chatRoom.chatRoomModel.findOne({email1: email1, email2: email2}).exec()
 }
 
-
+function chat_room_by_id(id)
+{
+    return chatRoom.chatRoomModel.findById(id).exec()
+}
 
 //test
 
@@ -214,3 +217,4 @@ exports.get_profile_with_id = get_profile_with_id
 exports.get_profile_for_name = get_profile_for_name
 exports.get_profile_for_email = get_profile_for_email
 exports.chat_room_query = chat_room_query
+exports.chat_room_by_id = chat_room_by_id
