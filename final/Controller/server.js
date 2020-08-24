@@ -15,7 +15,7 @@ const mongoose = require('mongoose')
 const mongodb = require('mongodb')
 const io = require("socket.io").listen(server)
 const MongoStore = require('connect-mongo')(session);
-const uuid = require('uuid/v4')
+//const uuid = require('uuid/v4')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -45,9 +45,7 @@ var session_middleware = session({
     secret: "deep dark secret: I like C++ more than python",
     resave: true,
     saveUninitialized: true,
-    genid: (req) => {
-        return uuid()
-    },
+   
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
@@ -724,12 +722,12 @@ app.get("/chat-choose", (req, res) => {
 
 app.post('/chat',function(req,res) {
 
-    if (!req.isAuthenticated())
-    {
-        res.send('signUp');
-    }
-    else
-    {
+    //if (req.session.user != null)
+    //{
+      //  res.send('signUp');
+    //}
+    //else
+    //{
 
         var friend_email = req.body.friend_email;
         var my_email = req.session.user.email;
@@ -769,7 +767,7 @@ app.post('/chat',function(req,res) {
                 console.log("couldn't find room. Err: ", err);
             })
         }).catch(()=> console.log("couldn't find friend profile"));
-    }
+    //}
 
 })
 
