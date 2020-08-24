@@ -1,192 +1,193 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title> Kelechi's Profile </title>
-<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
-rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
-rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
-rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Open Sans'
-rel='stylesheet'>
-<style>
+	<head>
+		<title> Kelechi's Profile </title>
+		<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+		rel='stylesheet'>
+		<style>
 
-html {
-	overflow: hidden;
-}
+		html {
+			overflow: hidden;
+		}
 
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow: hidden;
-}
+		body {
+			background-color: white;
+			margin: -9999rem -9999rem -9999rem;
+			padding: 9999rem 9999rem 9999rem;
+			overflow: hidden;
+		}
 
-ul.top_menu {
-	list-style-type: none;
-	margin: -9999rem -9999rem 0;
-	padding: 9999rem 9999rem 0;
-	overflow: hidden;
-	background-color: #154734;
-}
+		ul.top_menu {
+			list-style-type: none;
+			margin: -9999rem -9999rem 0;
+			padding: 9999rem 9999rem 0;
+			overflow: hidden;
+			background-color: #154734;
+		}
 
-ul.top_menu li {
-	float: left;
-}
+		ul.top_menu li {
+			float: left;
+		}
 
-ul.top_menu li a {
-	display: block;
-	color: white;
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-	text-align: center;
-	padding: 14px 30px;
-	text-decoration: none;
-}
+		ul.top_menu li a {
+			display: block;
+			color: white;
+			font-family: "PT Serif Caption";
+			font-size: 18px;
+			text-align: center;
+			padding: 14px 30px;
+			text-decoration: none;
+		}
 
-ul.top_menu li a:hover {
-	background-color: #081c15;
-}
+		ul.top_menu li a:hover {
+			background-color: #081c15;
+		}
 
-div.friends_list {
-	position: absolute;
-	bottom: 285px;
-	left: 1000px;
-}
+		div.friends_list {
+			position: absolute;
+			bottom: 285px;
+			left: 1000px;
+		}
 
-.fl_title_font {
-	margin: 0;
-	padding: 0;
-	width: 300px;
-	font-family: "Oleo Script Swash Caps";
-	font-size: 30px;
-	text-align: center;
-	color: black;
-}
+		.fl_title_font {
+			margin: 0;
+			padding: 0;
+			width: 300px;
+			font-family: "Oleo Script Swash Caps";
+			font-size: 30px;
+			text-align: center;
+			color: black;
+		}
 
-ul.fl_contents {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 300px;
-	background-color: #e3e3e3;
-	border: 1px outset;
-}
+		ul.fl_contents {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 300px;
+			background-color: #e3e3e3;
+			border: 1px outset;
+		}
 
-ul.fl_contents li a {
-	display: inline-block;
-	color: black;;
-	width: 100%;
-	border-bottom: 1px groove white;
-	text-decoration: none;
-	font-family: "PT Sans Narrow";
-	font-size: 22px;
-	font-weight: bold;
-}
+		ul.fl_contents li a {
+			display: inline-block;
+			color: black;;
+			width: 100%;
+			border-bottom: 1px groove white;
+			text-decoration: none;
+			font-family: "PT Sans Narrow";
+			font-size: 22px;
+			font-weight: bold;
+		}
 
-ul.fl_contents li a:hover {
-	background-color: #bd8b13;
-	color: white;
-}
+		ul.fl_contents li a:hover {
+			background-color: #bd8b13;
+			color: white;
+		}
 
-.profile_pic {
-	display: inline-block;
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
-	object-fit: cover;
-	position: absolute;
-	top: 90px;
-	left: 25px;
-}
+		.profile_pic {
+			display: inline-block;
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			object-fit: cover;
+			position: absolute;
+			top: 90px;
+			left: 25px;
+		}
 
-.minimized_profile_pic {
-	display: inline-block;
-	width: 60px;
-	height: 60px;
-	padding: 5px 5px;
-	border-radius: 50%;
-	object-fit: cover;
-}
+		.minimized_profile_pic {
+			display: inline-block;
+			width: 60px;
+			height: 60px;
+			padding: 5px 5px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
 
-div.profile_info {
-	position:absolute;
-	top: 75px;
-	left: 400px;
-}
+		div.profile_info {
+			position:absolute;
+			top: 75px;
+			left: 400px;
+		}
 
-div.profile_name {
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-}
+		div.profile_name {
+			font-family: "PT Serif Caption";
+			font-size: 18px;
+		}
 
-div.profile_body {
-	font-family: "Open Sans";
-	font-size: 10px;
-}
+		div.profile_body {
+			font-family: "Open Sans";
+			font-size: 10px;
+		}
 
-</style>
-</head>
-<body>
-<ul class="top_menu">
-	<li> <a href="home.html"> MustangConnect </a> </li>
-	<li style="float:right"><a href="index.html"> Log Out </a> </li>
-	<li style="float:right"><a href="chat.html"> Chat </a> </li>
-	<li style="float:right"><a href="clubs.html"> Clubs </a> </li>
-	<li style="float:right"><a href="profile.html"> Profile </a> </li>
-</ul>
+		</style>
+	</head>
+	
+	<body>
+		<ul class="top_menu">
+			<li> <a href="home.html"> MustangConnect </a> </li>
+			<li style="float:right"><a href="index.html"> Log Out </a> </li>
+			<li style="float:right"><a href="chat.html"> Chat </a> </li>
+			<li style="float:right"><a href="clubs.html"> Clubs </a> </li>
+			<li style="float:right"><a href="profile.html"> Profile </a> </li>
+		</ul>
 
-<div>
-	<a href="http://placehold.it/400x200" target="_blank">
-		<img src="http://placehold.it/400x200" class="profile_pic">
-	</a>
-</div>
+		<div>
+			<a href="http://placehold.it/400x200" target="_blank">
+				<img src="http://placehold.it/400x200" class="profile_pic">
+			</a>
+		</div>
 
-<div class="profile_info">
-	<div class="profile_name">
-		<h1> Kelechi Igwe </h1>
-	</div>
-	<div class="profile_body">
-	<h2> Nickname: Name of Nick </h2>
-	<h2> Gender: Male </h2>
-	<h2> Pronouns: <span style="font-style: italic"> He, His, Him </span> </h2>
-	<h2> Age: 29 </h2>
-	<h2> Ethnicity: Nigerian (Black/African American) </h2>
-	<h2> Languages: English </h2>
-	<h2> Hometown: Land Down Under </h2>
-	<h2> Major: Cookie Theory </h2>
-	<h2> Dorm: Off Campus (Mustang Village) </h2>
-	<h2> Hobbies: Trying To Get This Project Done </h2>
-	</div>
-</div>
+		<div class="profile_info">
+			<div class="profile_name">
+				<h1> Kelechi Igwe </h1>
+			</div>
+			<div class="profile_body">
+			<h2> Nickname: Name of Nick </h2>
+			<h2> Gender: Male </h2>
+			<h2> Pronouns: <span style="font-style: italic"> He, His, Him </span> </h2>
+			<h2> Age: 29 </h2>
+			<h2> Ethnicity: Nigerian (Black/African American) </h2>
+			<h2> Languages: English </h2>
+			<h2> Hometown: Land Down Under </h2>
+			<h2> Major: Cookie Theory </h2>
+			<h2> Dorm: Off Campus (Mustang Village) </h2>
+			<h2> Hobbies: Trying To Get This Project Done </h2>
+			</div>
+		</div>
 
-<div class=friends_list>
-<h2 class="fl_title_font"> Friends List (3) </h2>
-<ul class="fl_contents">
-	<li> <a href="#rzalawad">
-		<img src="http://placehold.it/400x200"
-		 class="minimized_profile_pic">
-		 <span style="text-align: center; position:absolute; top: 50px"> Ridham Zalawadia </span>
-		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 80px"> "R-Dawg" </span>
-		</a>
-	</li>
-	<li> <a href="#jzmorris">
-		<img src="http://placehold.it/400x200"
-		 class="minimized_profile_pic">
-		 <span style="text-align: center; position:absolute; top: 125px"> Jarod Morris </span>
-		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 155px"> "J-Rod" </span>
-		</a>
-	</li>
-	<li> <a href="#jdevkar">
-		<img src="http://placehold.it/400x200"
-		 class="minimized_profile_pic">
-		 <span style="text-align: center; position:absolute; top: 200px"> Jayant Devkar </span>
-		 <span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 230px"> "Jay" </span>
-		</a>
-	</li>
-</ul>
-</div>
+		<div class=friends_list>
+		<h2 class="fl_title_font"> Friends List (3) </h2>
+		<ul class="fl_contents">
+			<li> <a href="#rzalawad">
+				<img src="http://placehold.it/400x200"
+				class="minimized_profile_pic">
+				<span style="text-align: center; position:absolute; top: 50px"> Ridham Zalawadia </span>
+				<span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 80px"> "R-Dawg" </span>
+				</a>
+			</li>
+			<li> <a href="#jzmorris">
+				<img src="http://placehold.it/400x200"
+				class="minimized_profile_pic">
+				<span style="text-align: center; position:absolute; top: 125px"> Jarod Morris </span>
+				<span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 155px"> "J-Rod" </span>
+				</a>
+			</li>
+			<li> <a href="#jdevkar">
+				<img src="http://placehold.it/400x200"
+				class="minimized_profile_pic">
+				<span style="text-align: center; position:absolute; top: 200px"> Jayant Devkar </span>
+				<span style="font-weight:normal; font-style: italic; text-align: center; position: absolute; top: 230px"> "Jay" </span>
+				</a>
+			</li>
+		</ul>
+		</div>
 
-</body>
+	</body>
 </html>

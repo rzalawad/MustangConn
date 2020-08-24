@@ -1,72 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title> MustangConnect </title>
-<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+	<head>
+		<title> MustangConnect </title>
+		<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 rel='stylesheet'>
-<style>
 
-html {
-	overflow-x: hidden;
-}
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow-x: hidden;
-}
+		<style>
 
-div.title {
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-}
+		/*html {
+			overflow-x: hidden;
+		}*/
 
-</style>
-</head>
-<body>
+		body {
+			
+		}
 
-<div class="title">
-<p> MustangConnect</p>
-<p></p>
-</div>
+		#frame {
+			position:absolute;
+			width: 100%;
+			height: 100%;
+  			/* Center and scale the image nicely */
+			/*
+			background-position: center;*/
+			
+			/*margin: -9999rem -9999rem -9999rem;
+			padding: 9999rem 9999rem 9999rem;*/
+			/*overflow-x: hidden;*/
+		}
 
-<div>
-<label>
-<span>Cal Poly username or email</span>
-<input id="username" aria-label="Cal Poly username or email" 
- aria-required="true" name="username" type="text" value>
- </label>
-</div>
+		#background {
+			height: 100%;
+			width: 100%;
+			background-image: url("../images/CAL_POLY_entrance_highland.JPG");
+			background-repeat: no-repeat;
+			background-position: center center;
 
-<div>
- <label>
- <span>Password</span>
- <input id="password" aria-label="Password" aria-required="true"
-  name="password" type="text" value>
-  </label>
-</div>
+		}
 
-<div>
-<button id="login" onclick="location.href='home.html';">Log In</button>
-</div>
+		div.title {
+			font-family: "PT Serif Caption";
+			font-size: 18px;
+		}
+		
+		</style>
+	</head>
+	
+	<body>
+		<div id="frame" >
+			<div id="background">
+				<header>
+					<div class="title">
+					<h1> MustangConnect</h1>
+					<p></p>
+					</div>
+				</header>
 
-<script>
-var user_input = document.getElementById("username");
-var pass_input = document.getElementById("password");
-user_input.addEventListener("keyup", function(event) {
-	if (event.keyCode == 13) {
-		event.preventDefault();
-		document.getElementById("login").click();
-	}
-});
-pass_input.addEventListener("keyup", function(event) {
-	if (event.keyCode == 13) {
-		event.preventDefault();
-		document.getElementById("login").click();
-	}
-});
-</script>
+				<div class="form field">
+					<div class="form-group">
+						<label class="form-label" for="input-example-1">Cal PolyUsername</label>
+						<input class="form-input" type="text" id="username"placeholder="Username" style="width: 250px;">
+					</div>
 
-</body>
+
+					<div class="form-group">
+						<label class="form-label" for="input-example-1">Password</label>
+						<input class="form-input" type="password" id="password"placeholder="Password" style="width: 250px;">
+					</div>
+
+					<div>
+						<button class="btn btn-primary" id="login" onclick="locationhref='home.html';">Log In<Inp></Inp></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var user_input = document.getElementById("username");
+		var pass_input = document.getElementById("password");
+		user_input.addEventListener("keyup", function(event) {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+				document.getElementById("login").click();
+			}
+		});
+		pass_input.addEventListener("keyup", function(event) {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+				document.getElementById("login").click();
+			}
+		});
+	</script>
 </html>

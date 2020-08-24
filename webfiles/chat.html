@@ -53,5 +53,13 @@ li a:hover {
 	<li style="float:right"><a href="profile.html"> Profile </a> </li>
 </ul>
 
+	<div>
+		<ul> 
+			<% friends.forEach((item)=>{%> 
+			<li><%=item%></li>  
+			<%});%>
+		</ul>
+	</div>
+
 </body>
 </html>

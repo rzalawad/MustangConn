@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="ejs.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+
+    <title>Chat</title>
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1>Mustang Connect</h1>
+        <a href="home" class="btn">Leave Room</a>
+      </header>
+      <main class="chat-main">
+        <div class="chat-sidebar">
+          <h3><i class="fas fa-users"></i> Users</h3>
+          <ul id="users"><%=my_name%></ul><br>
+          <ul id="users"><%=friend_name%></ul>
+        </div>
+        <div class="chat-messages"></div>
+      </main>
+      <div class="chat-form-container">
+        <form id="chat-form">
+          <input
+            id="msg"
+            type="text"
+            placeholder="Enter Message"
+            required
+            autocomplete="off"
+          />
+          <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+      </div>
+    </div>
+    <input type = "hidden" name = "my_email" id="my_email" value = <%=my_email%> />
+    <input type = "hidden" name = "my_name" id="my_name" value = <%=my_name%> />
+    <input type = "hidden" name = "friend_name" id="friend_name" value = <%=friend_name%> />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const chatMessages = document.querySelector('.chat-messages');
+        const my_email = document.getElementById("my_email").value;
+        const my_name = document.getElementById("my_name").value;
+        const friend_name = document.getElementById("friend_name").value;
+
+        // Get username and room from URL
+        /*const { username, room } = Qs.parse(location.search, {
+          ignoreQueryPrefix: true
+        });*/
+        
+        let room = <%- room %>
+        
+        
+        let cnter = 0
+        // Join chatroom
+        const socket = io()
+        socket.emit('data', my_email)
+        socket.emit('join.room', room._id)
+        if (room.messageSequence.length != 0)
+        {
+          room.messageSequence.forEach(message => {
+            outputMessage(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          });
+          
+        }
+        else
+        {
+          console.log("not outputting")
+        }
+
+        
+
+        // Message from server
+        socket.on('message', message => {
+          outputMessage(message);
+          // Scroll down
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        // Message submit
+        chatForm.addEventListener('submit', e => {
+          e.preventDefault();
+
+          // Get message text
+          const msg = e.target.elements.msg.value;
+          if (cnter == 0)
+          {
+            const div = document.createElement('div');
+            div.innerHTML = `<hr>`
+            document.querySelector('.chat-messages').appendChild(div);
+            const div2 = document.createElement('div');
+            div2.innerHTML = `<p style="text-align: center">Now<\p>`
+            document.querySelector('.chat-messages').appendChild(div2);
+            cnter++
+          }
+          // Emit message to server
+          socket.emit('chatMessage', room._id, my_name, msg);
+
+          // Clear input
+          e.target.elements.msg.value = '';
+          e.target.elements.msg.focus();
+        });
+
+        // Output message to DOM
+        function outputMessage(message) {
+          const div = document.createElement('div');
+          div.classList.add('message');
+          
+          if (message.username == my_name)
+          {
+            div.innerHTML = `<p class="meta dark">${message.username} <span>${message.time}</span></p>
+            <p class="text">
+              ${message.text}
+            </p>`;
+          }
+          else
+          {
+            div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+            <p class="text">
+              ${message.text}
+            </p>`;
+          }
+          
+          document.querySelector('.chat-messages').appendChild(div);
+        }
+    </script>
+  </body>
+</html>
