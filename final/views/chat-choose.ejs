@@ -25,18 +25,14 @@
             <% { %>
             <label>Chat with: </label>
             <% friends.forEach((item)=>{ %> 
-            <form action="/chat" method="POST">
-                <input type = "hidden" name = "friend_email" value = <%=item[1]%> />
-                <label><%=item[0]%></label>
-                <input type="submit" value="Submit"></li>  
-            </form>
+                <form action="/chat" method="POST">
+                    <input type = "hidden" name = "friend_email" value = <%=item[1]%> />
+                    <label><%=item[0]%></label>
+                    <input type="submit" value="Submit"></li>  
+                </form>
             <%});%>
             <% } %>
-            <% else %>
-            <% { %>
-                <h1> Sorry, friends list is empty. Add Friends through Suggested List </h1>
-        
-            <% } %>
+
         </ul>
     </div>
     <script src="" async defer>
