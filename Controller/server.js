@@ -726,6 +726,7 @@ app.get("/reject/friend",(req,res)=>{
                     if (ob) {
                         ob.request_list.splice(ob.request_list.indexOf(obj.email), 1)
                         ob.save();
+                        req.request_list.splice(req.request_list.indexOf(obj.email), 1)
                         req.session.user = ob;
                     }
                     else {
@@ -758,6 +759,7 @@ app.get("/add/friend",(req,res)=>{
                         ob.request_list.splice(ob.request_list.indexOf(obj.email), 1)
                         ob.friend_list.push(obj.email)
                         ob.save();
+                        req.request_list.splice(req.request_list.indexOf(obj.email), 1)
                         req.session.user = ob;
                         req.session.save()
                     }
