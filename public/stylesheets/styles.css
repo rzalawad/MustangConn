@@ -20,7 +20,7 @@ ul.top_menu {
 ul.top_menu li a {
 	display: block;
 	color: white;
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 100%;
 	text-align: center;
 	text-decoration: none;
@@ -55,7 +55,7 @@ ul.home_sf_contents li a {
 	padding: 3% 2% 0;
 	width: 94%;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 150%;
 	font-weight: bold;
 }
@@ -93,7 +93,7 @@ img.club_profile_pic {
 a.home_more_link {
 	padding: 0 1%;
 	position: relative;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-weight: bold;
 	font-size: 120%;
 	text-decoration: none;
@@ -149,7 +149,7 @@ div.feed_text {
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 100%;
 	background-color: white;
 	border: 1px solid #e3e3e3;
@@ -160,7 +160,7 @@ div.feed_tag {
 	flex-basis: 11%;
 	width: 100%;
 	overflow: hidden;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 110%;
 	font-weight: bold;
 	background-color: #e3e3e3;
@@ -191,7 +191,7 @@ ul.home_fl_contents li a {
 	padding: 3% 2% 0;
 	width: 94%;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 150%;
 	font-weight: bold;
 }
@@ -202,7 +202,7 @@ ul.home_fl_contents li a:hover {
 /*///////////////////////////////////////////////////////////////////////////*/
 /* View Database Page */
 h2.db_list_titles {
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 175%;
 	color: black;
 	margin: 0;
@@ -232,7 +232,7 @@ ul.db_display li a {
 	width: 100%;
 	border-bottom: 1px groove white;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 150%;
 	font-weight: bold;
 }
@@ -271,7 +271,7 @@ h2.profile_fl_title_font {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	font-family: "Oleo Script Swash Caps";
+	font-family: "Oleo Script Swash Caps", sans-serif;
 	font-size: 200%;
 	text-align: center;
 	color: black;
@@ -294,7 +294,7 @@ ul.profile_fl_contents li a {
 	width: 100%;
 	border-bottom: 1px groove white;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 150%;
 	font-weight: bold;
 }
@@ -331,12 +331,12 @@ div.ppage_profile_info {
 }
 
 div.ppage_profile_name {
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 120%;
 }
 
 div.ppage_profile_body {
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 80%;
 }
 
@@ -360,7 +360,7 @@ ul.ppage_il_display li {
 	padding: 0.5% 1%;
 	background-color: #fafafa;
 	color: black;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-weight: 600;
 	font-size: 120%;
 	border: 2px solid #e3e3e3;
@@ -379,7 +379,7 @@ button.changePic {
 	color: black;
 	font-size: 80%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #98b096;
 	cursor: pointer;
 }
@@ -390,7 +390,7 @@ button.changePic:hover {
 /*///////////////////////////////////////////////////////////////////////////*/
 /* Clubs You Follow/Should Follow Page */
 h2.clubs_list_titles {
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 150%;
 	color: black;
 	margin: 0;
@@ -426,7 +426,7 @@ ul.clubs_followed li a {
 	width: 100%;
 	border-bottom: 1px groove white;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 137.5%;
 	font-weight: bold;
 }
@@ -454,7 +454,7 @@ ul.suggested_clubs li a {
 	width: 100%;
 	border-bottom: 1px groove white;
 	text-decoration: none;
-	font-family: "PT Sans Narrow";
+	font-family: "PT SANS NARROW", sans-serif;
 	font-size: 137.5%;
 	font-weight: bold;
 }
@@ -476,7 +476,7 @@ p.intro_header {
 	text-align: center;
 	margin-top: 5%; 
 	color: white;
-	font-family: "Lora";
+	font-family: "Lora", sans-serif;
 	font-weight: 600;
 	font-size: 225%;
 }
@@ -485,7 +485,7 @@ p.intro_body {
 	text-align: center;
 	margin-top: -2%;
 	color: white;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-weight: 500;
 	font-style: italic;
 	font-size: 125%;
@@ -513,7 +513,7 @@ input.login_form_control {
 	margin: 0 5%;
 	height: 6vh;
 	box-sizing: border-box;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 100%;
 	border: 2px inset gainsboro;
 }
@@ -529,7 +529,7 @@ button.login {
 	color: black;
 	font-size: 125%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #98b096;
 	cursor: pointer;
 }
@@ -545,7 +545,7 @@ button.signup {
 	color: black;
 	font-size: 125%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #9996b0;
 	cursor: pointer;
 }
@@ -562,7 +562,7 @@ button.change_psswd {
 	color: black;
 	font-size: 125%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #98b096;
 	cursor: pointer;
 }
@@ -579,7 +579,7 @@ input.submit_signup_code {
 	color: black;
 	font-size: 125%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #98b096;
 	cursor: pointer;
 }
@@ -590,7 +590,7 @@ input.submit_signup_code:hover {
 /*///////////////////////////////////////////////////////////////////////////*/
 /* Error Page */
 p.error_title {
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 300%;
 	font-weight: bold;
 	color: black;
@@ -598,14 +598,14 @@ p.error_title {
 }
 
 p.error_subtitle {
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 150%;
 	color: black;
 	text-align: center;
 }
 
 p.error_message {
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 87.5%;
 	color: black;
 	width: 100%;
@@ -617,7 +617,7 @@ select.cpass_type_of_account {
 	width: 30%;
 	margin: 0 5%;
 	height: 4vh;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 87.5%;
 	border: 2px inset gainsboro;
 }
@@ -633,7 +633,7 @@ button.send_change_email {
 	color: black;
 	font-size: 125%;
 	font-weight: bold;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	border: 2px outset #9996b0;
 	cursor: pointer;
 }
@@ -644,19 +644,19 @@ button.send_change_email:hover {
 /*///////////////////////////////////////////////////////////////////////////*/
 /* Student Signup Page */
 p.signup_header_text {
-	font-family: "Oleo Script Swash Caps";
+	font-family: "Oleo Script Swash Caps", sans-serif;
 	font-size: 225%;
 	text-align: center;
 }
 
 p.signup_header_subtext {
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 112.5%;
 	text-align: center;
 }
 
 p.signup_section_title {
-	font-family: "Oleo Script Swash Caps";
+	font-family: "Oleo Script Swash Caps", sans-serif;
 	font-size: 150%;
 	text-align: center;
 }
@@ -692,7 +692,7 @@ input.sendSignupEmail {
   color: black;
   font-size: 125%;
   font-weight: bold;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   border: 2px outset #9996b0;
   cursor: pointer;
 }
@@ -702,7 +702,7 @@ input.sendSignupEmail:hover {
 }
 
 p.verif_titles {
-  font-family: "Lora";
+  font-family: "Lora", sans-serif;
   font-weight: bold;
   font-size: 125%;
   text-align: center
@@ -713,7 +713,7 @@ select.verif_club_directory {
 	margin: 0 6%;
 	height: 6vh;
 	box-sizing: border-box;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 100%;
 	border: 2px inset gainsboro;
 }
@@ -729,7 +729,7 @@ input.sendClubEmail {
   color: black;
   font-size: 125%;
   font-weight: bold;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   border: 2px outset #98b096;
   cursor: pointer;
 }
@@ -760,7 +760,7 @@ ul.cpage_interests li {
 	padding: 0.5% 1%;
 	background-color: #fafafa;
 	color: black;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	text-align: center;
 	font-weight: 600;
 	font-size: 120%;
@@ -788,14 +788,14 @@ div.cpage_profile_info {
 }
 
 div.cpage_profile_name {
-	font-family: "PT Serif Caption";
+	font-family: "PT Serif Caption", sans-serif;
 	font-size: 112.5%;
 	text-align: center;
 }
 
 div.cpage_profile_description {
 	margin-top: -4%;
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 62.5%;
 	height: 30vh;
 }
