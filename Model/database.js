@@ -40,16 +40,7 @@ var find_people = function(user){
             for(var t=0; t<(Object.keys(collection).length); t++){
                 var target = collection[t]
                 var a_repeat = false
-                if (user.email == target.email){
-                    a_repeat = true
-                }
-                else if (user.friend_list.includes(target.email)){
-                    a_repeat = true
-                }
-                else if (user.requested_list.includes(target.email)){
-                    a_repeat = true
-                }
-                else if (user.request_list.includes(target.email)){
+                if (user.email == target.email || user.friend_list.includes(target.email) || user.requested_list.includes(target.email) || user.request_list.includes(target.email)){
                     a_repeat = true
                 }
 
@@ -156,8 +147,8 @@ function edit_Database() {
      *  page.
      */
     User.find({}, {email: 1, major: 1}).then(u_cursor => {
-        d_list = ["Biochemistry", "Computer Science", "Software Engineering", "Mechanical Engineering", "Business Administration", "Chemistry", "Physics", "Sociology", "Art and Design", "Music", "General Engineering", "Architecture", "Biomedical Engineering", "Computer Engineering", "Architectural Engineering", "Aerospace Engineering", "Theatre Arts"]
-        d_ref = ["biology", "Cs", "SE", "ME", "BUSS", "CHEM", "PHY", "SOCIO", "ART", "MUSIC", "GEN_STUD", "ARCH", "BMED", "CENG", "ARENG", "AERO", "THEAT"]
+        var d_list = ["Biochemistry", "Computer Science", "Software Engineering", "Mechanical Engineering", "Business Administration", "Chemistry", "Physics", "Sociology", "Art and Design", "Music", "General Engineering", "Architecture", "Biomedical Engineering", "Computer Engineering", "Architectural Engineering", "Aerospace Engineering", "Theatre Arts"]
+        var d_ref = ["biology", "Cs", "SE", "ME", "BUSS", "CHEM", "PHY", "SOCIO", "ART", "MUSIC", "GEN_STUD", "ARCH", "BMED", "CENG", "ARENG", "AERO", "THEAT"]
         u_cursor.forEach((item) => {
             var cur = item.email
             var i = 0
