@@ -39,32 +39,17 @@ var find_people = function(user){
         get_collc(query, m_pref).then((collection)=>{
             for(var t=0; t<(Object.keys(collection).length); t++){
                 var target = collection[t]
-                var a_repeat = false
-                if (user.email == target.email || user.friend_list.includes(target.email) || user.requested_list.includes(target.email) || user.request_list.includes(target.email)){
-                    a_repeat = true
-                }
-
-                if (!a_repeat) {
-                    var scr =0
-                    var lenght = Object.keys(user.pref_list).length
-                    for(var index = 0; index<lenght; index++){
-                        var p = (user.pref_list)[index]
-                        if(p=='language' || p=='hobby_list'){
-                            if(lsa(target.pref_list,user.pref_list)){
-                                if(p in target.pref_list)
-                                    scr+=scores[index]
-                                else
-                                    scr+= scores[index] - dp[index]
-                                // console.log("scores",scr)
-                            }
-                            else{
-                                if(target[p] == user[p]){
-                                    if(p in target.pref_list)
-                                        scr+=scores[index]
-                                    else
-                                        scr+= scores[index] - dp[index]
-                                }
-                            }       
+                var scr =0
+                var lenght = Object.keys(user.pref_list).length
+                for(var index = 0; index<lenght; index++){
+                    var p = (user.pref_list)[index]
+                    if(p=='language' || p=='hobby_list'){
+                        if(lsa(target.pref_list,user.pref_list)){
+                            if(p in target.pref_list)
+                                scr+=scores[index]
+                            else
+                                scr+= scores[index] - dp[index]
+                            // console.log("scores",scr)
                         }
                         else{
                             if(target[p] == user[p]){
@@ -73,15 +58,28 @@ var find_people = function(user){
                                 else
                                     scr+= scores[index] - dp[index]
                             }
+                        }       
+                    }
+                    else{
+                        if(target[p] == user[p]){
+                            if(p in target.pref_list)
+                                scr+=scores[index]
+                            else
+                                scr+= scores[index] - dp[index]
                         }
                     }
-                    if(scr>=0.55){
-                            fp_list[Object.keys(fp_list).length] = target
+                }
+                if(scr>=0.55){
+                    if (user.email == target.email || user.friend_list.includes(target.email) || user.requested_list.includes(target.email) || user.request_list.includes(target.email)) {
+                        continue
+                    }
+                    else {
+                        fp_list[Object.keys(fp_list).length] = target
                     }
                 }
             }
                 
-                resolve(fp_list)
+            resolve(fp_list)
         }).catch((err)=>{
             console.log(err)
         })
