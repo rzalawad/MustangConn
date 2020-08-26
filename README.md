@@ -1,3 +1,5 @@
 ## MUSTANG CONNECT CSC 307 Project
 
-Website: https://mustangconnect.azurewebsites.net (not updated)
+SonarCloud: https://sonarcloud.io/dashboard?id=Ridham177_MustangConn
+Travis: https://travis-ci.org/github/Ridham177/MustangConn
+Deliverables: 
