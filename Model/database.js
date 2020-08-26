@@ -92,14 +92,14 @@ var validation = function(username, password) {
     return new Promise(function(resolve, reject) {
         var user_found = false
 
-        User.findOne({email:username},function(err,docs){
+        User.findOne({email:username}).then(docs => {
             if(docs == null){
                 user_found = false
             }
             else{
                 if (password == (docs.toObject()).password){
-                    resolve(docs)
-                    user_found = true 
+                    user_found = true
+                    resolve(docs) 
                 }
                 else{
                     user_found = false
