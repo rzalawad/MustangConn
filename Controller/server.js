@@ -275,8 +275,8 @@ app.get("/club-verification",function(req,res){
                     else{   
                         res.render("error", {msg: "Driver-Generated Error: Unable to send code"})
                     }
-                }).catch((err)=>{
-                    res.render("error", {msg: err})
+                }).catch((err2)=>{
+                    res.render("error", {msg: err2})
                 })
                 }
                 else{
@@ -540,12 +540,12 @@ app.get('/home',function(req,res) {
                     }
                     else {
                         req.session.user.friend_list.forEach(email => {
-                            dataB.get_friends_for_email(email).then(doc => {
-                                if(!doc){
+                            dataB.get_friends_for_email(email).then(doc2 => {
+                                if(!doc2){
                                     res.render("error", {msg: err})
                                 }
                                 else {
-                                    frlist.push(doc)
+                                    frlist.push(doc2)
                                     if (i == (req.session.user.friend_list.length - 1)) {
                                         res.render("home", {files:docs, q: req.session.query, target: req.session.user, friends: frlist})
                                     }
@@ -554,7 +554,7 @@ app.get('/home',function(req,res) {
                             })
                         })
                     }
-                })).catch(err => res.render("error", {msg: err}))
+                })).catch(err2 => res.render("error", {msg: err2}))
             }
             else {
                 res.render("home", {files:docs, target: req.session.user})
@@ -853,17 +853,17 @@ app.get('/clubs/:current_Club', function(req, res){
 app.get('/chat-choose',function(req,res) {
     if (req.session.user != null) {
         //in the list to send, I am sending both name and usernames because names could be duplicates but usernames are unique (as they are calpoly usernames)
-        var profile;
 
+        var list_to_send = []
         if (req.session.user.friend_list_emails == 0)
         {
-            var list_to_send = []
+            list_to_send = []
             res.render("chat-choose", {friends: list_to_send})
         }
         else
         {
-            var list_to_send = []
-            cnt = 0
+            list_to_send = []
+            var cnt = 0
             req.session.user.friend_list_emails.forEach(email => {
                 //console.log(email);
                 dataB.get_sprofile_for_email(email).then(ret_profile => {
@@ -888,12 +888,11 @@ app.post('/chat',function(req,res) {
         var friend_email = req.body.friend_email;
         var my_email = req.session.user.email;
         var friend_profile = null
-        var room = null
         dataB.get_sprofile_for_email(friend_email).then( (profile) => {
             friend_profile = profile
            
-            email1 = friend_profile.email
-            email2 = req.session.user.email
+            var email1 = friend_profile.email
+            var email2 = req.session.user.email
             if (email1.localeCompare(email2) > 0)
             {
                 [email1, email2] = [email2, email1]
@@ -1098,8 +1097,8 @@ function insertFile(file, res, req) {
             return err
         }
         else {
-            let db = client.db('Mustang_Connect')
-            let collection = db.collection('clubs')
+            let db2 = client.db('Mustang_Connect')
+            let collection = db2.collection('clubs')
             try {
                 req.session.post = {
                     "file":file,
@@ -1108,8 +1107,8 @@ function insertFile(file, res, req) {
                 collection.insertOne(req.session.post)
                 console.log('File Inserted')
             }
-            catch (err) {
-                console.log('Error while inserting:', err)
+            catch (err2) {
+                console.log('Error while inserting:', err2)
             }
             client.close()
             res.render("home")
