@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+
+    <title>MustangConnect</title>
+    <link href='https://fonts.googleapis.com/css?family=Lora'
+      rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans'
+      rel='stylesheet'>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+
+    <style>
+      html {
+          height: 100%;
+          overflow: hidden;
+      }
+  
+      body {
+          background-image: url(/images/loginbackground.jpg);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p class="intro_header"> Welcome to MustangConnect! </p>
+    <p class="intro_body">
+    A platform where Cal Poly students can meet new people and
+    discover new clubs to truly make Cal Poly their "home away
+    from home".
+    </p>
+
+    <div class="index_field_cont" style="height: 30vh">
+        <p style="font-family: Lora; font-weight: bold; font-size: 16px; text-align: center;">
+            Please Enter The Email And Account Type Of Account You Want To Change The Password For.</p>
+        <form class="email" action="/changePassVerification">
+            <input type="text" name='edit_email' id="edit_email" class="login_form_control" placeholder="Email Address" required autofocus>
+            <br>
+            <select name="account_type" id="account_type" class="cpass_type_of_account">
+                <option value="student"> Student </option>
+                <option value="club"> Club </option>
+            </select>
+            <br><br>
+            <a>
+              <button class="send_change_email" type="submit">Send Email</button>
+            </a>
+        </form>
+    </div>
+
+    <span style="position: absolute; bottom: 1%; right: 1%;
+                 background-color: black">
+    <a style="color: white; font-size: 100%; text-decoration: none"
+     href="https://gopoly.com/images/2020/7/8/CPCampusByBrittanyAnzelApp.jpg?width=1416&height=797
+           &mode=crop&scale=both&format=jpg&quality=80" target="_blank">
+      Photo Credits: Brittany App (click here for photo link)
+    </a>
+    </span>
+
+  </body>
+</html>

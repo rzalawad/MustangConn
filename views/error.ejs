@@ -1,50 +1,54 @@
-<<<<<<< HEAD
-
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>MustangConnect</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Error</title>
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 	
 		<script type="text/javascript" src="/eel.js"></script>
+
+		<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+		rel='stylesheet'>
+
+		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
 	
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	  </head>
-	  <body>
-		<h1>POOP 
-            DE
-            POOP
-        </h1>
 
+		<style>
+			html {
+				overflow: hidden;
+			}
 	
-	  </body>
+			body {
+				background-color: white;
+				margin: -9999rem -9999rem -9999rem;
+				padding: 9999rem 9999rem 9999rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="top_menu">
+			<li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+				<a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+			</li>
+		</ul>
 
-=======
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>MustangConnect</title>
+		<p class="error_title"> Oops! Looks like we ran into an error...</p>
+		<p class="error_subtitle"> Click on the icon at the top left to go back to the homepage </p>
+		<br><br>
+		<% if (msg) { %>
+		<p class="error_message"> Console Message:<br><%-msg%> </p>
+		<% } else { %>
+		<p class="error_message"> Oh no...unable to fetch error message </p>
+		<% } %>	
 	
-		<script type="text/javascript" src="/eel.js"></script>
-	
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	  </head>
-	  <body>
-		<h1>POOP 
-            DE
-            POOP
-        </h1>
-
-	
-	  </body>
-
->>>>>>> Ridham
+	</body>
 </html>

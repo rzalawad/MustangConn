@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+	
+		<script type="text/javascript" src="/eel.js"></script>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+		<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+		rel='stylesheet'>
+
+		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+
+		<script>
+			function check_fields(form) {
+				var messages = []
+					
+				if (form.password1.value != form.password2.value) {
+					messages.push('Passwords are not the same');
+				}
+				if (isNaN(form.age.value)) {
+					messages.push("Age must be a number");
+				}
+				if (form.language.value != "") {
+					var tempArr = form.language.value.split(",");
+					var i;
+					var flag = false;
+					for (i = 0; i < tempArr.length; i++) {
+						if (tempArr[i].replace(/\s/g, '').length == 0) {
+							flag = true;
+						}
+					}
+
+					if (flag) {
+						messages.push("Remove whitespace entry (', ,') from Languages");
+					}
+				}
+				if (form.hobbies.value != "") {
+					var tempArr = form.hobbies.value.split(",");
+					var i;
+					var flag = false;
+					for (i = 0; i < tempArr.length; i++) {
+						if (tempArr[i].replace(/\s/g, '').length == 0) {
+							flag = true;
+						}
+					}
+
+					if (flag) {
+						messages.push("Remove whitespace entry (', ,') from Hobbies");
+					}
+				}
+				if (messages.length == 0) {
+					form.action = "/studentSignUp";
+					return true;
+				}
+
+				alert(messages.join(", "));
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+				return false;	
+			}
+		</script>
+
+		<style>
+			html {
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="signup_header_text"> Let's Make Your Student Profile </p>
+		<p class="signup_header_subtext"> The information you put here will be used by our system to match
+		you with people with things in common.
+		</p>
+		<p style="font-family: Open Sans; font-size: 87.5%; text-align: center">
+		(Note: Please make the first letter of every word capital (e.g. Languages: English, Spanish))
+		</p>
+	
+		<form id="form" onsubmit="return check_fields(this);">
+			<div class="signup_section_info">
+				<p class="signup_section_title"> Personal Information </p>
+				<div class="form-group col-md-6">
+					<label for="name">Full Name</label>
+					<input type="text" class="form-control" id="name" name= "name" placeholder="Full Name" required>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="age">Age</label>
+					<input type="text" class="form-control" id="age" name = "age" placeholder="Age" required>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="gender">Gender</label>
+					<select name="gender" id="gender" class="form-control" required>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Non-Binary">Non-Binary</option>
+						<option value="Transgender">Transgender</option>
+						<option value="Other">Other</option>
+						<option value="Prefer not to answer">Prefer not to answer</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="location">Location (Hometown)</label>
+					<input type="text" class="form-control" id="location" name="location" placeholder="City, State, or Country" required>
+					<small id="locHelp" class="form-text text-muted">City (If California), State (If Out-of-State), or Country (If International).</small>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="ethnicity">Ethnicity</label>
+					<input type="text" class="form-control" id="ethnicity" name = "ethnicity" placeholder="Ethnicity" required>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="language">Languages</label>
+					<input type="text" class="form-control" id="language" name = "language" placeholder="Languages that you can speak" required>
+					<small id="locHelp" class="form-text text-muted">List all the languages you can speak, separated by comma.</small>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="hobbies">Hobbies</label>
+					<input type="text" class="form-control" id="hobbies" name = "hobbies" placeholder="Hobbies" required>
+					<small id="locHelp" class="form-text text-muted">List all the things you love to do, separated by comma.</small>
+				</div>
+			</div>
+
+			<br><br>
+
+			<div class="signup_section_info">
+				<p class="signup_section_title"> Cal Poly Information </p>
+				<div class="form-group col-md-6">
+					<label for="major">Major</label>
+					<select name="major" id="major" class="form-control" required>
+						<option value="Aerospace Engineering">Aerospace Engineering</option>
+						<option value="Agricultural and Environmental Plant Sciences">Agricultural and Environmental Plant Sciences</option>
+						<option value="Agricultural Business">Agricultural Business</option>
+						<option value="Agricultural Communication">Agricultural Communication</option>
+						<option value="Agricultural Science">Agricultural Science</option>
+						<option value="Agricultural Systems Management">Agricultural Systems Management</option>
+						<option value="Animal Science">Animal Science</option>
+						<option value="Anthropology">Anthropology and Geography</option>
+						<option value="Architectural Engineering">Architectural Engineering</option>
+						<option value="Architecture">Architecture</option>
+						<option value="Art and Design">Art and Design</option>
+						<option value="Biochemistry">Biochemistry</option>
+						<option value="Biological Sciences">Biological Sciences</option>
+						<option value="Biomedical Engineering">Biomedical Engineering</option>
+						<option value="BioResource and Agricultural Engineering">BioResource and Agricultural Engineering</option>
+						<option value="Business Administration">Business Administration</option>
+						<option value="Chemistry">Chemistry</option>
+						<option value="Child Development">Child Development</option>
+						<option value="City and Regional Planning">City and Regional Planning</option>
+						<option value="Civil Engineering">Civil Engineering</option>
+						<option value="Communication Studies">Communication Studies</option>
+						<option value="Comparative Ethnic Studies">Comparative Ethnic Studies</option>
+						<option value="Computer Engineering">Computer Engineering</option>
+						<option value="Computer Science">Computer Science</option>
+						<option value="Construction Management">Construction Management</option>
+						<option value="Dairy Science">Dairy Science</option>
+						<option value="Economics">Economics</option>
+						<option value="Electrical Engineering">Electrical Engineering</option>
+						<option value="English">English</option>
+						<option value="Environmental Earth and Soil Sciences">Environmental Earth and Soil Sciences</option>
+						<option value="Environmental Engineering">Environmental Engineering</option>
+						<option value="Environmental Management and Protection">Environmental Management and Protection</option>
+						<option value="Food Science">Food Science</option>
+						<option value="Forestry and Natural Resources">Forestry and Natural Resources</option>
+						<option value="General Engineering">General Engineering</option>
+						<option value="Graphic Communication">Graphic Communication</option>
+						<option value="History">History</option>
+						<option value="Industrial Engineering">Industrial Engineering</option>
+						<option value="Industrial Technology and Packaging">Industrial Technology and Packaging</option>
+						<option value="Interdisciplinary Studies">Interdisciplinary Studies</option>
+						<option value="Journalism">Journalism</option>
+						<option value="Kinesiology">Kinesiology</option>
+						<option value="Landscape Architecture">Landscape Architecture</option>
+						<option value="Liberal Arts & Engineering Studies">Liberal Arts & Engineering Studies</option>
+						<option value="Liberal Studies">Liberal Studies</option>
+						<option value="Manufacturing Engineering">Manufacturing Engineering</option>
+						<option value="Marine Sciences">Marine Sciences</option>
+						<option value="Materials Engineering">Materials Engineering</option>
+						<option value="Mathematics">Mathematics</option>
+						<option value="Mechanical Engineering">Mechanical Engineering</option>
+						<option value="Microbiology">Microbiology</option>
+						<option value="Music">Music</option>
+						<option value="Nutrition">Nutrition</option>
+						<option value="Philosophy">Philosophy</option>
+						<option value="Physics">Physics</option>
+						<option value="Political Science">Political Science</option>
+						<option value="Psychology">Psychology</option>
+						<option value="Public Health">Public Health</option>
+						<option value="Recreation, Parks, & Tourism Administration">Recreation, Parks, & Tourism Administration</option>
+						<option value="ROTC">ROTC</option>
+						<option value="Sociology">Sociology</option>
+						<option value="Software Engineering">Software Engineering</option>
+						<option value="Spanish">Spanish</option>
+						<option value="Statistics">Statistics</option>
+						<option value="Theatre Arts">Theatre Arts</option>
+						<option value="Wine and Viticulture">Wine and Viticulture</option>
+						<option value="Prefer not to answer">Prefer not to answer</option>
+					</select>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="year">Year</label>
+					<select name="year" id="year" class="form-control" required>
+						<option value="1st">1st</option>
+						<option value="2nd">2nd</option>
+						<option value="3rd">3rd</option>
+						<option value="4th">4th</option>
+						<option value="5th">5th</option>
+						<option value="Transfer">Transfer</option>
+						<option value="Graduate">Graduate</option>
+						<option value="Blended Program">Blended Program</option>
+						<option value="Other">Other</option>
+						<option value="Prefer not to answer">Prefer not to answer</option>
+					</select>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="dorm">Dorm</label>
+					<select name="dorm" id="dorm" class="form-control" required>
+						<option value="Sierra Madre">Sierra Madre</option>
+						<!--<option value="Sierra Madre - Tower 0">Sierra Madre - Tower 0</option>
+						<option value="Sierra Madre - Tower 1">Sierra Madre - Tower 1</option>
+						<option value="Sierra Madre - Tower 2">Sierra Madre - Tower 2</option>
+						<option value="Sierra Madre - Tower 3">Sierra Madre - Tower 3</option>
+						<option value="Sierra Madre - Tower 4">Sierra Madre - Tower 4</option>
+						<option value="Sierra Madre - Tower 5">Sierra Madre - Tower 5</option>-->
+						<option value="Yosemite">Yosemite</option>
+						<!--<option value="Yosemite - Tower 0">Yosemite - Tower 0</option>
+						<option value="Yosemite - Tower 1">Yosemite - Tower 1</option>
+						<option value="Yosemite - Tower 2">Yosemite - Tower 2</option>
+						<option value="Yosemite - Tower 3">Yosemite - Tower 3</option>
+						<option value="Yosemite - Tower 4">Yosemite - Tower 4</option>
+						<option value="Yosemite - Tower 5">Yosemite - Tower 5</option>
+						<option value="Yosemite - Tower 6">Yosemite - Tower 6</option>
+						<option value="Yosemite - Tower 7">Yosemite - Tower 7</option>
+						<option value="Yosemite - Tower 8">Yosemite - Tower 8</option>
+						<option value="Yosemite - Tower 9">Yosemite - Tower 9</option>-->
+						<option value="yakʔitʸutʸu">yakʔitʸutʸu</option>
+						<!--<option value="yakʔitʸutʸu - tsɨtkawayu">yakʔitʸutʸu - tsɨtkawayu</option>
+						<option value="yakʔitʸutʸu - elewexe">yakʔitʸutʸu - elewexe</option>
+						<option value="yakʔitʸutʸu - tšɨłkukunɨtš">yakʔitʸutʸu - tšɨłkukunɨtš</option>
+						<option value="yakʔitʸutʸu - tiłhini">yakʔitʸutʸu - tiłhini</option>
+						<option value="yakʔitʸutʸu - tsɨtqawɨ">yakʔitʸutʸu - tsɨtqawɨ</option>
+						<option value="yakʔitʸutʸu - nipumu?">yakʔitʸutʸu - nipumu?</option>
+						<option value="yakʔitʸutʸu - tsɨtpxatu">yakʔitʸutʸu - tsɨtpxatu</option>-->
+						<option value="South Mountain (Red Bricks)">South Mountain (Red Bricks)</option>
+						<!--<option value="South Mountain (Red Bricks) - Trinity">South Mountain (Red Bricks) - Trinity</option>
+						<option value="South Mountain (Red Bricks) - Santa Lucia">South Mountain (Red Bricks) - Santa Lucia</option>
+						<option value="South Mountain (Red Bricks) - Muir">South Mountain (Red Bricks) - Muir</option>
+						<option value="South Mountain (Red Bricks) - Sequoia">South Mountain (Red Bricks) - Sequoia</option>
+						<option value="South Mountain (Red Bricks) - Fremont">South Mountain (Red Bricks) - Fremont</option>
+						<option value="South Mountain (Red Bricks) - Tenaya">South Mountain (Red Bricks) - Tenaya</option>-->
+						<option value="North Mountain">North Mountain</option>
+						<!--<option value="North Mountain - Shasta">North Mountain - Shasta</option>
+						<option value="North Mountain - Diablo">North Mountain - Diablo</option>
+						<option value="North Mountain - Palomar">North Mountain - Palomar</option>
+						<option value="North Mountain - Whitney">North Mountain - Whitney</option>
+						<option value="North Mountain - Lassen">North Mountain - Lassen</option>-->
+						<option value="Cerro Vista">Cerro Vista</option>
+						<!--<option value="Cerro Vista - Morro">Cerro Vista - Morro</option>
+						<option value="Cerro Vista - Cabrillo">Cerro Vista - Cabrillo</option>
+						<option value="Cerro Vista - Hollister">Cerro Vista - Hollister</option>
+						<option value="Cerro Vista - Romauldo">Cerro Vista - Romauldo</option>
+						<option value="Cerro Vista - Islay">Cerro Vista - Islay</option>
+						<option value="Cerro Vista - Bishop">Cerro Vista - Bishop</option>-->
+						<option value="Poly Canyon Village">Poly Canyon Village</option>
+						<!--<option value="Poly Canyon Village - Aliso">Poly Canyon Village - Aliso</option>
+						<option value="Poly Canyon Village - Buena Vista">Poly Canyon Village - Buena Vista</option>
+						<option value="Poly Canyon Village - Corralitos">Poly Canyon Village - Corralitos</option>
+						<option value="Poly Canyon Village - Dover">Poly Canyon Village - Dover</option>
+						<option value="Poly Canyon Village - Estrella">Poly Canyon Village - Estrella</option>
+						<option value="Poly Canyon Village - Foxen">Poly Canyon Village - Foxen</option>
+						<option value="Poly Canyon Village - Gypsum">Poly Canyon Village - Gypsum</option>
+						<option value="Poly Canyon Village - Huasna">Poly Canyon Village - Huasna</option>
+						<option value="Poly Canyon Village - Inyo">Poly Canyon Village - Inyo</option>-->
+						<option value="Cal Poly Lofts">Cal Poly Lofts</option>
+						<option value="Ag Housing">Ag Housing</option>
+						<option value="Off Campus">Off Campus</option>
+						<option value="Prefer not to answer">Prefer not to answer</option>
+					</select>
+				</div>
+			</div>
+
+			<br><br>
+
+			<div class="signup_section_info">
+				<p class="signup_section_title"> Account Information </p>
+				<div class="form-group col-md-4">
+					<label for="preference">Preference</label>
+					<small id="prefHelp" class="form-text text-muted">Choose your top 5 preferences to meet people accordingly</small>
+	
+					<select id="p1" name="1" class="form-control" style="width: 25vw" required>
+					  <option selected>First Preference (Highest Priority)</option>
+					  <option> location</option>
+					  <option> hobby</option>
+					  <option> language</option>
+					  <option> major</option>
+					  <option> dorm</option>
+					  <option> gender</option>
+					  <option> ethnicity</option>
+					</select>
+	
+					<select id="p2" name="2" class="form-control" style="width: 25vw" required>
+						<option selected>Second Preference</option>
+						<option> location</option>
+						<option> hobby</option>
+						<option> language</option>
+						<option> major</option>
+						<option> dorm</option>
+						<option> gender</option>
+						<option> ethnicity</option>
+					</select>
+	
+					<select id="p3" name="3" class="form-control" style="width: 25vw" required>
+					<option selected>Third Preference</option>
+					<option> location</option>
+					<option> hobby</option>
+					<option> language</option>
+					<option> major</option>
+					<option> dorm</option>
+					<option> gender</option>
+					<option> ethnicity</option>
+					</select>
+	
+					<select id="p4" name="4" class="form-control" style="width: 25vw" required>
+					<option selected>Fourth Preference</option>
+					<option> location</option>
+					<option> hobby</option>
+					<option> language</option>
+					<option> major</option>
+					<option> dorm</option>
+					<option> gender</option>
+					<option> ethnicity</option>
+					</select>
+	
+					<select id="p5" name="5" class="form-control" style="width: 25vw" required>
+					<option selected>Fifth Preference (Lowest Priority)</option>
+					<option> location</option>
+					<option> hobby</option>
+					<option> language</option>
+					<option> major</option>
+					<option> dorm</option>
+					<option> gender</option>
+					<option> ethnicity</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="password">Enter Password</label>
+					<input type="password" class="form-control" id="password1" name ="password" placeholder="Enter Password">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="password">Verify Password</label>
+					<input type="password" class="form-control" id="password2" name ="password" placeholder="Re-enter Password">
+				</div>
+			</div>
+
+			<br><br>
+			<button type="submit" class="btn btn-primary" style="margin: 0 46%; width:10%">Get Started!</button>
+			<br><br>
+		</form>
+	</body>
+
+</html>

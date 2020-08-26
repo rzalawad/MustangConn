@@ -1,72 +1,108 @@
-<<<<<<< HEAD
-<<<<<<<< HEAD:views/verification.ejs
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>MustangConnect</title>
-	
-		<script type="text/javascript" src="/eel.js"></script>
-	
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	  </head>
-	  <body>
-		<h3>Please enter the calpoly email below </h3>
-	
-	
-		<form action="/eVerification">
-			<label for="email">Email ID:</label>
-			<input type="text" id="email" name="email"><br><br>
-			<input type="submit" value="Submit">
-		  </form>
-      </body>
-========
+<html lang="en">
+  <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This will maybe someday contain info about this website :)">
+		<meta name="author" content="Cal Poly Summer 2020 CSC 307 Group 3">
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 
-=======
->>>>>>> Ridham
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
 		<title>MustangConnect</title>
-	
+		<link href='https://fonts.googleapis.com/css?family=Lora'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+    rel='stylesheet'>
+    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+		
 		<script type="text/javascript" src="/eel.js"></script>
-	
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	  </head>
-	  <body>
-<<<<<<< HEAD
-		<h1>Login Page </h1>
-	
-	
-		<form action="/login", method="POST">
-			<label for="email">Email ID:</label>
-			<input type="text" id="email" name="email"><br><br>
-			<label for="psswd">Password:</label>
-			<input type="text" id="psswd" name="psswd"><br><br>
-			<input type="submit" value="Submit">
-		</form>
-	
-	
-	  </body>
-	
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+		 crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+     crossorigin="anonymous"></script>
 
->>>>>>>> Ridham:Jay/views/index.html
-=======
-		<h3>Please enter the calpoly email below </h3>
-	
-	
-		<form action="/eVerification">
-			<label for="email">Email ID:</label>
-			<input type="text" id="email" name="email"><br><br>
-			<input type="submit" value="Submit">
-		  </form>
-      </body>
->>>>>>> Ridham
+    <script>
+      function check_email(form) {
+          var verif_email = form.email.value.split('@');
+          if (verif_email.length == 2) {
+              if (verif_email[1] == "calpoly.edu") {
+                  form.action = "/student-verification"
+                  return
+              }
+          }
+
+          alert("Email must be in format <username@calpoly.edu>")
+      }
+    </script>
+
+    <style>
+      html {
+          height: 100%;
+          overflow: hidden;
+      }
+
+      body {
+          background-image: url(/images/loginbackground.jpg);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="intro_header"> Welcome to MustangConnect! </p>
+    <p class="intro_body">
+    A platform where Cal Poly students can meet new people and
+    discover new clubs to truly make Cal Poly their "home away
+    from home".
+    </p>
+
+    <div class="index_field_cont" style="height: 64vh; top: 44%">
+		<p class="verif_titles">
+    What Type Of Account Are You Making?</p>
+    
+    <div class="verif_student_user">
+    <p class="verif_titles"> Student</p>
+		<form onsubmit="check_email(this);">
+			<input type="text" class="login_form_control" id="email" name="email" 
+			 placeholder="Please Enter Cal Poly Email Address" required autofocus>
+			<br><br>
+			<input type="submit" class="sendSignupEmail" value="Submit">
+    </form>
+    </div>
+
+    <br>
+
+    <div class="verif_club_user">
+      <p class="verif_titles"> Club </p>
+      <label for="clubs" class="verif_titles" style="font-size: 16px; margin-left: 20px"> Choose Cal Poly Club </label>
+      <form action="/club-verification">
+        <select name="club_name" id="club_name" class="verif_club_directory">
+          <% clubs.forEach((item)=>{%>
+              <option value="<%=item%>"> <%=item%> </option>
+          <%});%> 
+        </select>
+        <br><br>
+        <input type="submit" class="sendClubEmail" value="Submit">
+      </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <span style="position: absolute; bottom: 1%; right: 1%;
+                 background-color: black">
+    <a style="color: white; font-size: 100%; text-decoration: none"
+     href="https://gopoly.com/images/2020/7/8/CPCampusByBrittanyAnzelApp.jpg?width=1416&height=797
+           &mode=crop&scale=both&format=jpg&quality=80" target="_blank">
+      Photo Credits: Brittany App (click here for photo link)
+    </a>
+    </span>
+
+  </body>
 </html>

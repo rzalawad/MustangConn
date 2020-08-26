@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title> <%=target.name%>'s Profile </title>
+
+        <link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+        rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+        rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+        rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Open Sans'
+        rel='stylesheet'>
+        <link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+
+        <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+
+        <style>
+            html {
+                overflow: hidden;
+            }
+            
+            body {
+                background-color: white;
+                margin: -9999rem -9999rem -9999rem;
+                padding: 9999rem 9999rem 9999rem;
+                overflow-x: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="top_menu">
+            <li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+                <a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+            </li>
+            <% if (actual_user.user == "club") { %>
+                <li style="float:left; padding: 1% 2%"> <a href="/post/upload"> Post </a> </li>
+            <% } %>
+            <% if (actual_user.user == "admin") { %>
+                <li style="float:left; padding: 1% 2%"> <a href="/viewDatabase"> Database </a></li>
+            <% } %>
+            <li style="float:right; padding: 1% 2%"> <a href="/logout"> Log Out </a> </li>
+            <li style="float:right; padding: 1% 2%"> <a href="/chat-choose"> Chat </a> </li>
+            <% if (actual_user.user != "club") { %>
+                <li style="float:right; padding: 1% 2%"> <a href="/clubs"> Clubs </a> </li>
+                <li style="float:right; padding: 1% 2%"> <a href="/profile"> Profile </a> </li>
+            <% if (actual_user.request_list.length > 0) { %>
+                <li style="float:right; padding: 1% 2%"> 
+                    <a href="/friend/requests" style="color: #529be4"> Pending Requests </a> </li>
+            <% } else { %>
+                <li style="float:right; padding: 1% 2%"> <a href="/friend/requests"> Pending Requests </a> </li>
+            <% } %>
+                <li style="float:right; padding: 1% 2%"> <a href="/findPeople"> Meet People! </a> </li>
+            <% } else { %>
+                <li style="float:right; padding: 1% 2%"> <a href="/clubs/<%=actual_user.name%>"> Profile </a> </li>
+            <% } %>
+        </ul>
+
+        <div class=club_interests>
+            <h2 style="font-family: PT Serif Caption; font-size: 200%"> Club Interests </h2>
+            <ul class="cpage_interests">
+                <% target.interests.forEach(item=>{%>
+                <li> <%=item%> </li>
+                <%});%> 
+            </ul>
+        </div>
+
+        <div>
+            <a href="https://i.ibb.co/y676MDy/no-ppic.png" target="_blank">
+                <% if(target.ppic){ %>
+                    <img src="/image/<%= ppic %>"class="cpage_profile_pic">
+                <% } else { %>
+                    <img src="https://i.ibb.co/y676MDy/no-ppic.png" class="cpage_profile_pic">
+                <% } %>
+            </a>
+        </div>
+
+        <span></span>
+        <% if ((actual_user.email == target.email) && (actual_user.user == "club")) { %>
+        <div class="cpage_bttn">
+            <form action="/profile/upload/redirect">
+                <button class="changePic"  type="submit">Change Profile Pic</button>
+            </form>
+        </div>
+        <% } %>
+
+        <div class="cpage_profile_info">
+            <div class="cpage_profile_name">
+                <h1> <%=target.name%> </h1>
+            </div>
+            <h2 style="font-family: Open Sans; text-align: center; margin-top: -5%;"> Club Contact Email: <%=target.email%> </h2>
+            <br>
+            <div class="cpage_profile_description">
+            <h2 style="text-align: center; font-family: Open Sans; font-size: 200%;
+                       margin-top: -0.5%; font-weight: bold;"> Description </h2>
+            <h2 style="margin-top: -2%; height: 25vh; border: 2px outset #e3e3e3; font-family: Open Sans; overflow-y: auto"> <%=target.des%> </h2>
+            </div>
+        </div>
+
+        <div class=profile_friends_list>
+            <h2 class="profile_fl_title_font"> Members (<%=target.members.length%>) </h2>
+            <ul class="profile_fl_contents">
+                <% target.members.forEach(item=>{%>
+                <li> <a href="/profile">
+                    <img src="https://i.ibb.co/y676MDy/no-ppic.png"
+                    class="ppage_minimized_profile_pic">
+                    <span style="text-align: center;"> <%=item%> </span>
+                    </a>
+                </li>
+                <%});%> 
+            </ul>
+        </div>
+    </body>
+</html>

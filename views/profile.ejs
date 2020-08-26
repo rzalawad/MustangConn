@@ -1,4 +1,3 @@
-<<<<<<< HEAD
   
 <!DOCTYPE html>
 <html>
@@ -7,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title> <%=name%>'s Profile </title>
+	<title> <%=target.name%>'s Profile </title>
 
 	<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
 	rel='stylesheet'>
@@ -17,379 +16,122 @@
 	rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Open Sans'
 	rel='stylesheet'>
-<style>
+	<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+	
+	<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+	<style>
+		html {
+			overflow: hidden;
+		}
 
-html {
-	overflow-x: hidden;
-}
-
-ul.top_menu {
-	list-style-type: none;
-	margin: -9999rem -9999rem 0;
-	padding: 9999rem 9999rem 0;
-	overflow: hidden;
-	background-color: #154734;
-}
-
-ul.top_menu li {
-	float: left;
-}
-
-ul.top_menu li a {
-	display: block;
-	color: white;
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-	text-align: center;
-	text-decoration: none;
-}
-
-ul.top_menu li a:hover {
-	color: #bd8b13;
-}
-
-div.friends_list {
-	position: absolute;
-	bottom: 250px;
-	left: 1000px;
-	overflow-x: hidden;
-	overflow-y: auto;
-}
-
-.fl_title_font {
-	margin: 0;
-	padding: 0;
-	width: 300px;
-	font-family: "Oleo Script Swash Caps";
-	font-size: 30px;
-	text-align: center;
-	color: black;
-}
-
-ul.fl_contents {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 300px;
-	background-color: #e3e3e3;
-	border: 1px outset;
-}
-
-ul.fl_contents li a {
-	display: inline-block;
-	color: black;;
-	width: 100%;
-	border-bottom: 1px groove white;
-	text-decoration: none;
-	font-family: "PT Sans Narrow";
-	font-size: 22px;
-	font-weight: bold;
-}
-
-ul.fl_contents li a:hover {
-	background-color: #bd8b13;
-	color: white;
-}
-
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow-x: hidden;
-}
-
-
-.profile_pic {
-	display: inline-block;
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	object-fit: cover;
-	position: relative;
-	top: 20px;
-	left: 10px;
-}
-
-.minimized_profile_pic {
-	display: inline-block;
-	width: 60px;
-	height: 60px;
-	padding: 5px 5px;
-	border-radius: 50%;
-	object-fit: cover;
-}
-
-div.profile_info {
-	position:absolute;
-	top: 75px;
-	left: 400px;
-}
-
-div.profile_name {
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-}
-
-div.profile_body {
-	font-family: "Open Sans";
-	font-size: 10px;
-}
-
-.bttn{
-	padding-top: 40px;
-	position:relative;
-	left: 70px;
-}
-
-
-</style>
+		body {
+			background-color: white;
+			margin: -9999rem -9999rem -9999rem;
+			padding: 9999rem 9999rem 9999rem;
+			overflow-x: hidden;
+		}
+	</style>
 </head>
 <body>
-<ul class="top_menu">
-	<li style="float:left; padding: 7px 30px"> 
-		<a href="home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
-	</li>
-	<li style="float:left; padding: 14px 30px"> <a href="post/upload"> Post </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="index"> Log Out </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="chat"> Chat </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="clubs"> Clubs </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
-</ul>
-
-<div>
-	<a href="http://placehold.it/400x200" target="_blank">
-		<% if(ppic){ %>
-			<img src="image/<%= ppic %>"class="profile_pic">
-		<% } else { %>
-			<img src="http://placehold.it/400x200" class="profile_pic">
-			<% } %>
-	</a>
-</div>
-
-<span></span>
-<div class="bttn">
-	<form action="/profile/upload/redirect">
-		<button class="btn btn-lg btn-primary btn-block"  type="submit">Change Profile Pic</button>
-	</form>
-</div>
-
-<div class="profile_info">
-	<div class="profile_name">
-		<h1> <%=name%> </h1>
-	</div>
-	<div class="profile_body">
-	<h2> Gender: <%=gender%> </h2>
-	<h2> Age: <%=age%> </h2>
-	<h2> Hometown: <%=location%> </h2>
-	<h2> Dorm: <%=dorm%> </h2>
-	<h2> Hobbies:  </h2>
-	<ul title="Hobbies"> 
-		<% hobbies.forEach((item)=>{%> 
-		<li><%=item%></li>  
-		<%});%> 
-	</ul> 
-	</div>
-</div>
-
-<div class=friends_list>
-	<h2 class="fl_title_font"> Friends List (<%=friends.length%>) </h2>
-	<ul class="fl_contents">
-		<% friends.forEach((item)=>{%> 
-		<li> <a href="profile">
-			<img src="http://placehold.it/400x200"
-			 class="minimized_profile_pic">
-			 <span style="text-align: center;"> <%=item%> </span>
-			</a>
+	<ul class="top_menu">
+		<li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+			<a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
 		</li>
-		<%});%> 
-	</ul>
-</div>
-	
-<p id="demo"></p>
-<script>
-	var test = document.getElementById('mydiv').dataset.test
-	document.getElementById("demo").innerHTML = test;
-</script>
-
-
-</body>
-=======
-  
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Profile </title>
-<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
-rel='stylesheet'>
-<style>
-
-html {
-	overflow-x: hidden;
-}
-
-ul.top_menu {
-	list-style-type: none;
-	margin: -9999rem -9999rem 0;
-	padding: 9999rem 9999rem 0;
-	overflow: hidden;
-	background-color: #154734;
-}
-
-ul.top_menu li {
-	float: left;
-}
-
-ul.top_menu li a {
-	display: block;
-	color: white;
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-	text-align: center;
-	padding: 14px 30px;
-	text-decoration: none;
-}
-
-ul.top_menu li a:hover {
-	background-color: #081c15;
-}
-
-ul.friends_list {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 200px;
-	background-color: blue;
-}
-
-ul.friends_list li {
-	float: right;
-}
-
-ul.friends_list li a {
-	display: block;
-	color: black;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-ul.friends_list li a:hover {
-	background-color: #bd8b13;
-	color: white;
-}
-
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow-x: hidden;
-}
-
-
-.profile_pic {
-	display: inline-block;
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	object-fit: cover;
-	position: relative;
-	top: 20px;
-}
-
-div.profile_name {
-	position: relative;
-	bottom: 250px;
-	left: 400px;
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-}
-
-div.profile_info {
-	background-color: white;
-}
-
-.bttn{
-	padding-top: 40px;
-}
-
-
-</style>
-</head>
-<body>
-<ul class="top_menu">
-	<li> <a href="home"> MustangConnect </a> </li>
-	<li style="float:right"><a href="index"> Log Out </a> </li>
-	<li style="float:right"><a href="chat"> Chat </a> </li>
-	<li style="float:right"><a href="clubs"> Clubs </a> </li>
-	<li style="float:right"><a href="profile"> Profile </a> </li>
-	<li style="float:right"><a href="findPeople"> Meet People! </a> </li>
-</ul>
-
-<div>
-	<a href="http://placehold.it/400x200" target="_blank">
-		<% if(ppic){ %>
-			<img src="image/<%= ppic %>"class="profile_pic">
+		<% if (actual_user.user == "club") { %>
+			<li style="float:left; padding: 1% 2%"> <a href="/post/upload"> Post </a> </li>
+		<% } %>
+		<% if (actual_user.user == "admin") { %>
+			<li style="float:left; padding: 1% 2%"> <a href="/viewDatabase"> Database </a></li>
+		<% } %>
+		<li style="float:right; padding: 1% 2%"> <a href="/logout"> Log Out </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/chat-choose"> Chat </a> </li>
+		<% if (actual_user.user != "club") { %>
+			<li style="float:right; padding: 1% 2%"> <a href="/clubs"> Clubs </a> </li>
+			<li style="float:right; padding: 1% 2%"> <a href="/profile"> Profile </a> </li>
+		<% if (actual_user.request_list.length > 0) { %>
+			<li style="float:right; padding: 1% 2%"> 
+				<a href="/friend/requests" style="color: #529be4"> Pending Requests </a> </li>
 		<% } else { %>
-			<img src="http://placehold.it/400x200" class="profile_pic">
+			<li style="float:right; padding: 1% 2%"> <a href="/friend/requests"> Pending Requests </a> </li>
+		<% } %>
+			<li style="float:right; padding: 1% 2%"> <a href="/findPeople"> Meet People! </a> </li>
+		<% } else { %>
+			<li style="float:right; padding: 1% 2%"> <a href="/clubs/<%=actual_user.name%>"> Profile </a> </li>
+		<% } %>
+	</ul>
+
+	<div>
+			<% if(target.ppic){ %>
+				<a href="/image/<%= target.ppic %>" target="_blank">
+				<img src="/image/<%= target.ppic %>"class="ppage_profile_pic">
+				</a>
+			<% } else { %>
+				<a href="https://i.ibb.co/y676MDy/no-ppic.png" target="_blank">
+				<img src="https://i.ibb.co/y676MDy/no-ppic.png" class="ppage_profile_pic">
+				</a>
 			<% } %>
-	</a>
-</div>
-	
-<h2></h2>
-<div class="bttn">
-	<form action="/profile/upload/redirect">
-		<button class="btn btn-lg btn-primary btn-block"  type="submit">Change Profile Pic</button>
-	</form>
-</div>
+		</a>
+	</div>
 
-<div class="profile_name">
+	<span></span>
+	<% if (actual_user.email == target.email) { %>
+	<div class="ppage_bttn">
+		<form action="/profile/upload/redirect">
+			<button class="changePic" type="submit">Change Profile Pic</button>
+		</form>
+	</div>
+	<% } %>
 
-	<h1><%=name%> </h1>
-</div>
+	<div class="ppage_profile_info">
+		<div class="ppage_profile_name">
+			<h1> <%=target.name%> </h1>
+		</div>
+		<div class="ppage_profile_body">
+			<h2> Gender: <%=target.gender%> </h2>
+			<h2> Age: <%=target.age%> </h2>
+			<h2> Major: <%=target.major%> </h2>
+			<h2> Ethnicity: <%=target.ethnicity%> </h2>
+			<h2> Hometown: <%=target.location%> </h2>
+			<h2> Dorm: <%=target.dorm%> </h2>
+		</div>
+	</div>
 
-<div class="profile_info">
+	<div class="ppage_info_list" style="top: 57%">
+		<ul class="ppage_il_display">
+			<h2 style="font-family: Open Sans; font-size: 120%; color: black; display: inline;">
+				Hobbies: </h2> 
+			<% target.hobby_list.forEach((item)=>{%>
+			<li><%=item%></li>
+			<%});%>
+		</ul>
+	</div>
 
-	<h3>Age: <%=age%> </h3>
-</div>
-<div class="gender">
-	<h3>Gender: <%=gender%> </h3>
-</div>
+	<div class="ppage_info_list" style="top: 63%">
+		<ul class="ppage_il_display">
+			<h2 style="font-family: Open Sans; font-size: 120%; color: black; display: inline;">
+				Languages: </h2> 
+			<% target.language.forEach((item)=>{%>
+			<li><%=item%></li>
+			<%});%>
+		</ul>
+	</div>
 
-<div class="profile_info">
-	<h3>Dorm: <%=dorm%> </h3>
-</div>
-
-<div class="profile_info">
-	<h3>Hobbies:</h3>
-</div>
-
-<ul title="Hobbies"> 
-	<% hobbies.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
-
-<div class="profile_info">
-	<h3>Location: <%=location%> </h3>
-</div>
-
-
-<div class="profile_info">
-	<h3>Friends</h3>
-</div>
-
-<ul> 
-	<% friends.forEach((item)=>{%> 
-	<li><%=item%></li>  
-	<%});%> 
-</ul> 
-<p id="demo"></p>
-<script>
-	var test = document.getElementById('mydiv').dataset.test
-	document.getElementById("demo").innerHTML = test;
-</script>
-
+	<div class=profile_friends_list>
+		<h2 class="profile_fl_title_font"> Friends List (<%=friends.length%>) </h2>
+		<ul class="profile_fl_contents">
+			<% friends.forEach((item)=>{%> 
+			<li> <a href="/profile/<%=item.email%>">
+				<% if (item.ppic) { %>
+				    <img src="/image/<%=item.ppic%>" class="ppage_minimized_profile_pic">
+				<% } else { %>
+					<img src="https://i.ibb.co/y676MDy/no-ppic.png" class="ppage_minimized_profile_pic">
+				<% } %>
+				<span style="text-align: center;"> <%=item.name%> </span>
+				</a>
+			</li>
+			<%});%>
+		</ul>
+	</div>
 
 </body>
->>>>>>> Ridham
 </html>

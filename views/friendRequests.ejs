@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous">
+
+		<link href='https://fonts.googleapis.com/css?family=PT Serif Caption'
+		rel='stylesheet'>
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+		<style>
+			html {
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+
+			img.frequests_ppic {
+				display: inline-block;
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				object-fit: cover;
+				position: relative;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="top_menu">
+			<li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+				<a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+			</li>
+			<% if (actual_user.user == "club") { %>
+				<li style="float:left; padding: 1% 2%"> <a href="/post/upload"> Post </a> </li>
+			<% } %>
+			<% if (actual_user.user == "admin") { %>
+				<li style="float:left; padding: 1% 2%"> <a href="/viewDatabase"> Database </a></li>
+			<% } %>
+			<li style="float:right; padding: 1% 2%"> <a href="/logout"> Log Out </a> </li>
+			<li style="float:right; padding: 1% 2%"> <a href="/chat-choose"> Chat </a> </li>
+			<% if (actual_user.user != "club") { %>
+				<li style="float:right; padding: 1% 2%"> <a href="/clubs"> Clubs </a> </li>
+				<li style="float:right; padding: 1% 2%"> <a href="/profile"> Profile </a> </li>
+				<li style="float:right; padding: 1% 2%"> <a href="/friend/requests"> Pending Requests </a> </li>
+				<li style="float:right; padding: 1% 2%"> <a href="/findPeople"> Meet People! </a> </li>
+			<% } else { %>
+				<li style="float:right; padding: 1% 2%"> <a href="/clubs/<%=actual_user.name%>"> Profile </a> </li>
+			<% } %>
+		</ul>
+	
+<hr>
+<% r_list.forEach((item)=>{ %>
+	<div class="container">
+		<div class="card card-body mb-3">
+			<div>
+				<% if(item.ppic){ %>
+					<a href="/image/<%= item.ppic %>">
+						<img src="/image/<%= item.ppic %>" class="frequests_ppic">
+					</a>
+				<% } else { %>
+					<a href="https://i.ibb.co/y676MDy/no-ppic.png">
+						<img src="https://i.ibb.co/y676MDy/no-ppic.png" class="frequests_ppic">
+					</a>
+				<% } %>
+
+				<h2><%=item.name%> </h2>
+			</div>
+				<form action="/profile/<%=item.email%>">
+					<input type = "hidden" name = "target" id = "target" value = <%=item.id%>/>
+					<button class="btn btn-primary"  type="submit">View Profile</button>
+				</form>
+				<br>
+				<form action="/add/friend">
+					<input type = "hidden" name = "target" id = "target" value = <%=item.id%>/>
+					<button class="btn btn-primary"  type="submit">Accept Request</button>
+				</form>
+				<br>
+				<form action="/reject/friend">
+					<input type = "hidden" name = "target" id = "target" value = <%=item.id%>/>
+					<button class="btn btn-primary"  type="submit">Reject Request</button>
+				</form>
+		</div>
+	</div>
+<%});%>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+  </body>
+  </html>

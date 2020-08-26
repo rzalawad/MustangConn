@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+	
+		<script type="text/javascript" src="/eel.js"></script>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+		<link href='https://fonts.googleapis.com/css?family=Oleo Script Swash Caps'
+		rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Open Sans'
+		rel='stylesheet'>
+
+		<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+
+		<script>
+			function check_fields(form) {
+				var messages = []
+					
+				if (form.password1.value != form.password2.value) {
+					messages.push('Passwords are not the same');
+				}
+				if (form.interests.value != "") {
+					var tempArr = form.interests.value.split(",");
+					var i;
+					var flag = false;
+					for (i = 0; i < tempArr.length; i++) {
+						if (tempArr[i].replace(/\s/g, '').length == 0) {
+							flag = true;
+						}
+					}
+
+					if (flag) {
+						messages.push("Remove whitespace entry (', ,') from Interests");
+					}
+				}
+				if (messages.length == 0) {
+					form.action = "/clubSignUp";
+					return true;
+				}
+
+				alert(messages.join(", "));
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+				return false;	
+			}
+		</script>
+
+		<style>
+			html {
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="signup_header_text"> Let's Make Your Club Profile </p>
+		<p class="signup_header_subtext"> 
+		The information you put here will be used by our system to help students find and learn about your club
+		</p>
+		<p style="font-family: Open Sans; font-size: 87.5%; text-align: center">
+		(Note: Please make the first letter of every word capital (e.g. Interests: Filipino Culture))
+		</p>
+	
+		<form id="form" onsubmit="return check_fields(this);">
+			<div class="signup_section_info">
+				<p class="signup_section_title"> Club Information </p>
+				<div class="form-group col-md-6">
+					<label for="des">Description</label>
+					<input type="text" class="form-control" id="des" name = "des" placeholder="Club Description" required>
+				</div>
+	
+				<div class="form-group col-md-6">
+					<label for="interests">Interests</label>
+					<input type="text" class="form-control" id="interests" name = "interests" placeholder="Club Interests" required>
+					<small id="locHelp" class="form-text text-muted">List all the things your club is interested in, separated by comma.</small>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="password">Enter Password</label>
+					<input type="password" class="form-control" id="password1" name ="password" placeholder="Enter Password">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="password">Verify Password</label>
+					<input type="password" class="form-control" id="password2" name ="password" placeholder="Re-enter Password">
+				</div>
+			</div>
+
+			<br><br>
+			<button type="submit" class="btn btn-primary" style="margin: 0 46%; width:10%">Get Started!</button>
+		</form>
+	</body>
+
+</html>

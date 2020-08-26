@@ -1,43 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This will maybe someday contain info about this website :)">
+    <meta name="author" content="Cal Poly Summer 2020 CSC 307 Group 3">
+    <link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>MustangConnect</title>
+    <link href='https://fonts.googleapis.com/css?family=Lora'
+      rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans'
+      rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+      function check_address(form) {
+          var verif_email = form.email.value.split('@');
+          if (verif_email.length == 1) {
+              form.email.value = verif_email[0] + "@calpoly.edu"
+              form.action = "/login"
+              return true
+          } 
+      }
+    </script>
 
-    <!-- Custom styles for this template -->
-    <link href="./signin.css" rel="stylesheet">
+    <style>
+      html {
+          height: 100%;
+          overflow: hidden;
+      }
+
+      body {
+          background-image: url(/images/loginbackground.jpg);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          overflow: hidden;
+      }
+    </style>
   </head>
+  <body>
+    <p class="intro_header"> Welcome to MustangConnect! </p>
+    <p class="intro_body">
+    A platform where Cal Poly students can meet new people and
+    discover new clubs to truly make Cal Poly their "home away
+    from home".
+    </p>
 
-  <body class="text-center">
-    <form class="form-signin" action="/login">
-      <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="email" class="sr-only">Email address</label>
-      <input type="email" name= 'email' id="email" class="form-control" placeholder="Email address" required autofocus>
-      <label for="psswd" class="sr-only">Password</label>
-      <input type="password" name= 'psswd' id="psswd" class="form-control" placeholder="Password" required><br>
-      <a>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </a>
+    <div class="index_field_cont" style="height: 40vh">
+      <form class="login_box" onsubmit="check_address(this);">
+        <input type="text" name='email' id="email" class="login_form_control" placeholder="Email Address" required autofocus>
+        <br>
+        <input type="password" name= 'psswd' id="psswd" class="login_form_control" placeholder="Password" required>
+        <br><br>
+        <a href="recover" style="color: blue; font-family: Open Sans; text-decoration: none;
+                font-size: 87.5%; position: relative; left: 36%">
+        Forgot password?
+        </a>
+        <br><br>
+        <a>
+          <button class="login" type="submit">Login</button>
+        </a>
+      </form>
 
-    </form>
+      <p style="color: black; font-family: Open Sans; text-align: center;
+                font-size: 87.5%; font-weight: bold">
+      Don't have an account yet? Let's make you one!
+      </p>
 
-    <form action="/verification">
-      <a>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-      </a>
-    </form>
+      <form action="/verification">
+        <a>
+        <button class="signup" type="submit">Sign Up</button>
+        </a>
+      </form>
+    </div>
 
-      
-
+    <span style="position: absolute; bottom: 1%; right: 1%;
+                 background-color: black">
+    <a style="color: white; font-size: 100%; text-decoration: none"
+     href="https://gopoly.com/images/2020/7/8/CPCampusByBrittanyAnzelApp.jpg?width=1416&height=797
+           &mode=crop&scale=both&format=jpg&quality=80" target="_blank">
+      Photo Credits: Brittany App (click here for photo link)
+    </a>
+    </span>
 
   </body>
 </html>

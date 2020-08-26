@@ -1,0 +1,1042 @@
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Style Sheet for MustangConnect Web Application
+ * Authors: CSC 307 Summer 2020 Group 3:
+ *     Kelechi Igwe, Jayant Devkar, Ridham Zalawadia, Jarod Morris
+ *
+ * Description: Contains different CSS components used throughout the entire
+ * website, separated by page.
+ */
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Top Navigation Bar */
+ul.top_menu {
+	list-style-type: none;
+	margin: 0;
+	overflow-y: hidden;
+	overflow-x: auto;
+	background-color: #154734;
+	white-space: nowrap;
+}
+
+ul.top_menu li a {
+	display: block;
+	color: white;
+	font-family: "PT Serif Caption";
+	font-size: 100%;
+	text-align: center;
+	text-decoration: none;
+}
+
+ul.top_menu li a:hover {
+	color: #bd8b13;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Home (Logged In) Page */
+div.home_sf {
+	background-color: #e3e3e3;
+	border: 2px outset #e3e3e3;
+	width: 20%;
+	height: 93%;
+	position:absolute;
+	left: 0;
+	top: 7.5%;
+}
+
+ul.home_sf_contents {
+	list-style-type: none;
+	margin-top: -5%;
+	padding: 0;
+	width: 100%;
+	background-color: #e3e3e3;
+}
+
+ul.home_sf_contents li a {
+	display: inline-block;
+	color: black;
+	padding: 3% 2% 0;
+	width: 94%;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 150%;
+	font-weight: bold;
+}
+
+ul.home_sf_contents li a:hover {
+	color: white;
+}
+
+button.add_sf {
+	position: relative;
+	top: -3vh;
+	margin-left: 33%;
+	background-color: #bd8b13;
+	color: black;
+	border: 2px outset #bd8b13;
+	cursor: pointer;
+}
+
+img.minimized_profile_pic {
+	display: inline-block;
+	width: 6vw;
+	height: 6vw;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+img.club_profile_pic {
+	display: inline-block;
+	width: 4vw;
+	height: 4vw;
+	padding: 1% 1% 0;
+	object-fit: cover;
+}
+
+a.home_more_link {
+	padding: 0 1%;
+	position: relative;
+	font-family: "PT Sans Narrow";
+	font-weight: bold;
+	font-size: 120%;
+	text-decoration: none;
+	color:black;
+	background-color: #A4D65E;
+	border-radius: 5px;
+	border: 2px outset #A4D65E;
+}
+
+a.home_more_link:hover {
+	color: white;
+	text-decoration: none;
+}
+
+div.club_feed {
+	position: absolute;
+	top: 7.5%;
+	left: 20%;
+	margin: auto;
+	width: 60%;
+	height: 100%;
+	overflow-y: auto;
+}
+
+div.feed_post {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto;
+	width: 80%;
+	border: 2px solid #fafafa;
+	border-radius: 8px;
+}
+
+div.feed_pic_cont {
+	order: 1;
+	width: 100%;
+	flex-basis: 80%;
+	border: 1px solid #e3e3e3;
+}
+
+img.feed_pic {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 80%;
+	max-height: 80%;
+}
+
+div.feed_text {
+	order: 2;
+	flex-basis: 5%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	font-family: "Open Sans";
+	font-size: 100%;
+	background-color: white;
+	border: 1px solid #e3e3e3;
+}
+
+div.feed_tag {
+	order: 3;
+	flex-basis: 11%;
+	width: 100%;
+	overflow: hidden;
+	font-family: "Open Sans";
+	font-size: 110%;
+	font-weight: bold;
+	background-color: #e3e3e3;
+	border: 1px solid #e3e3e3;
+}
+
+div.home_fl {
+	background-color: #e3e3e3;
+	border: 2px outset #e3e3e3;
+	width: 20%;
+	height: 93%;
+	position: absolute;
+	left: 80%;
+	top: 7.5%;
+}
+
+ul.home_fl_contents {
+	list-style-type: none;
+	margin-top: -5%;
+	padding: 0;
+	width: 100%;
+	background-color: #e3e3e3;
+}
+
+ul.home_fl_contents li a {
+	display: inline-block;
+	color: black;
+	padding: 3% 2% 0;
+	width: 94%;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 150%;
+	font-weight: bold;
+}
+
+ul.home_fl_contents li a:hover {
+	color: white;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* View Database Page */
+h2.db_list_titles {
+	font-family: "Open Sans";
+	font-size: 175%;
+	color: black;
+	margin: 0;
+	padding: 0;
+}
+
+div.db_list {
+	position: absolute;
+	top: 10%;
+    width: 40%;
+}
+
+ul.db_display {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 80vh;
+	width: 100%;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+}
+
+ul.db_display li a {
+	display: inline-block;
+	color: black;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 150%;
+	font-weight: bold;
+}
+
+ul.db_display li a:hover {
+	background-color: #ABCAE9;
+}
+
+img.db_minimized_profile_pic {
+	display: inline-block;
+	width: 3.5vw;
+	height: 3.5vw;
+	padding: 1% 1% 0;
+	border-radius: 20%;
+	object-fit: cover;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Find People Page */
+img.meet_profile_pic {
+	display: inline-block;
+	width: 15vw;
+	height: 15vw;
+	border-radius: 50%;
+	object-fit: cover;
+	position: relative;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Profile Page (Students and Admin (Us)) */
+div.profile_friends_list {
+	position: absolute;
+	top: 10%;
+	right: 3%;
+}
+
+h2.profile_fl_title_font {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-family: "Oleo Script Swash Caps";
+	font-size: 200%;
+	text-align: center;
+	color: black;
+}
+
+ul.profile_fl_contents {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 23vw;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+	height: 80vh;
+}
+
+ul.profile_fl_contents li a {
+	display: inline-block;
+	color: black;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 150%;
+	font-weight: bold;
+}
+
+ul.profile_fl_contents li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+img.ppage_profile_pic {
+	display: inline-block;
+	width: 18vw;
+	height: 18vw;
+	border-radius: 50%;
+	object-fit: cover;
+	position: relative;
+	top: 3vh;
+	left: 0.5%;
+}
+
+img.ppage_minimized_profile_pic {
+	display: inline-block;
+	width: 5vw;
+	height: 5vw;
+	padding: 1% 1%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+div.ppage_profile_info {
+	position:absolute;
+	top: 8vh;
+	left: 23%;
+}
+
+div.ppage_profile_name {
+	font-family: "PT Serif Caption";
+	font-size: 120%;
+}
+
+div.ppage_profile_body {
+	font-family: "Open Sans";
+	font-size: 80%;
+}
+
+div.ppage_info_list {
+	position: absolute;
+	left: 23%;
+}
+
+ul.ppage_il_display {
+	list-style-type: none;
+	margin: 0;
+	padding: 2% 0;
+	overflow-x: auto;
+	width: 50vw;
+	white-space: nowrap;
+}
+
+ul.ppage_il_display li {
+	display: inline;
+	margin-right: 1%;
+	padding: 0.5% 1%;
+	background-color: #fafafa;
+	color: black;
+	font-family: "Open Sans";
+	font-weight: 600;
+	font-size: 120%;
+	border: 2px solid #e3e3e3;
+	border-radius: 5px;
+}
+
+div.ppage_bttn {
+	padding-top: 2%;
+	position:relative;
+	left: 4.5%;
+}
+
+button.changePic {
+	width: 10%;
+	background-color: #98b096;
+	color: black;
+	font-size: 80%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #98b096;
+	cursor: pointer;
+}
+
+button.changePic:hover {
+	background-color: #6dab68;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Clubs You Follow/Should Follow Page */
+h2.clubs_list_titles {
+	font-family: "PT Serif Caption";
+	font-size: 150%;
+	color: black;
+	margin: 0;
+	padding: 0;
+}
+
+div.cf_list {
+	position: absolute;
+	top: 15%;
+	left: 5%;
+}
+
+div.sc_list {
+	position: absolute;
+	top: 15%;
+	right: 5%;
+}
+
+ul.clubs_followed {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 50vw;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+	height: 70vh;
+}
+
+ul.clubs_followed li a {
+	display: inline-block;
+	color: black;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 137.5%;
+	font-weight: bold;
+}
+
+ul.clubs_followed li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+ul.suggested_clubs {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 22vw;
+	background-color: #e3e3e3;
+	border: 1px outset;
+	overflow-y: auto;
+	height: 70vh;
+}
+
+ul.suggested_clubs li a {
+	display: inline-block;
+	color: black;
+	height: 20vh;
+	width: 100%;
+	border-bottom: 1px groove white;
+	text-decoration: none;
+	font-family: "PT Sans Narrow";
+	font-size: 137.5%;
+	font-weight: bold;
+}
+
+ul.suggested_clubs li a:hover {
+	background-color: #bd8b13;
+	color: white;
+}
+
+.clubs_minimized_profile_pic {
+	display: inline-block;
+	padding: 1% 1%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Index and Verification Pages (Base Formatting) */
+p.intro_header {
+	text-align: center;
+	margin-top: 5%; 
+	color: white;
+	font-family: "Lora";
+	font-weight: 600;
+	font-size: 225%;
+}
+
+p.intro_body {
+	text-align: center;
+	margin-top: -2%;
+	color: white;
+	font-family: "Open Sans";
+	font-weight: 500;
+	font-style: italic;
+	font-size: 125%;
+}
+
+div.index_field_cont {
+	width: 29%;
+	padding: 1.5%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -10% 0 0 -16%;
+	background-color: white;
+	border: 2px solid gainsboro;
+	border-radius: 8px;
+}
+
+form.login_box {
+	padding-bottom: 5%;
+	border-bottom: 2px solid gainsboro;
+}
+
+input.login_form_control {
+	width: 90%;
+	margin: 0 5%;
+	height: 6vh;
+	box-sizing: border-box;
+	font-family: "Open Sans";
+	font-size: 100%;
+	border: 2px inset gainsboro;
+}
+
+input.login_form_control:focus {
+	outline: none;
+}
+
+button.login {
+	margin: 0 35%;
+	width: 30%;
+	background-color: #98b096;
+	color: black;
+	font-size: 125%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #98b096;
+	cursor: pointer;
+}
+
+button.login:hover {
+  background-color: #6dab68;
+}
+
+button.signup {
+	margin: 0 35%;
+	width: 30%;
+	background-color: #9996b0;
+	color: black;
+	font-size: 125%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #9996b0;
+	cursor: pointer;
+}
+
+button.signup:hover {
+  background-color: #7972ad;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Change Password Page */
+button.change_psswd {
+	margin: 0 21%;
+	width: 60%;
+	background-color: #98b096;
+	color: black;
+	font-size: 125%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #98b096;
+	cursor: pointer;
+}
+
+button.change_psswd:hover {
+  background-color: #6dab68;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Code Entry Page */
+input.submit_signup_code {
+	margin: 0 34%;
+	width: 30%;
+	background-color: #98b096;
+	color: black;
+	font-size: 125%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #98b096;
+	cursor: pointer;
+}
+
+input.submit_signup_code:hover {
+	background-color: #6dab68;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Error Page */
+p.error_title {
+	font-family: "PT Serif Caption";
+	font-size: 300%;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+
+p.error_subtitle {
+	font-family: "PT Serif Caption";
+	font-size: 150%;
+	color: black;
+	text-align: center;
+}
+
+p.error_message {
+	font-family: "Open Sans";
+	font-size: 87.5%;
+	color: black;
+	width: 100%;
+	overflow-y: auto;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Recover Page */
+select.cpass_type_of_account {
+	width: 30%;
+	margin: 0 5%;
+	height: 4vh;
+	font-family: "Open Sans";
+	font-size: 87.5%;
+	border: 2px inset gainsboro;
+}
+
+select.cpass_type_of_account:focus {
+	outline: none;
+}
+
+button.send_change_email {
+	margin: 0 30%;
+	width: 40%;
+	background-color: #9996b0;
+	color: black;
+	font-size: 125%;
+	font-weight: bold;
+	font-family: "Open Sans";
+	border: 2px outset #9996b0;
+	cursor: pointer;
+}
+
+button.send_change_email:hover {
+  background-color: #7972ad;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Student Signup Page */
+p.signup_header_text {
+	font-family: "Oleo Script Swash Caps";
+	font-size: 225%;
+	text-align: center;
+}
+
+p.signup_header_subtext {
+	font-family: "Open Sans";
+	font-size: 112.5%;
+	text-align: center;
+}
+
+p.signup_section_title {
+	font-family: "Oleo Script Swash Caps";
+	font-size: 150%;
+	text-align: center;
+}
+
+div.signup_section_info {
+	border: 2px outset #e3e3e3;
+	border-radius: 5px;
+	margin: auto;
+	width: 50%;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Verification Page */
+div.verif_student_user {
+	margin: auto;
+	width: 80%;
+	height: 37%;
+	border: 2px solid #e3e3e3;
+	border-radius: 8px;
+}
+
+div.verif_club_user {
+	margin: auto;
+	width: 80%;
+	height: 41%;
+	border: 2px solid #e3e3e3;
+	border-radius: 8px;
+}
+
+input.sendSignupEmail {
+  margin: 0 35%;
+  width: 30%;
+  background-color: #9996b0;
+  color: black;
+  font-size: 125%;
+  font-weight: bold;
+  font-family: "Open Sans";
+  border: 2px outset #9996b0;
+  cursor: pointer;
+}
+
+input.sendSignupEmail:hover {
+  background-color: #7972ad;
+}
+
+p.verif_titles {
+  font-family: "Lora";
+  font-weight: bold;
+  font-size: 125%;
+  text-align: center
+}
+
+select.verif_club_directory {
+	width: 90%;
+	margin: 0 6%;
+	height: 6vh;
+	box-sizing: border-box;
+	font-family: "Open Sans";
+	font-size: 100%;
+	border: 2px inset gainsboro;
+}
+
+select.verif_club_directory:focus {
+	outline: none;
+}
+
+input.sendClubEmail {
+  margin: 0 35%;
+  width: 30%;
+  background-color: #98b096;
+  color: black;
+  font-size: 125%;
+  font-weight: bold;
+  font-family: "Open Sans";
+  border: 2px outset #98b096;
+  cursor: pointer;
+}
+
+input.sendClubEmail:hover {
+  background-color: #6dab68;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* View Club Profile Page */
+div.club_interests {
+	position: absolute;
+	top: 10%;
+	left: 5%;
+}
+
+ul.cpage_interests {
+	list-style-type: none;
+	margin: -10% 0 0 0;
+	padding: 2% 0;
+	overflow-x: auto;
+	width: 16vw;
+}
+
+ul.cpage_interests li {
+	display: inline-block;
+	width: 90%;
+	margin: 2%;
+	padding: 0.5% 1%;
+	background-color: #fafafa;
+	color: black;
+	font-family: "Open Sans";
+	text-align: center;
+	font-weight: 600;
+	font-size: 120%;
+	border: 2px solid #e3e3e3;
+	border-radius: 5px;
+}
+
+img.cpage_profile_pic {
+	display: inline-block;
+	width: 18vw;
+	height: 18vw;
+	border-radius: 50%;
+	object-fit: cover;
+	position: relative;
+	top: 4vh;
+	left: 40%;
+}
+
+div.cpage_profile_info {
+	margin-top: -1%;
+	position:absolute;
+	top: 53%;
+	left: 29%;
+	width: 40%;
+}
+
+div.cpage_profile_name {
+	font-family: "PT Serif Caption";
+	font-size: 112.5%;
+	text-align: center;
+}
+
+div.cpage_profile_description {
+	margin-top: -4%;
+	font-family: "Open Sans";
+	font-size: 62.5%;
+	height: 30vh;
+}
+
+div.cpage_bttn{
+	padding-top: 3%;
+	position:relative;
+	left: 44%;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Chat CSS */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+:root {
+	--dark-color-a: #667aff;
+	--dark-color-b: #7386ff;
+	--light-color: #e6e9ff;
+	--success-color: #5cb85c;
+	--error-color: #d9534f;
+}
+
+ul.chat_list {
+	list-style: none;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+
+.chat_btn {
+	text-decoration: none;
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--light-color);
+	color: var(--dark-color-a);
+	border: 0;
+	font-size: 17px;
+	box-sizing: border-box;
+	margin: 0;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Chat Page */
+.chat-container {
+	max-width: 1100px;
+	background: #fff;
+	margin: 30px auto;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.chat-header {
+	background: var(--dark-color-a);
+	color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.chat-main {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.chat-sidebar {
+	background: var(--dark-color-b);
+	color: #fff;
+	padding: 20px 20px 60px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.chat-sidebar h2 {
+	font-size: 20px;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	margin: 0 0 20px 0;
+	box-sizing: border-box;
+}
+
+.chat-sidebar h3 {
+	margin: 0 0 15px 0;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.chat-sidebar ul li {
+	padding: 10px 0;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.chat-messages {
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.chat-messages .message {
+	padding: 10px;
+	margin: 0 0 15px 0;
+	background-color: var(--light-color);
+	border-radius: 5px;
+	overflow-wrap: break-word;
+	box-sizing: border-box;
+}
+
+.chat-messages .message .meta {
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--dark-color-b);
+	opacity: 0.7;
+	margin: 0 0 7px 0;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.chat-messages .message .meta span {
+	color: #777;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.chat-form-container {
+	padding: 20px 30px;
+	background-color: var(--dark-color-a);
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.chat-form-container form {
+	display: flex;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.chat-form-container input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	flex: 1;
+	box-sizing: border-box;
+	margin: 0;
+}
+/*///////////////////////////////////////////////////////////////////////////*/
+/* Join Page */
+.join-container {
+	max-width: 500px;
+	margin: 80px auto;
+	color: #fff;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.join-header {
+	text-align: center;
+	padding: 20px;
+	background: var(--dark-color-a);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.join-main {
+	padding: 30px 40px;
+	background: var(--dark-color-b);
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.join-main p {
+	margin: 0 0 20px 0;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.join-main .form-control {
+	margin: 0 0 20px 0;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.join-main label {
+	display: block;
+	margin: 0 0 5px 0;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.join-main select {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.join-main .btn {
+	margin: 20px 0 0 0;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+@media (max-width: 700px) {
+	.chat-main {
+		display: block;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	.chat-sidebar {
+		display: none;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+}
+/*///////////////////////////////////////////////////////////////////////////*/

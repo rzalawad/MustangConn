@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Our Database</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=PT Serif Caption' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+	rel='stylesheet'>
+	<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
+	<style>
+	html {
+		overflow-x: hidden;
+	}
+
+	body {
+		background-color: white;
+		margin: -9999rem -9999rem -9999rem;
+		padding: 9999rem 9999rem 9999rem;
+		overflow-x: hidden;
+	}
+	</style>
+</head>
+<body>
+	<ul class="top_menu">
+		<li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+			<a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+		</li>
+		<li style="float:left; padding: 1% 2%"> <a href="/viewDatabase"> Database </a></li>
+		<li style="float:right; padding: 1% 2%"> <a href="/logout"> Log Out </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/chat-choose"> Chat </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/clubs"> Clubs </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/profile"> Profile </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/friend/requests"> Pending Requests </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/findPeople"> Meet People! </a> </li>
+	</ul>
+
+<div class=db_list style="left: 5%">
+	<h2 class="db_list_titles" style="text-align: center"> Users (<%=db_users.length%>) </h2>
+	<ul class="db_display">
+		<% db_users.forEach((item)=>{%>
+        <li> <a href="/profile/<%=item.email%>">
+            <% if (item.ppic) { %>
+                <img src="image/<%= item.ppic %>" class="db_minimized_profile_pic">
+            <% } else { %>
+			    <img src="https://i.ibb.co/y676MDy/no-ppic.png" class="db_minimized_profile_pic">
+            <% } %>
+            <span style="text-align: center; position:relative; top:-3.5vh;"><%=item.name%></span>
+			</a>
+		</li>
+		<%});%> 
+	</ul>
+</div>
+
+<div class=db_list style="left: 55%">
+	<h2 class="db_list_titles" style="text-align: center"> Clubs (<%=db_clubs.length%>) </h2>
+	<ul class="db_display">
+		<% db_clubs.forEach((item)=>{%>
+        <li> <a href="/clubs/<%=item.name%>">
+            <% if (item.ppic) { %>
+                <img src="/image/<%= item.ppic %>" class="db_minimized_profile_pic">
+            <% } else { %>
+			    <img src="https://i.ibb.co/y676MDy/no-ppic.png" class="db_minimized_profile_pic">
+            <% } %>
+            <span style="text-align: center; position:relative; top:-3.5vh;"><%=item.name%></span>
+			</a>
+		</li>
+		<%});%> 
+	</ul>
+</div>
+
+</body>
+</html>

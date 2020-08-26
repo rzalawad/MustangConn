@@ -4,57 +4,87 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Clubs</title>
 
     <link href='https://fonts.googleapis.com/css?family=PT Serif Caption' rel='stylesheet'>
-    
-<style>
-html {
-	overflow-x: hidden;
-}
+	<link href='https://fonts.googleapis.com/css?family=PT Sans Narrow'
+	rel='stylesheet'>
+	<link rel="icon" href="https://i.ibb.co/sqx588n/mclogo.png">
 
-body {
-	background-color: white;
-	margin: -9999rem -9999rem -9999rem;
-	padding: 9999rem 9999rem 9999rem;
-	overflow-x: hidden;
-}
+	<link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+	
+	<style>
+		html {
+			overflow-x: hidden;
+		}
 
-ul.top_menu {
-	list-style-type: none;
-	margin: -9999rem -9999rem 0;
-	padding: 9999rem 9999rem 0;
-	overflow: hidden;
-	background-color: #154734;
-}
-
-ul.top_menu li {
-	float: left;
-}
-
-ul.top_menu li a {
-	display: block;
-	color: white;
-	font-family: "PT Serif Caption";
-	font-size: 18px;
-	text-align: center;
-	text-decoration: none;
-}
-
-ul.top_menu li a:hover {
-	color: #bd8b13;
-}
-
-</style>
+		body {
+			background-color: white;
+			margin: -9999rem -9999rem -9999rem;
+			padding: 9999rem 9999rem 9999rem;
+			overflow-x: hidden;
+		}
+	</style>
 </head>
 <body>
-<ul class="top_menu">
-	<li style="float:left; padding: 7px 30px"> 
-		<a href="home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
-	</li>
-	<li style="float:left; padding: 14px 30px"> <a href="post/upload"> Post </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="index"> Log Out </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="chat"> Chat </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="clubs"> Clubs </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="profile"> Profile </a> </li>
-	<li style="float:right; padding: 14px 30px"> <a href="findPeople"> Meet People! </a> </li>
-</ul>
+	<ul class="top_menu">
+		<li style="float:left; padding: 0.5% 2% 0.5% 0"> 
+			<a href="/home"> <img src="https://i.ibb.co/sqx588n/mclogo.png"> </a> 
+		</li>
+		<% if (target.user == "club") { %>
+			<li style="float:left; padding: 1% 2%"> <a href="/post/upload"> Post </a> </li>
+		<% } %>
+		<% if (target.user == "admin") { %>
+			<li style="float:left; padding: 1% 2%"> <a href="/viewDatabase"> Database </a></li>
+		<% } %>
+		<li style="float:right; padding: 1% 2%"> <a href="/logout"> Log Out </a> </li>
+		<li style="float:right; padding: 1% 2%"> <a href="/chat-choose"> Chat </a> </li>
+		<% if (target.user != "club") { %>
+			<li style="float:right; padding: 1% 2%"> <a href="/clubs"> Clubs </a> </li>
+			<li style="float:right; padding: 1% 2%"> <a href="/profile"> Profile </a> </li>
+			<% if (target.request_list.length > 0) { %>
+				<li style="float:right; padding: 1% 2%"> 
+					<a href="/friend/requests" style="color: #529be4"> Pending Requests </a> </li>
+			<% } else { %>
+				<li style="float:right; padding: 1% 2%"> <a href="/friend/requests"> Pending Requests </a> </li>
+			<% } %>
+			<li style="float:right; padding: 1% 2%"> <a href="/findPeople"> Meet People! </a> </li>
+		<% } else { %>
+			<li style="float:right; padding: 1% 2%"> <a href="/clubs/<%=target.name%>"> Profile </a> </li>
+		<% } %>
+	</ul>
+
+	<div class=cf_list>
+		<h2 class="clubs_list_titles" style="width: 50vw; text-align: center"> Clubs You Follow (<%=target.club_list.length%>) </h2>
+		<ul class="clubs_followed">
+			<% target.club_list.forEach(item=>{%>
+			<li> <a href="/clubs">
+				<img src="https://i.ibb.co/y676MDy/no-ppic.png"
+				class="clubs_minimized_profile_pic" style="width: 8vw; height: 8vw">
+				<span style="position:absolute; font-size: 200%; width: 39vw; top: 5vh"> <%item%> </span>
+				<span style="font-weight:normal; width: 39vw; font-size: 100%; position: absolute; top: 13vh">
+					This (sometime in the future) should be the club description </span>
+				</a>
+			</li>
+			<%});%>
+		</ul>
+	</div>
+
+	<div class=sc_list>
+		<h2 class="clubs_list_titles" style="width: 22vw; text-align: center"> Other Clubs </h2>
+		<ul class="suggested_clubs">
+			<% all_clubs.forEach(item=>{%>
+			<li> <a href="/clubs/<%=item.name%>">
+				<img src="https://i.ibb.co/y676MDy/no-ppic.png"
+				class="clubs_minimized_profile_pic" style="width: 4.8vw; height: 4.8vw">
+				<span style="position:absolute; width: 16vw;top: 6vh"> <%=item.name%> </span>
+				<span style="font-weight:normal; width: 16vw; height: 13vh; overflow-y: auto; font-size: 75%; position: absolute; top: 10vh">
+					<%=item.des%> </span>
+				</a>
+			</li>
+			<% }) %>
+		</ul>
+	</div>
+
+</body>
+</html>

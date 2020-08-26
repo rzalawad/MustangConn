@@ -4,4 +4,4 @@ node_js:
   - 12.18.2
  
 script: 
-  - make server.js
+  - make Controller/server.js
