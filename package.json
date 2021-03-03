@@ -33,7 +33,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "pytalk": "^1.0.5",
     "pytalk-2": "^2.0.0",
     "python-shell": "^2.0.1",
