@@ -23,7 +23,7 @@
     "gridfs-stream": "^1.1.1",
     "http": "0.0.1-security",
     "method-override": "^3.0.0",
-    "mocha": "^8.1.2",
+    "mocha": "^8.4.0",
     "moment": "^2.27.0",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.25",
